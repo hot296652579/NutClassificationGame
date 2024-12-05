@@ -1,9 +1,5 @@
-import { Tablecultivate_config } from "../../../module_basic/table/Tablecultivate_config";
 import { Tablelevels_config } from "../../../module_basic/table/Tablelevels_config";
 import { GlobalConfig } from "../Config/GlobalConfig";
-import { LevelManager } from "../Manager/LevelMgr";
-import { BossModel } from "./BossModel";
-import { MainConfigModel } from "./MainConfigModel";
 
 /**道具类型
  * @param REVOKE 撤销

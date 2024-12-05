@@ -2,7 +2,6 @@ import { _decorator, Component, Label, Node, ProgressBar, tween, Tween, Vec3 } f
 import { EventDispatcher } from '../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from './Enum/GameEvent';
 import { LevelManager } from './Manager/LevelMgr';
-import { PropManager } from './Manager/PropMgr';
 import { GameUtil } from './Utils';
 const { ccclass, property } = _decorator;
 

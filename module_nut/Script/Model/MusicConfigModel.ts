@@ -1,11 +1,3 @@
-/*
- * @Author: super_javan 296652579@qq.com
- * @Date: 2024-11-21 23:14:36
- * @LastEditors: super_javan 296652579@qq.com
- * @LastEditTime: 2024-11-21 23:23:40
- * @FilePath: /cocoscreator_hole/assets/module_hole/Script/Model/MusicConfigModel.ts
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import { Tablemusic_config } from "../../../module_basic/table/Tablemusic_config";
 /**
  * 音乐配置数据

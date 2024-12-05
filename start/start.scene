@@ -182,7 +182,7 @@
     "_priority": 6553,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 667,
+    "_orthoHeight": 674.5098039215686,
     "_near": 1,
     "_far": 2000,
     "_color": {
@@ -313,7 +313,7 @@
     },
     "_type": 0,
     "_fillType": 0,
-    "_sizeMode": 2,
+    "_sizeMode": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
       "x": 0,

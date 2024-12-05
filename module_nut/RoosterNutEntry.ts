@@ -66,15 +66,6 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.emit(GameEvent.EVENT_ZERO_TO_FULL_TRANSITION);
     }
 
-    private fullTransitionFinish(): void {
-        this.enterBattle();
-    }
-
-    private enterBattle(): void {
-        LevelManager.instance.loadBattle();
-        EventDispatcher.instance.emit(GameEvent.EVENT_FULL_TO_ZERO_TRANSITION);
-    }
-
     /** 关卡升级*/
     private levelUpHandler(): void {
         LevelManager.instance.clearLevelData();

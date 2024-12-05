@@ -16,7 +16,6 @@ export class LevelManager {
     }
 
     levelPrefabs: Prefab[] = [];
-    battlePrefab: Prefab = null!;
     parent: Node = null!;
 
     public levelModel: LevelModel = null;
@@ -35,13 +34,6 @@ export class LevelManager {
         this.parent.removeAllChildren();
         this.parent.addChild(currentLevelNode);
         console.log(`Loaded level: ${level}.`);
-    }
-
-    /** 添加战斗场景*/
-    loadBattle(): void {
-        const currentBattleNode = instantiate(this.battlePrefab);
-        this.parent.removeAllChildren();
-        this.parent.addChild(currentBattleNode);
     }
 
     /** 关卡等级升级 */
