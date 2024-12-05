@@ -8,6 +8,8 @@ export class NutData {
     public maxScrews: number = 6; // 螺母最大容量 默认6个
     public isGroup: boolean = false; // 是否是归类类型
     public isDone: boolean = false; // 是否完成
+    public canGrow: boolean = false; // 是否可以生长
+    public curScrews: number = 0; // 当前显示的螺丝数量
 
     constructor() { }
 

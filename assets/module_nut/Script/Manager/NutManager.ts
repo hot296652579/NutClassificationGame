@@ -79,6 +79,12 @@ export class NutManager extends Component {
             } else {
                 // 点击不同螺母
                 const topScrew = nutComponent.data.getTopScrew();
+                const full = nutComponent.data.isFull();
+                if (full) {
+                    console.log('已达到最大限制，无法操作');
+                    return;
+                }
+
                 const currentRingColor = this.currentRing.getComponent(Ring)!.color;
                 if (!topScrew || topScrew.color === currentRingColor) {
                     // 颜色匹配：两步移动

@@ -9,6 +9,12 @@ const { ccclass, property } = _decorator;
 @ccclass('NutComponent')
 export class NutComponent extends Component {
     @property(Node)
+    screwsNode: Node = null!; // 螺母中螺丝节点
+
+    @property(Node)
+    screwTranslucent: Node = null!; // 半透明螺丝
+
+    @property(Node)
     ringsNode: Node = null!; // 螺母中的 Rings 节点
 
     @property(Node)
@@ -23,6 +29,10 @@ export class NutComponent extends Component {
     @property(CCFloat)
     maxScrews: number = 6;      // 最大螺丝数量
 
+    @property(CCBoolean)
+    canGrow: boolean = false;    //是否可增加形
+    curScrews: number = 0;      // 当前显示的螺丝数量
+
     isDone: boolean = false; // 是否完成
 
     public data: NutData = new NutData();
@@ -34,6 +44,15 @@ export class NutComponent extends Component {
         this.data.maxScrews = this.maxScrews;
         this.data.isGroup = this.isGroup;
         this.data.isDone = this.isDone;
+        this.data.canGrow = this.canGrow;
+        this.data.curScrews = this.curScrews;
+    }
+
+    initilizeScrews(): void {
+        //DOTO 初始化螺丝UI
+        console.log(`
+            
+            `)
     }
 
     // 获取顶部螺丝圈节点
