@@ -18,10 +18,10 @@ export class ThirdPersonCamera extends Component {
     zoomSensitivity: number = 1.0;
 
     @property
-    lenMin: number = 1.0;
+    lenMin: number = 10.0;
 
     @property
-    lenMax: number = 10.0;
+    lenMax: number = 100.0; //值越大镜头越远
 
     @property
     len: number = 5;
@@ -30,12 +30,12 @@ export class ThirdPersonCamera extends Component {
     rotateVHSeparately: boolean = false;
 
     @property
-    tweenTime:number = 0.2;
+    tweenTime: number = 0.2;
 
     protected _targetLen: number = 0;
     protected _targetAngles: Vec3 = v3();
 
-    start(){
+    start() {
         this._targetLen = this.len;
         this._targetAngles.set(this.node.eulerAngles);
     }
@@ -85,11 +85,13 @@ export class ThirdPersonCamera extends Component {
         this._targetAngles.set(eulerAngles.x + deltaX * ROTATION_STRENGTH, eulerAngles.y + deltaY * ROTATION_STRENGTH, eulerAngles.z);
     }
 
-    onCameraZoom(delta: number) {
-        this._targetLen += delta * this.zoomSensitivity;
+    onCameraZoom(view: number) {
+        // this._targetLen += delta * this.zoomSensitivity;
+        this._targetLen = view;
         if (this._targetLen < this.lenMin) {
             this._targetLen = this.lenMin;
         }
+
         if (this._targetLen > this.lenMax) {
             this._targetLen = this.lenMax;
         }

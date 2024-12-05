@@ -2,8 +2,8 @@
   "general": {
     "highQuality": true,
     "designResolution": {
-      "width": 1600,
-      "height": 750
+      "width": 720,
+      "height": 1334
     }
   },
   "__version__": "1.0.6",

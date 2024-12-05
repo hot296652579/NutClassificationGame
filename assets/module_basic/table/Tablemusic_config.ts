@@ -23,6 +23,10 @@ export class Tablemusic_config {
     get type(): number {
         return this.data.type;
     }
+    /** 音效内置cd */
+    get cd(): number {
+        return this.data.cd;
+    }
     /** 音效用途说明 */
     get content(): string {
         return this.data.content;

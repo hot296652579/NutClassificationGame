@@ -31,5 +31,13 @@ export class Tableprop_config {
     get weight(): number {
         return this.data.weight;
     }
+    /** 半径  */
+    get radius(): number {
+        return this.data.radius;
+    }
+    /** 缩小倍率 */
+    get narrow(): number {
+        return this.data.narrow;
+    }
 }
     

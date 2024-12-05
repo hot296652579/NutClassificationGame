@@ -35,5 +35,9 @@ export class Tableblackhole_config {
     get exp(): number {
         return this.data.exp;
     }
+    /** 半径 */
+    get radius(): number {
+        return this.data.radius;
+    }
 }
     

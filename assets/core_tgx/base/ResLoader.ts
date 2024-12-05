@@ -1,6 +1,6 @@
 import { Asset, AssetManager, __private, assetManager, error, js, resources, warn } from "cc";
 
-export type AssetType<T = Asset> = __private.__types_globals__Constructor<T> | null;
+export type AssetType<T = Asset> = __private._types_globals__Constructor<T> | null;
 export type Paths = string | string[];
 export type ProgressCallback = ((finished: number, total: number, item: AssetManager.RequestItem) => void) | null;
 export type CompleteCallback = any;

@@ -1,0 +1,79 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "4821a6e4-b4dd-472c-936f-f929d03b32bf",
+  "files": [],
+  "subMetas": {
+    "4da42": {
+      "importer": "gltf-mesh",
+      "uuid": "4821a6e4-b4dd-472c-936f-f929d03b32bf@4da42",
+      "displayName": "",
+      "id": "4da42",
+      "name": "cap.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 1088
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "cf2a2": {
+      "importer": "gltf-scene",
+      "uuid": "4821a6e4-b4dd-472c-936f-f929d03b32bf@cf2a2",
+      "displayName": "",
+      "id": "cf2a2",
+      "name": "Caps.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "4821a6e4-b4dd-472c-936f-f929d03b32bf@cf2a2",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "4821a6e4-b4dd-472c-936f-f929d03b32bf@4da42"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [],
+      "scenes": [
+        "4821a6e4-b4dd-472c-936f-f929d03b32bf@cf2a2"
+      ]
+    }
+  }
+}

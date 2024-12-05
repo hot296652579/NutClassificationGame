@@ -4,12 +4,18 @@
  * 
  *  */
 export class EventDispatcher {
-    private _handlersMap:any = {};
+    private static _instance: EventDispatcher | null = null;
+    public static get instance(): EventDispatcher {
+        if (!this._instance) this._instance = new EventDispatcher();
+        return this._instance;
+    }
+
+    private _handlersMap: any = {};
     public on(event: string, cb: Function, thisArg?: any, args?: [], once?: boolean) {
-        if(!event || !cb){
+        if (!event || !cb) {
             return;
         }
-        
+
         let handlers = this._handlersMap[event];
         if (!handlers) {
             handlers = this._handlersMap[event] = [];

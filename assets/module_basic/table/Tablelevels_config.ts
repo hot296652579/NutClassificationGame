@@ -27,5 +27,17 @@ export class Tablelevels_config {
     get reward_additional(): number {
         return this.data.reward_additional;
     }
+    /** boss */
+    get boss(): number {
+        return this.data.boss;
+    }
+    /** 关卡总质量 */
+    get quality(): number {
+        return this.data.quality;
+    }
+    /** 模型数量 */
+    get propTotal(): number {
+        return this.data.propTotal;
+    }
 }
     
