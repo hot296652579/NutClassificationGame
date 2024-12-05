@@ -298,6 +298,11 @@ export class NutManager extends Component {
             this.inOperation = false;
         });
     }
+
+    /** 清除操作栈*/
+    clearUndoStack(): void {
+        this.operationStack = [];
+    }
 }
 
 /**

@@ -1,7 +1,8 @@
-import { Button, Component, Label, Node, NodeEventType, _decorator } from 'cc';
+import { Button, Component, Label, Node, NodeEventType, _decorator, find } from 'cc';
 import { EventDispatcher } from '../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from './Enum/GameEvent';
 import { TYPE_ITEM } from './Model/LevelModel';
+import { NutManager } from './Manager/NutManager';
 const { ccclass, property } = _decorator;
 
 /**
@@ -11,19 +12,16 @@ const { ccclass, property } = _decorator;
 export class ButtonController extends Component {
     @property(Button) btUndo: Button = null!;
     @property(Button) btAddScrew: Button = null!;
+    nutManager: NutManager = null!;
 
     protected start() {
         this.addUIEvent();
         this.setupUIListeners();
     }
 
-    private onResetAddition(): void {
-
-    }
-
     private addUIEvent(): void {
-        this.btUndo.node.on(NodeEventType.TOUCH_END, () => this.handleUpgrade(TYPE_ITEM.ADDNUT), this);
-        this.btAddScrew.node.on(NodeEventType.TOUCH_END, () => this.handleUpgrade(TYPE_ITEM.REVOKE), this);
+        this.btUndo.node.on(NodeEventType.TOUCH_END, () => this.onClickHandler(TYPE_ITEM.REVOKE), this);
+        this.btAddScrew.node.on(NodeEventType.TOUCH_END, () => this.onClickHandler(TYPE_ITEM.ADDNUT), this);
     }
 
     private setupUIListeners(): void {
@@ -36,8 +34,20 @@ export class ButtonController extends Component {
         );
     }
 
-    private handleUpgrade(type: TYPE_ITEM): void {
+    private onResetAddition(): void {
+        this.nutManager = find('Canvas').getComponentInChildren(NutManager);
+    }
 
+    private onClickHandler(type: TYPE_ITEM): void {
+        console.log('onClickHandler');
+        switch (type) {
+            case TYPE_ITEM.REVOKE:
+                this.nutManager.undoLastOperation();
+                break;
+
+            default:
+                break;
+        }
     }
 
 }
