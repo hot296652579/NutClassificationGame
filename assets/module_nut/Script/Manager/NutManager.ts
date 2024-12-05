@@ -183,7 +183,7 @@ export class NutManager extends Component {
         }
 
         if (!foundVisibleScrew || !revealColor) {
-            console.log('没有找到显示的螺丝圈做揭示.');
+            // console.log('没有找到显示的螺丝圈做揭示.');
             return;
         }
 
@@ -220,15 +220,19 @@ export class NutManager extends Component {
 
             // 如果归类完成，添加螺母的颜色
             const screws = nutComponent.data.screws;
-            const topColor = screws[0].color; // 获取顶部螺丝圈的颜色
-            groupedColors.add(topColor); // 将颜色添加到已归类的颜色集合中
+            const topColor = screws[0].color;
+            groupedColors.add(topColor);
         }
 
         // 获取关卡所需归类的颜色
-        const levelColors = this.getLevelColors(); // 获取当前关卡需要归类的颜色
-
-        // 检查是否所有需要归类的颜色都已经归类完成
-        return levelColors.every(color => groupedColors.has(color));
+        const levelColors = this.getLevelColors();
+        // 计算已归类的颜色数量
+        const arrayColors = Array.from(groupedColors);
+        const filteredColors = arrayColors.filter(function (color) {
+            return levelColors.includes(color);
+        });
+        const result = filteredColors.length;
+        return result >= levelColors.length;
     }
 
 
