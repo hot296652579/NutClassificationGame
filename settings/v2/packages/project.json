@@ -1,0 +1,18 @@
+{
+  "general": {
+    "highQuality": true,
+    "designResolution": {
+      "width": 1600,
+      "height": 750
+    }
+  },
+  "__version__": "1.0.6",
+  "fbx": {
+    "legacyFbxImporter": {
+      "visible": true
+    }
+  },
+  "script": {
+    "preserveSymlinks": true
+  }
+}

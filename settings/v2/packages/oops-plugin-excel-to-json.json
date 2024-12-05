@@ -1,0 +1,6 @@
+{
+  "__version__": "1.0.0",
+  "PathExcel": "project://excel",
+  "PathJsonClient": "project://assets/module_basic/config",
+  "PathTsClient": "project://assets/module_basic/table"
+}

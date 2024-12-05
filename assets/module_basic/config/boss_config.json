@@ -1,0 +1,17 @@
+{
+    "1": {
+        "name": "拳击手",
+        "model": "boss_1",
+        "weight": 100
+    },
+    "2": {
+        "name": "外星人",
+        "model": "boss_2",
+        "weight": 1000
+    },
+    "3": {
+        "name": "蓝布偶",
+        "model": "boss_3",
+        "weight": 10000
+    }
+}
