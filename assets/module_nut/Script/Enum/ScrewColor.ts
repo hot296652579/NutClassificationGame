@@ -1,3 +1,5 @@
+import { Enum } from "cc";
+
 export enum ScrewColor {
     Unknow = 0, //未知
     EMPTY = -1, //空
