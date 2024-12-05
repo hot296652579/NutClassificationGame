@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, tween, PhysicsSystem, geometry, CameraComponent, input, Input, EventTouch, Vec3 } from 'cc';
+import { _decorator, Component, Node, tween, PhysicsSystem, geometry, CameraComponent, input, Input, EventTouch, Vec3, ccenum, CCString } from 'cc';
 import { NutComponent } from '../NutComponent';
 import { Ring } from '../Ring';
 import { ScrewData } from '../Model/ScrewData';
@@ -14,6 +14,10 @@ export class NutManager extends Component {
 
     @property([Node])
     nutNodes: Node[] = []; // 螺母节点数组
+
+    @property({ type: [CCString], tooltip: "当前关卡需要归类的颜色" })
+    private levelColorStrings: string[] = []; // 在编辑器中使用字符串数组
+
     private currentRing: Node | null = null; // 当前悬浮的螺丝圈
     private currentNut: Node | null = null; // 当前选择的螺母
     private operationStack: NutOperationRecord[] = []; // 操作栈
@@ -140,8 +144,18 @@ export class NutManager extends Component {
         this.inOperation = true;
         targetNutComponent.addRingNode(ringNode, isReturning, () => {
             this.inOperation = false;
+            this.handlePostMoveLogic();
         }
         );
+    }
+
+    /**
+     * 处理移动后逻辑，包括通关检测
+     */
+    handlePostMoveLogic() {
+        if (this.checkLevelCompletion()) {
+            console.log('通关！');
+        }
     }
 
     /**
@@ -184,6 +198,48 @@ export class NutManager extends Component {
         if (checkIfGrouped) {
             nutComponent.displayNutCap(checkIfGrouped);
         }
+    }
+
+    /**
+     * 检查当前关卡是否通关
+     * 通关条件：所有螺母中颜色归类完成，且关卡中所有颜色都归类完成。
+     */
+    checkLevelCompletion(): boolean {
+        // 存储每种颜色的归类状态
+        const groupedColors: Set<ScrewColor> = new Set();
+
+        // 遍历所有的螺母节点
+        for (const nutNode of this.nutNodes) {
+            const nutComponent = nutNode.getComponent(NutComponent);
+            if (!nutComponent) continue;
+
+            // 如果螺母没有归类完成，跳过该螺母
+            if (!nutComponent.data.checkIfGrouped()) {
+                continue;
+            }
+
+            // 如果归类完成，添加螺母的颜色
+            const screws = nutComponent.data.screws;
+            const topColor = screws[0].color; // 获取顶部螺丝圈的颜色
+            groupedColors.add(topColor); // 将颜色添加到已归类的颜色集合中
+        }
+
+        // 获取关卡所需归类的颜色
+        const levelColors = this.getLevelColors(); // 获取当前关卡需要归类的颜色
+
+        // 检查是否所有需要归类的颜色都已经归类完成
+        return levelColors.every(color => groupedColors.has(color));
+    }
+
+
+    /**
+     * 获取当前关卡需要归类的颜色
+     * @returns 当前关卡的颜色数组
+     */
+    getLevelColors(): ScrewColor[] {
+        return this.levelColorStrings
+            .map(colorStr => ScrewColor[colorStr as keyof typeof ScrewColor])
+            .filter(color => color !== undefined);
     }
 
     resetCurrentSelection() {
