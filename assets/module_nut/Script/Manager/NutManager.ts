@@ -288,7 +288,7 @@ export class NutManager extends Component {
     undoLastOperation(): void {
         const lastOperation = this.operationStack.pop();
         if (!lastOperation) {
-            console.warn('没有可撤销的操作!');
+            console.warn('没有可撤销的操作!!!');
             return;
         }
 
