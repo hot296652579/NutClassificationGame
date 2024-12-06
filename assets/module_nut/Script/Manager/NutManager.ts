@@ -125,9 +125,9 @@ export class NutManager extends Component {
         onComplete?: () => void
     ) {
         const currentNutComponent = currentNutNode.getComponent(NutComponent)!;
-        const groupRings = this.getGroupRings(startRing, currentNutNode);
+        const groupRings = this.getGroupRings(startRing, currentNutNode); //找到相邻同色的所有螺丝圈
         const freeSlots = targetNutComponent.getFreeSlots(); // 可用的数量
-        const ringsToMove = groupRings.slice(0, freeSlots); // 确定最多移动的数量
+        const ringsToMove = groupRings.slice(0, freeSlots); // 截取可用的数量螺丝圈移动
 
         const moveNext = (index: number) => {
             if (index >= ringsToMove.length) {
@@ -353,6 +353,9 @@ export class NutManager extends Component {
 
     /**
      * 保存操作记录
+     * @param ringNode 当前移动的螺丝圈节点
+     * @param curNutComponent 当前螺丝圈的螺母组件
+     * @param targetNutComponent 目标螺母组件
      */
     saveOperation(ringNode: Node, curNutComponent: NutComponent, targetNutComponent: NutComponent): void {
         const fromNutNode = curNutComponent.node;
