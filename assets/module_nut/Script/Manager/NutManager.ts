@@ -131,6 +131,7 @@ export class NutManager extends Component {
 
         const moveNext = (index: number) => {
             if (index >= ringsToMove.length) {
+                // 所有需要移动的螺丝圈移动完成
                 if (onComplete) onComplete();
                 return;
             }
