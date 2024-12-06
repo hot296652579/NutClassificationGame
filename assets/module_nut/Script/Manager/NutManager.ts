@@ -63,6 +63,13 @@ export class NutManager extends Component {
         if (this.inOperation) return;
 
         const nutComponent = nutNode.getComponent(NutComponent)!;
+        const growCanOp = nutComponent.growCanOp();
+
+        //增长类型 没解锁不可操作
+        if (!growCanOp) {
+            console.log('增加类型螺母未解锁，无法操作');
+            return;
+        }
 
         // 判断是否是归类类型且已经完成
         if (nutComponent.data.isGroup && nutComponent.data.isDone) {
@@ -81,7 +88,7 @@ export class NutManager extends Component {
                 const topScrew = nutComponent.data.getTopScrew();
                 const full = nutComponent.data.isFull();
                 if (full) {
-                    console.log('已达到最大限制，无法操作');
+                    console.log('螺母已达到上限，无法操作');
                     return;
                 }
 

@@ -21,7 +21,7 @@ export class NutData {
     // 检查螺母是否已满
     isFull(): boolean {
         if (this.canGrow) {
-            return this.screws.length >= this.curScrews;
+            return this.screws.length >= this.curScrews && this.screws.length > 0;
         } else {
             return this.screws.length >= this.maxScrews;
         }

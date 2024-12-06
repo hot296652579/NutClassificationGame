@@ -24,17 +24,17 @@ export class NutComponent extends Component {
     capNode: Node = null!; // 螺母帽
 
     @property({ type: CCBoolean, tooltip: '是否归类形' })
-    isGroup: boolean = false;    //是否是归类形
+    isGroup: boolean = false;
 
     @property({ type: CCFloat, tooltip: '螺母最大螺丝数量' })
-    maxScrews: number = 6;      // 最大螺丝数量
+    maxScrews: number = 6;
 
     @property({ type: CCBoolean, tooltip: '是否可增加形' })
-    canGrow: boolean = false;    //是否可增加形
+    canGrow: boolean = false;
 
     @property({ type: CCFloat, tooltip: '可增加螺母当前螺丝数量' })
     curScrews: number = 0;
-    isDone: boolean = false; // 是否完成
+    isDone: boolean = false;
 
     public data: NutData = new NutData();
 
@@ -149,5 +149,14 @@ export class NutComponent extends Component {
                 }
             })
             .start();
+    }
+
+    // 增加类型螺母 判断螺丝节点是否显示
+    growCanOp(): boolean {
+        if (this.canGrow) {
+            return !this.screwTranslucent.active;
+        } else {
+            return true;
+        }
     }
 }
