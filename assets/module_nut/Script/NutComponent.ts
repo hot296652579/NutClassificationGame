@@ -23,16 +23,17 @@ export class NutComponent extends Component {
     @property(Node)
     capNode: Node = null!; // 螺母帽
 
-    @property(CCBoolean)
+    @property({ type: CCBoolean, tooltip: '是否归类形' })
     isGroup: boolean = false;    //是否是归类形
 
-    @property(CCFloat)
+    @property({ type: CCFloat, tooltip: '螺母最大螺丝数量' })
     maxScrews: number = 6;      // 最大螺丝数量
 
-    @property(CCBoolean)
+    @property({ type: CCBoolean, tooltip: '是否可增加形' })
     canGrow: boolean = false;    //是否可增加形
-    curScrews: number = 0;      // 当前显示的螺丝数量
 
+    @property({ type: CCFloat, tooltip: '可增加螺母当前螺丝数量' })
+    curScrews: number = 0;
     isDone: boolean = false; // 是否完成
 
     public data: NutData = new NutData();
@@ -49,10 +50,26 @@ export class NutComponent extends Component {
     }
 
     initilizeScrews(): void {
-        //DOTO 初始化螺丝UI
-        console.log(`
-            
-            `)
+        this.updateVisuals();
+    }
+
+    /**
+     * 更新可增加类型螺丝的显示
+     */
+    public updateVisuals(): void {
+        if (this.data.curScrews <= 0) {
+            this.screwTranslucent.active = true;
+            this.screwsNode.active = false;
+            return;
+        }
+
+        this.screwTranslucent.active = !this.data.canGrow;
+        if (this.data.canGrow) {
+            this.screwsNode.active = true;
+            this.screwsNode.children.forEach((child, index) => {
+                child.active = index < this.data.curScrews;
+            });
+        }
     }
 
     // 获取顶部螺丝圈节点

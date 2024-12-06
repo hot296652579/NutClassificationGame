@@ -165,6 +165,25 @@ export class NutManager extends Component {
     }
 
     /**
+     * 处理广告成功逻辑：找到第一个 `canGrow` 为 `false` 的螺母组件并设置为可增长
+     */
+    public handleAdSuccess(): void {
+        for (const nutNode of this.nutNodes) {
+            const nutComponent = nutNode.getComponent(NutComponent);
+            if (nutComponent && nutComponent.data.canGrow) {
+                nutComponent.data.curScrews++;
+
+                if (nutComponent.data.curScrews >= nutComponent.data.maxScrews) {
+                    nutComponent.data.curScrews = nutComponent.data.maxScrews;
+                }
+
+                nutComponent.updateVisuals();
+                return;
+            }
+        }
+    }
+
+    /**
      * 处理移开顶部螺丝圈后的揭示逻辑
      * @param nutComponent 当前螺母组件
      */
@@ -201,7 +220,8 @@ export class NutManager extends Component {
     /** 检测归类的螺母是否完成归类*/
     checkAndDisplayNutCap(nutComponent: NutComponent) {
         const checkIfGrouped = nutComponent.data.checkIfGrouped();
-        if (checkIfGrouped) {
+        const isGroup = nutComponent.data.isGroup;
+        if (checkIfGrouped && isGroup) {
             nutComponent.displayNutCap(checkIfGrouped);
         }
     }

@@ -2160,7 +2160,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -2427,6 +2427,12 @@
       },
       {
         "__id__": 196
+      },
+      {
+        "__id__": 199
+      },
+      {
+        "__id__": 202
       }
     ],
     "nestedPrefabInstanceRoots": [
@@ -2829,6 +2835,68 @@
     "__type__": "cc.TargetInfo",
     "localID": [
       "74QDxLP69DSoGbvZS28Id1"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 130
+    },
+    "sourceInfo": {
+      "__id__": 200
+    },
+    "propertyPath": [
+      "screwsNode"
+    ],
+    "target": {
+      "__id__": 130
+    },
+    "targetInfo": {
+      "__id__": 201
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "842fYGbRBP5ITr7O+GCNMK"
+    ]
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "c74+v1ZNlOWoGmBufN5oiN",
+      "2cQhbfoMNDtaizhahGc8zs"
+    ]
+  },
+  {
+    "__type__": "cc.TargetOverrideInfo",
+    "source": {
+      "__id__": 130
+    },
+    "sourceInfo": {
+      "__id__": 203
+    },
+    "propertyPath": [
+      "screwTranslucent"
+    ],
+    "target": {
+      "__id__": 130
+    },
+    "targetInfo": {
+      "__id__": 204
+    }
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "842fYGbRBP5ITr7O+GCNMK"
+    ]
+  },
+  {
+    "__type__": "cc.TargetInfo",
+    "localID": [
+      "5d5nsSIDVAgY/6Hmd0VTs/",
+      "41eKvMQaZPZKGHUPACYD3d"
     ]
   }
 ]

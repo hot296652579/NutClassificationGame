@@ -5,7 +5,7 @@ import { ScrewColor } from "../Enum/ScrewColor";
 /** 螺母数据 */
 export class NutData {
     public screws: ScrewData[] = []; // 当前螺母的螺丝圈数据
-    public maxScrews: number = 6; // 螺母最大容量 默认6个
+    public maxScrews: number = 6; // 螺母最大容量 默认4个
     public isGroup: boolean = false; // 是否是归类类型
     public isDone: boolean = false; // 是否完成
     public canGrow: boolean = false; // 是否可以生长
@@ -20,7 +20,11 @@ export class NutData {
 
     // 检查螺母是否已满
     isFull(): boolean {
-        return this.screws.length >= this.maxScrews;
+        if (this.canGrow) {
+            return this.screws.length >= this.curScrews;
+        } else {
+            return this.screws.length >= this.maxScrews;
+        }
     }
 
     // 获取顶部螺丝圈

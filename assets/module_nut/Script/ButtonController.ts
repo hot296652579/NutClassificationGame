@@ -44,6 +44,9 @@ export class ButtonController extends Component {
             case TYPE_ITEM.REVOKE:
                 this.nutManager.undoLastOperation();
                 break;
+            case TYPE_ITEM.ADDNUT:
+                this.nutManager.handleAdSuccess();
+                break;
 
             default:
                 break;

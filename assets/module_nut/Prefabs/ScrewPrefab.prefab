@@ -875,7 +875,9 @@
     "screwsNode": {
       "__id__": 2
     },
-    "ScrewTranslucent": null,
+    "screwTranslucent": {
+      "__id__": 34
+    },
     "ringsNode": {
       "__id__": 28
     },
