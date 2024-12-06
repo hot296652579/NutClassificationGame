@@ -94,9 +94,8 @@ export class NutManager extends Component {
                         return;
                     }
 
-                    // 颜色匹配：两步移动
-                    this.moveRingToSuspension(this.currentRing, nutComponent, () => {
-                        this.moveRingToNut(this.currentRing!, nutComponent, false);
+                    //连续移动逻辑
+                    this.moveGroupRings(this.currentRing, this.currentNut, nutComponent, () => {
                         this.resetCurrentSelection();
                         this.checkAndDisplayNutCap(nutComponent);
                     });
@@ -116,6 +115,68 @@ export class NutManager extends Component {
                 this.moveRingToSuspension(topRing, nutComponent);
             }
         }
+    }
+
+    // 连续移动螺丝圈逻辑
+    moveGroupRings(
+        startRing: Node,
+        currentNutNode: Node,
+        targetNutComponent: NutComponent,
+        onComplete?: () => void
+    ) {
+        const currentNutComponent = currentNutNode.getComponent(NutComponent)!;
+        const groupRings = this.getGroupRings(startRing, currentNutNode);
+        const freeSlots = targetNutComponent.getFreeSlots(); // 可用的数量
+        const ringsToMove = groupRings.slice(0, freeSlots); // 确定最多移动的数量
+
+        const moveNext = (index: number) => {
+            if (index >= ringsToMove.length) {
+                if (onComplete) onComplete();
+                return;
+            }
+
+            const ring = ringsToMove[index];
+            if (ring === startRing) {
+                // 当前悬浮螺丝圈：直接移动到目标螺母
+                this.moveRingToSuspension(ring, targetNutComponent, () => {
+                    this.moveRingToNut(ring, targetNutComponent, false);
+                    moveNext(index + 1);
+                });
+            } else {
+                // 后续螺丝圈：先移动到当前螺母悬浮位置，再移动到目标螺母
+                this.moveRingToSuspension(ring, currentNutComponent, () => {
+                    this.moveRingToSuspension(ring, targetNutComponent, () => {
+                        this.moveRingToNut(ring, targetNutComponent, false);
+                        moveNext(index + 1);
+                    });
+                });
+            }
+        };
+
+        moveNext(0); // 开始移动
+    }
+
+    // 获取相邻的同颜色螺丝圈
+    getGroupRings(startRing: Node, nutNode: Node): Node[] {
+        const nutComponent = nutNode.getComponent(NutComponent)!;
+        const allRings = nutComponent.ringsNode.children;
+        const startColor = startRing.getComponent(Ring)!.color;
+
+        // 找到与 `startRing` 相邻且颜色相同的螺丝圈
+        const groupRings: Node[] = [];
+        let foundStart = false;
+
+        for (let i = allRings.length - 1; i >= 0; i--) {
+            const ring = allRings[i];
+            if (ring === startRing) foundStart = true;
+            if (ring.getComponent(Ring)!.color === startColor) {
+                groupRings.push(ring);
+            } else if (foundStart) {
+                break;
+            }
+        }
+
+        return groupRings;
     }
 
     // 获取给定螺丝圈的索引
@@ -220,7 +281,7 @@ export class NutManager extends Component {
         }
 
         if (!foundVisibleScrew || !revealColor) {
-            // console.log('没有找到显示的螺丝圈做揭示.');
+            console.log('没有找到隐藏的螺丝圈做揭示.');
             return;
         }
 

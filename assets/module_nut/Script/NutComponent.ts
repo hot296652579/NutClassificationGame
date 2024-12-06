@@ -4,6 +4,7 @@ import { NutOperationRecord } from './Manager/NutManager';
 
 
 const { ccclass, property } = _decorator;
+const duration: number = 0.3;
 
 /** 螺母组件*/
 @ccclass('NutComponent')
@@ -78,6 +79,7 @@ export class NutComponent extends Component {
         return rings.length > 0 ? rings[rings.length - 1] : null;
     }
 
+    //揭示螺丝 隐藏未知螺丝显示真实螺丝
     updateScrewVisibility(): void {
         const screws = this.data.screws;
         for (let i = 0; i < screws.length; i++) {
@@ -109,7 +111,7 @@ export class NutComponent extends Component {
         ringNode.eulerAngles = new Vec3(0, 0, 0);
 
         tween(ringNode)
-            .to(0.3, { eulerAngles: new Vec3(0, 180, 0), position: new Vec3(endPosition.x, endPosition.y, endPosition.z) })
+            .to(duration, { eulerAngles: new Vec3(0, 180, 0), position: new Vec3(endPosition.x, endPosition.y, endPosition.z) })
             .call(() => {
                 if (onComplete) {
                     onComplete();
@@ -128,6 +130,11 @@ export class NutComponent extends Component {
         this.capNode.active = show;
     }
 
+    //获取剩余可用位置
+    getFreeSlots() {
+        return this.maxScrews - this.ringsNode.children.length;
+    }
+
     /**
      * 撤销操作：恢复节点位置和数据
      */
@@ -135,12 +142,12 @@ export class NutComponent extends Component {
         const { opNode, fromNut, toNut, fromPosition, toPosition, fromScreews, toScreews } = lastOperation;
         // console.log('恢复的from screws数据:', fromScreews);
         tween(opNode)
-            .to(0.3, { position: this.suspensionNode.position })
+            .to(duration, { position: this.suspensionNode.position })
             .call(() => {
                 const rings = fromNut.getComponent(NutComponent)!.ringsNode;
                 opNode.parent = rings;
             })
-            .to(0.3, { position: fromPosition })
+            .to(duration, { position: fromPosition })
             .call(() => {
                 toNut.getComponent(NutComponent)!.data!.screws = toScreews;
                 fromNut.getComponent(NutComponent)!.data!.screws = fromScreews;
