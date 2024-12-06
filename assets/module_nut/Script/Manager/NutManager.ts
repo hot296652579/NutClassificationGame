@@ -80,26 +80,31 @@ export class NutManager extends Component {
         if (this.currentRing) {
             // 已有悬浮螺丝圈
             if (this.currentNut === nutNode) {
-                // 点击同一个螺母：归位
+                console.log('点击同一螺母，归位操作');
                 this.moveRingToNut(this.currentRing, nutComponent, true);
                 this.resetCurrentSelection();
             } else {
                 // 点击不同螺母
                 const topScrew = nutComponent.data.getTopScrew();
-                const full = nutComponent.data.isFull();
-                if (full) {
-                    console.log('螺母已达到上限，无法操作');
-                    return;
-                }
-
                 const currentRingColor = this.currentRing.getComponent(Ring)!.color;
                 if (!topScrew || topScrew.color === currentRingColor) {
+                    const full = nutComponent.data.isFull();
+                    if (full) {
+                        console.log('螺母已达到上限，无法操作');
+                        return;
+                    }
+
                     // 颜色匹配：两步移动
                     this.moveRingToSuspension(this.currentRing, nutComponent, () => {
                         this.moveRingToNut(this.currentRing!, nutComponent, false);
                         this.resetCurrentSelection();
                         this.checkAndDisplayNutCap(nutComponent);
                     });
+                } else {
+                    console.log('不符合移动要求，归位操作');
+                    const currentNutComponent = this.currentRing.parent!.parent!.getComponent(NutComponent)!;
+                    this.moveRingToNut(this.currentRing, currentNutComponent, true);
+                    this.resetCurrentSelection();
                 }
             }
         } else {
