@@ -3,6 +3,8 @@ import { duration, NutComponent } from '../NutComponent';
 import { Ring } from '../Ring';
 import { ScrewData } from '../Model/ScrewData';
 import { ScrewColor } from '../Enum/ScrewColor';
+import { tgxUIMgr } from '../../../core_tgx/tgx';
+import { UI_BattleResult } from '../../../scripts/UIDef';
 
 
 const { ccclass, property } = _decorator;
@@ -251,7 +253,7 @@ export class NutManager extends Component {
      */
     handlePostMoveLogic() {
         if (this.checkLevelCompletion()) {
-            console.log('通关！');
+            tgxUIMgr.inst.showUI(UI_BattleResult);
         }
     }
 

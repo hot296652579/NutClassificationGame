@@ -1,9 +1,5 @@
 import { _decorator, Node, Prefab, instantiate, Component } from 'cc';
 import { LevelModel } from '../Model/LevelModel';
-import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
-import { GameEvent } from '../Enum/GameEvent';
-import { Tablecultivate_config } from '../../../module_basic/table/Tablecultivate_config';
-import { JsonUtil } from '../../../core_tgx/base/utils/JsonUtil';
 import { GlobalConfig } from '../Config/GlobalConfig';
 const { ccclass, property } = _decorator;
 

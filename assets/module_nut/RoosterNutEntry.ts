@@ -62,10 +62,6 @@ export class RoosterNutEntry extends Component {
 
     }
 
-    private startTransitionToBig(): void {
-        EventDispatcher.instance.emit(GameEvent.EVENT_ZERO_TO_FULL_TRANSITION);
-    }
-
     /** 关卡升级*/
     private levelUpHandler(): void {
         LevelManager.instance.clearLevelData();

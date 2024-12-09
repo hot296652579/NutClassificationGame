@@ -10,8 +10,6 @@ import { UserManager } from "../../../Script/Manager/UserMgr";
 import { Layout_BattleResult } from "./Layout_BattleResult";
 import { AdvertMgr } from "../../../Script/Manager/AdvertMgr";
 
-const delday = 30000;
-
 export class UI_BattleResult_Impl extends UI_BattleResult {
     rewardBase: number = 0; //基础奖励
     rewardAdditional: number = 0; //额外奖励
@@ -40,7 +38,18 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
     }
 
     private initilizeResult(): void {
+        this.win = true;
+        let layout = this.layout as Layout_BattleResult;
+        let winNode = layout.winNode;
+        let LoseNode = layout.LoseNode;
+        winNode.active = this.win;
+        LoseNode.active = !this.win;
 
+        layout.btGet.node.getChildByName('lbGet').getComponent(Label).string = `${this.rewardBase}`;
+        layout.btExtra.node.getChildByName('lbExtra').getComponent(Label).string = `${this.rewardAdditional}`;
+
+        const soundId = this.win ? 11 : 12;
+        NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
     }
 
     private emitEvent(): void {
