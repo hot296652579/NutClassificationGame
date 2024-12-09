@@ -890,6 +890,7 @@
     "isGroup": false,
     "maxScrews": 6,
     "canGrow": false,
+    "curScrews": 0,
     "ringsUnknowNode": {
       "__id__": 30
     },

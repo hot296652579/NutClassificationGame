@@ -4,7 +4,7 @@ import { NutOperationRecord } from './Manager/NutManager';
 
 
 const { ccclass, property } = _decorator;
-const duration: number = 0.3;
+export const duration: number = 0.2;
 
 /** 螺母组件*/
 @ccclass('NutComponent')
@@ -127,6 +127,24 @@ export class NutComponent extends Component {
 
     //显示螺母帽
     displayNutCap(show: boolean) {
+        Tween.stopAllByTarget(this.capNode);
+        const getPosByScrews = this.ringsNode.children.length * 1.5;
+        this.capNode.setPosition(v3(0, getPosByScrews, 0));
+
+        if (show) {
+            this.capNode.active = show;
+            this.capNode.setScale(v3(0, 1, 1));
+
+            tween(this.capNode)
+                .to(duration, { scale: v3(1, 1, 1), position: v3(0, getPosByScrews + 1, 0) })
+                .delay(duration)
+                .to(duration, { position: v3(0, getPosByScrews, 0) })
+                .call(() => {
+                    this.capNode.setPosition(v3(0, getPosByScrews, 0));
+                })
+                .start()
+        }
+
         this.capNode.active = show;
     }
 

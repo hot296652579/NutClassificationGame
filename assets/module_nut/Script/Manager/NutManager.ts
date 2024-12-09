@@ -206,7 +206,11 @@ export class NutManager extends Component {
         tween(ringNode)
             .to(0.3, { worldPosition: targetPos })
             .call(() => {
-                if (onComplete) onComplete();
+                if (onComplete) {
+                    onComplete();
+                } else {
+                    ringNode.getComponent(Ring)!.suspensionEffect();
+                }
             })
             .start();
     }
