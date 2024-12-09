@@ -416,8 +416,11 @@ export class NutManager extends Component {
                 const operation = lastOperations[i];
                 const { toNut } = operation;
 
+                //先隐藏螺丝帽
+                toNut.getComponent(NutComponent).displayNutCap(false);
                 await this.undoRingNodeOperationAsync(toNut, operation);
             }
+
             this.inOperation = false;
             console.log('撤销操作已完成');
         } finally {
@@ -439,7 +442,6 @@ export class NutManager extends Component {
             });
         });
     }
-
 
     /** 清除操作栈*/
     clearUndoStack(): void {

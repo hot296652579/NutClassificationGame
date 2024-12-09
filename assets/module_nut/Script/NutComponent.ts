@@ -149,8 +149,14 @@ export class NutComponent extends Component {
             })
             .to(duration, { position: fromPosition })
             .call(() => {
-                toNut.getComponent(NutComponent)!.data!.screws = toScreews;
-                fromNut.getComponent(NutComponent)!.data!.screws = fromScreews;
+                let toNutData = toNut.getComponent(NutComponent)!.data!;
+                let fromNutData = fromNut.getComponent(NutComponent)!.data!;
+                toNutData.screws = toScreews;
+                fromNutData.screws = fromScreews;
+
+                fromNutData.isDone = fromNutData.checkIfGrouped();
+                toNutData.isDone = toNutData.checkIfGrouped();
+
                 if (onComplete) {
                     onComplete();
                 }
