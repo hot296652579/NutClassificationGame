@@ -16,7 +16,7 @@ export class Tablemain_config {
     id: number = 0;
 
     /** 参数 */
-    get param(): number {
+    get param(): any {
         return this.data.param;
     }
     /** 数据说明 */

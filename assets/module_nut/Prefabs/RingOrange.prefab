@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "RingUnknow",
+    "_name": "RingOrange",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RingUnknow",
+    "_name": "RingOrange",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -88,7 +88,7 @@
   },
   {
     "__type__": "cc.PrefabInstance",
-    "fileId": "8dm7n8ZARG/YaBlcjQSFhU",
+    "fileId": "45G68hlnxGaqlkzeN0V3LF",
     "prefabRootNode": {
       "__id__": 1
     },
@@ -185,7 +185,7 @@
       "0"
     ],
     "value": {
-      "__uuid__": "52b29a95-b49d-428e-9b9d-7afa72a07831",
+      "__uuid__": "ba8dc403-12d8-4fc3-bdb1-18ff57a3809e",
       "__expectedType__": "cc.Material"
     }
   },
@@ -207,8 +207,8 @@
     "__prefab": {
       "__id__": 13
     },
-    "color": 0,
-    "colorName": "未知颜色",
+    "color": 5,
+    "colorName": "橙色",
     "hoverHeight": 0.3,
     "hoverWidth": 0.5,
     "duration": 2,
@@ -216,7 +216,7 @@
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "20p/RIvz5KBZz6UDw49B3n"
+    "fileId": "3boQj2gKtD3Ivl6PrJ2wSo"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -48,7 +48,7 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         layout.btGet.node.getChildByName('lbGet').getComponent(Label).string = `${this.rewardBase}`;
         layout.btExtra.node.getChildByName('lbExtra').getComponent(Label).string = `${this.rewardAdditional}`;
 
-        const soundId = this.win ? 11 : 12;
+        const soundId = this.win ? 3 : 3;
         NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
     }
 

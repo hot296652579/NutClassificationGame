@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Quat, Tween, tween, Vec3 } from 'cc';
+import { _decorator, CCString, Component, Node, Quat, Tween, tween, Vec3 } from 'cc';
 import { ScrewColor } from './Enum/ScrewColor';
 import { duration } from './NutComponent';
 
@@ -9,6 +9,9 @@ const { ccclass, property } = _decorator;
 export class Ring extends Component {
     @property
     color: ScrewColor = ScrewColor.RED; //对应各自的颜色枚举
+
+    @property(CCString)
+    colorName: string = '红色'; //对应各自的颜色名称 默认红色
 
     @property
     hoverHeight: number = 0.3; // 悬浮高度（上下浮动的幅度）
