@@ -251,7 +251,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.TargetInfo",
@@ -268,7 +268,7 @@
     "propertyPath": [
       "_active"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "cc.TargetInfo",
@@ -786,7 +786,7 @@
     "value": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 9,
+      "y": 6,
       "z": 0
     }
   },
@@ -848,11 +848,11 @@
     "_center": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 5,
+      "y": 3,
       "z": 0
     },
     "_radius": 2,
-    "_height": 10,
+    "_height": 6,
     "_direction": 1,
     "_id": ""
   },

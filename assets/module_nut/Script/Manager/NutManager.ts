@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, tween, PhysicsSystem, geometry, CameraComponent, input, Input, EventTouch, Vec3, ccenum, CCString } from 'cc';
-import { NutComponent } from '../NutComponent';
+import { duration, NutComponent } from '../NutComponent';
 import { Ring } from '../Ring';
 import { ScrewData } from '../Model/ScrewData';
 import { ScrewColor } from '../Enum/ScrewColor';
@@ -204,9 +204,10 @@ export class NutManager extends Component {
     moveRingToSuspension(ringNode: Node, nutComponent: NutComponent, onComplete?: () => void) {
         const targetPos = nutComponent.getSuspensionPosition();
         tween(ringNode)
-            .to(0.3, { worldPosition: targetPos })
+            .to(duration, { worldPosition: targetPos })
             .call(() => {
                 if (onComplete) {
+                    ringNode.getComponent(Ring)!.stopHover();
                     onComplete();
                 } else {
                     ringNode.getComponent(Ring)!.suspensionEffect();

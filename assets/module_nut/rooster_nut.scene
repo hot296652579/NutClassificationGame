@@ -1593,6 +1593,14 @@
       {
         "__uuid__": "5a627956-3508-4ad6-97b5-fdedf0ddc215",
         "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "5c01a42c-03c1-43c7-916c-4ee9b84df899",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "5d290d5a-2779-4b07-877d-c58409659276",
+        "__expectedType__": "cc.Prefab"
       }
     ],
     "gameUI": {

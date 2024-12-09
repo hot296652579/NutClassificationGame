@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, Quat, tween, Vec3 } from 'cc';
+import { _decorator, Component, Node, Quat, Tween, tween, Vec3 } from 'cc';
 import { ScrewColor } from './Enum/ScrewColor';
 import { duration } from './NutComponent';
 
@@ -14,65 +14,56 @@ export class Ring extends Component {
     hoverHeight: number = 0.3; // 悬浮高度（上下浮动的幅度）
 
     @property
-    tiltAngle: number = 2; // 左右倾斜的角度（度数）
+    hoverWidth: number = 0.5; // 左右浮动的幅度
 
     @property
     duration: number = 2; // 单次浮动的时间（秒）
 
     private originalPosition: Vec3 = new Vec3(); // 初始位置
-    private originalRotation: Quat = new Quat(); // 保存初始旋转
 
     onLoad() {
+        this.originalPosition = this.node.position;
     }
 
     //悬浮效果
     suspensionEffect() {
-        const pos = this.node.position;
-        const rotation = this.node.rotation;
-        // 定义上下浮动的目标位置
-        const upPosition = new Vec3(
-            pos.x,
-            pos.y + this.hoverHeight,
-            pos.z
+        const ringNode = this.node.position;
+        // 定义浮动的目标位置
+        const upLeftPosition = new Vec3(
+            ringNode.x - this.hoverWidth,
+            ringNode.y + this.hoverHeight,
+            ringNode.z
         );
-        const downPosition = new Vec3(
-            pos.x,
-            pos.y - this.hoverHeight,
-            pos.z
+        const upRightPosition = new Vec3(
+            ringNode.x + this.hoverWidth,
+            ringNode.y + this.hoverHeight,
+            ringNode.z
         );
-
-        // 定义左右倾斜的目标旋转
-        const leftTilt = Quat.fromEuler(
-            new Quat(),
-            rotation.x,
-            rotation.y,
-            rotation.z - this.tiltAngle
+        const downLeftPosition = new Vec3(
+            ringNode.x - this.hoverWidth,
+            ringNode.y - this.hoverHeight,
+            ringNode.z
         );
-        const rightTilt = Quat.fromEuler(
-            new Quat(),
-            rotation.x,
-            rotation.y,
-            rotation.z + this.tiltAngle
+        const downRightPosition = new Vec3(
+            ringNode.x + this.hoverWidth,
+            ringNode.y - this.hoverHeight,
+            ringNode.z
         );
 
-        // 使用 tween 实现上下浮动和左右倾斜的组合效果
+        // 使用 tween 实现上下和左右浮动的组合效果
         tween(this.node)
-            .parallel( // 并行执行上下浮动和旋转动画
-                tween()
-                    .to(this.duration, { position: upPosition }, { easing: 'sineInOut' })
-                    .to(this.duration, { position: downPosition }, { easing: 'sineInOut' }),
-                tween()
-                    .to(this.duration, { rotation: leftTilt }, { easing: 'sineInOut' })
-                    .to(this.duration, { rotation: rightTilt }, { easing: 'sineInOut' })
+            .sequence(
+                tween().to(this.duration, { position: upLeftPosition }, { easing: 'sineInOut' }),
+                tween().to(this.duration, { position: upRightPosition }, { easing: 'sineInOut' }),
+                tween().to(this.duration, { position: downRightPosition }, { easing: 'sineInOut' }),
+                tween().to(this.duration, { position: downLeftPosition }, { easing: 'sineInOut' })
             )
-            .union() // 合并动画序列
             .repeatForever() // 无限循环
             .start();
     }
+
     stopHover() {
-        tween(this.node).stop();
-        this.node.setPosition(this.originalPosition);
-        this.node.setRotation(this.originalRotation);
+        Tween.stopAllByTarget(this.node);
     }
 }
 
