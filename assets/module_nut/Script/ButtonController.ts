@@ -38,11 +38,13 @@ export class ButtonController extends Component {
         this.nutManager = find('Canvas').getComponentInChildren(NutManager);
     }
 
-    private onClickHandler(type: TYPE_ITEM): void {
-        console.log('onClickHandler');
+    private async onClickHandler(type: TYPE_ITEM): Promise<void> {
+        const { inOperation } = this.nutManager;
+        if (inOperation) return;
+
         switch (type) {
             case TYPE_ITEM.REVOKE:
-                this.nutManager.undoLastOperation();
+                await this.nutManager.undoLastOperation();
                 break;
             case TYPE_ITEM.ADDNUT:
                 this.nutManager.handleAdSuccess();

@@ -20,8 +20,8 @@ export class NutManager extends Component {
 
     private currentRing: Node | null = null; // 当前悬浮的螺丝圈
     private currentNut: Node | null = null; // 当前选择的螺母
-    private operationStack: NutOperationRecord[] = []; // 操作栈
-    private inOperation: boolean = false; // 是否在操作中
+    private operationStack: NutOperationRecord[][] = []; // 操作栈，每次操作保存为一个记录数组
+    public inOperation: boolean = false; // 是否在操作中
 
     start() {
         this.initNuts(); // 初始化数据
@@ -129,17 +129,29 @@ export class NutManager extends Component {
         const freeSlots = targetNutComponent.getFreeSlots(); // 可用的数量
         const ringsToMove = groupRings.slice(0, freeSlots); // 截取可用的数量螺丝圈移动
 
+        const operationRecords: NutOperationRecord[] = []; // 存储本次移动的所有操作记录
+
         const moveNext = (index: number) => {
             if (index >= ringsToMove.length) {
                 // 所有需要移动的螺丝圈移动完成
+                if (operationRecords.length > 0) {
+                    this.operationStack.push(operationRecords); // 保存整个移动操作为数组
+                }
                 if (onComplete) onComplete();
                 return;
             }
 
             const ring = ringsToMove[index];
+
+            const createOperation = () => {
+                const record = this.createNutOperationRecord(ring, currentNutComponent, targetNutComponent);
+                operationRecords.push(record); // 保存每次移动的记录
+            };
+
             if (ring === startRing) {
                 // 当前悬浮螺丝圈：直接移动到目标螺母
                 this.moveRingToSuspension(ring, targetNutComponent, () => {
+                    createOperation();
                     this.moveRingToNut(ring, targetNutComponent, false);
                     moveNext(index + 1);
                 });
@@ -147,6 +159,7 @@ export class NutManager extends Component {
                 // 后续螺丝圈：先移动到当前螺母悬浮位置，再移动到目标螺母
                 this.moveRingToSuspension(ring, currentNutComponent, () => {
                     this.moveRingToSuspension(ring, targetNutComponent, () => {
+                        createOperation();
                         this.moveRingToNut(ring, targetNutComponent, false);
                         moveNext(index + 1);
                     });
@@ -207,7 +220,7 @@ export class NutManager extends Component {
 
         if (!isReturning && this.currentNut) {
             const currentNutComponent = this.currentNut.getComponent(NutComponent)!;
-            this.saveOperation(ringNode, currentNutComponent, targetNutComponent);
+            // this.saveOperation(ringNode, currentNutComponent, targetNutComponent);
             // 移除当前螺母顶部的螺丝圈
             const removedScrew = currentNutComponent.data.removeTopScrew();
             if (removedScrew) {
@@ -357,7 +370,11 @@ export class NutManager extends Component {
      * @param curNutComponent 当前螺丝圈的螺母组件
      * @param targetNutComponent 目标螺母组件
      */
-    saveOperation(ringNode: Node, curNutComponent: NutComponent, targetNutComponent: NutComponent): void {
+    private createNutOperationRecord(
+        ringNode: Node,
+        curNutComponent: NutComponent,
+        targetNutComponent: NutComponent
+    ): NutOperationRecord {
         const fromNutNode = curNutComponent.node;
         const toNutNode = targetNutComponent.node;
 
@@ -367,11 +384,11 @@ export class NutManager extends Component {
         const newEndY = (targetNutComponent.ringsNode.children.length) * 1.5;
         const endPosition = new Vec3(0, newEndY, 0);
 
-        //深度拷贝
+        // 深度拷贝数据
         const fromScreews = curNutComponent.data.screws.map(screw => ({ ...screw }));
         const toScreews = targetNutComponent.data.screws.map(screw => ({ ...screw }));
 
-        const operation: NutOperationRecord = {
+        return {
             fromNut: fromNutNode,
             toNut: toNutNode,
             opNode: ringNode,
@@ -379,28 +396,51 @@ export class NutManager extends Component {
             toPosition: endPosition,
             fromScreews: fromScreews,
             toScreews: toScreews,
-        }
-
-        // console.log('保存的from screws数据:', operation.fromScreews);
-        this.operationStack.push(operation);
+        };
     }
+
 
     /**
      * 撤销最近的操作
      */
-    undoLastOperation(): void {
-        const lastOperation = this.operationStack.pop();
-        if (!lastOperation) {
+    async undoLastOperation(): Promise<void> {
+        const lastOperations = this.operationStack.pop();
+        if (!lastOperations || lastOperations.length === 0) {
             console.warn('没有可撤销的操作!!!');
             return;
         }
 
         this.inOperation = true;
-        const { toNut } = lastOperation;
-        toNut.getComponent(NutComponent)?.undoRingNodeOperation(lastOperation, () => {
+
+        try {
+            // 按逆序逐个撤销操作
+            for (let i = lastOperations.length - 1; i >= 0; i--) {
+                const operation = lastOperations[i];
+                const { toNut } = operation;
+
+                await this.undoRingNodeOperationAsync(toNut, operation);
+            }
+            console.log('撤销操作已完成');
+        } finally {
             this.inOperation = false;
+        }
+    }
+
+    private undoRingNodeOperationAsync(toNut: Node, operation: NutOperationRecord): Promise<void> {
+        return new Promise((resolve) => {
+            const nutComponent = toNut.getComponent(NutComponent);
+            if (!nutComponent) {
+                console.error('未找到 NutComponent，无法撤销');
+                resolve(); // 无法处理，直接完成当前任务
+                return;
+            }
+
+            nutComponent.undoRingNodeOperation(operation, () => {
+                resolve(); // 完成一次撤销
+            });
         });
     }
+
 
     /** 清除操作栈*/
     clearUndoStack(): void {
