@@ -95,9 +95,11 @@ export class NutManager extends Component {
                     }
 
                     //连续移动逻辑
+                    this.inOperation = true;
                     this.moveGroupRings(this.currentRing, this.currentNut, nutComponent, () => {
                         this.resetCurrentSelection();
                         this.checkAndDisplayNutCap(nutComponent);
+                        this.inOperation = false;
                     });
                 } else {
                     console.log('不符合移动要求，归位操作');
@@ -220,7 +222,6 @@ export class NutManager extends Component {
 
         if (!isReturning && this.currentNut) {
             const currentNutComponent = this.currentNut.getComponent(NutComponent)!;
-            // this.saveOperation(ringNode, currentNutComponent, targetNutComponent);
             // 移除当前螺母顶部的螺丝圈
             const removedScrew = currentNutComponent.data.removeTopScrew();
             if (removedScrew) {
@@ -234,9 +235,7 @@ export class NutManager extends Component {
             targetNutComponent.data.addScrew(screwData);
         }
 
-        this.inOperation = true;
         targetNutComponent.addRingNode(ringNode, isReturning, () => {
-            this.inOperation = false;
             this.handlePostMoveLogic();
         }
         );
@@ -410,9 +409,8 @@ export class NutManager extends Component {
             return;
         }
 
-        this.inOperation = true;
-
         try {
+            this.inOperation = true;
             // 按逆序逐个撤销操作
             for (let i = lastOperations.length - 1; i >= 0; i--) {
                 const operation = lastOperations[i];
@@ -420,6 +418,7 @@ export class NutManager extends Component {
 
                 await this.undoRingNodeOperationAsync(toNut, operation);
             }
+            this.inOperation = false;
             console.log('撤销操作已完成');
         } finally {
             this.inOperation = false;
