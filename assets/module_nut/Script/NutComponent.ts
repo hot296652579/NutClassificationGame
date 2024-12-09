@@ -132,7 +132,7 @@ export class NutComponent extends Component {
 
     //获取剩余可用位置
     getFreeSlots() {
-        return this.maxScrews - this.ringsNode.children.length;
+        return this.canGrow ? this.data.curScrews - this.ringsNode.children.length : this.maxScrews - this.ringsNode.children.length;
     }
 
     /**
