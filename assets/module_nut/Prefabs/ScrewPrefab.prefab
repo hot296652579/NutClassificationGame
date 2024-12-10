@@ -887,8 +887,8 @@
     "capNode": {
       "__id__": 43
     },
-    "isGroup": false,
-    "maxScrews": 6,
+    "isGroup": true,
+    "maxScrews": 4,
     "canGrow": false,
     "curScrews": 0,
     "ringsUnknowNode": {

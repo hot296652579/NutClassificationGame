@@ -5,6 +5,8 @@ import { ScrewData } from '../Model/ScrewData';
 import { ScrewColor } from '../Enum/ScrewColor';
 import { tgxUIMgr } from '../../../core_tgx/tgx';
 import { UI_BattleResult } from '../../../scripts/UIDef';
+import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
+import { GameEvent } from '../Enum/GameEvent';
 
 
 const { ccclass, property } = _decorator;
@@ -18,14 +20,14 @@ export class NutManager extends Component {
     nutNodes: Node[] = []; // 螺母节点数组
 
     @property({ type: [CCString], tooltip: "当前关卡需要归类的颜色" })
-    private levelColorStrings: string[] = []; // 在编辑器中使用字符串数组
-
+    readonly levelColorStrings: String[] = []; // 在编辑器中使用字符串数组
     private currentRing: Node | null = null; // 当前悬浮的螺丝圈
     private currentNut: Node | null = null; // 当前选择的螺母
     private operationStack: NutOperationRecord[][] = []; // 操作栈，每次操作保存为一个记录数组
     public inOperation: boolean = false; // 是否在操作中
 
     start() {
+        this.clearData();
         this.initNuts(); // 初始化数据
         input.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
     }
@@ -96,6 +98,7 @@ export class NutManager extends Component {
                         return;
                     }
 
+                    console.log('执行连续移动逻辑');
                     //连续移动逻辑
                     this.inOperation = true;
                     this.moveGroupRings(this.currentRing, this.currentNut, nutComponent, () => {
@@ -252,6 +255,7 @@ export class NutManager extends Component {
      * 处理移动后逻辑，包括通关检测
      */
     handlePostMoveLogic() {
+        console.log('检测是否通关:' + this.checkLevelCompletion());
         if (this.checkLevelCompletion()) {
             tgxUIMgr.inst.showUI(UI_BattleResult);
         }
@@ -324,7 +328,6 @@ export class NutManager extends Component {
      * 通关条件：所有螺母中颜色归类完成，且关卡中所有颜色都归类完成。
      */
     checkLevelCompletion(): boolean {
-        // 存储每种颜色的归类状态
         const groupedColors: Set<ScrewColor> = new Set();
 
         // 遍历所有的螺母节点
@@ -345,11 +348,14 @@ export class NutManager extends Component {
 
         // 获取关卡所需归类的颜色
         const levelColors = this.getLevelColors();
+        console.log('获取关卡所需归类的颜色 levelColors:', levelColors);
         // 计算已归类的颜色数量
         const arrayColors = Array.from(groupedColors);
+        console.log('已经归类的颜色:', groupedColors);
         const filteredColors = arrayColors.filter(function (color) {
             return levelColors.includes(color);
         });
+        console.log('过滤后的颜色:', filteredColors);
         const result = filteredColors.length;
         return result >= levelColors.length;
     }
@@ -360,10 +366,11 @@ export class NutManager extends Component {
      * @returns 当前关卡的颜色数组
      */
     getLevelColors(): ScrewColor[] {
-        return this.levelColorStrings
-            .map(colorStr => ScrewColor[colorStr as keyof typeof ScrewColor])
-            .filter(color => color !== undefined);
+        console.log('Before levelColorStrings:', this.levelColorStrings); // 打印初始值
+        return [...this.levelColorStrings]
+            .map(colorStr => ScrewColor[colorStr as keyof typeof ScrewColor]);
     }
+
 
     resetCurrentSelection() {
         this.currentRing = null;
@@ -453,6 +460,19 @@ export class NutManager extends Component {
     /** 清除操作栈*/
     clearUndoStack(): void {
         this.operationStack = [];
+    }
+
+    /** 清除数据*/
+    clearData(): void {
+        console.log('清除数据!!!!!!!!!!!!!!!!');
+        this.clearUndoStack();
+        this.resetCurrentSelection();
+        this.inOperation = false;
+        for (const nutNode of this.nutNodes) {
+            const nutComponent = nutNode.getComponent(NutComponent)!;
+            nutComponent.data.isDone = false;
+            nutComponent.data.screws = [];
+        }
     }
 }
 
