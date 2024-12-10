@@ -7,6 +7,7 @@ import { tgxUIMgr } from '../../../core_tgx/tgx';
 import { UI_BattleResult } from '../../../scripts/UIDef';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
+import { LevelManager } from './LevelMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -119,6 +120,7 @@ export class NutManager extends Component {
                     //连续移动逻辑
                     self.inOperation = true;
                     self.moveGroupRings(self.currentRing, self.currentNut, nutComponent, () => {
+                        LevelManager.instance.addLevelStep();
                         self.resetCurrentSelection();
                         self.checkAndDisplayNutCap(nutComponent);
                         self.inOperation = false;
@@ -163,9 +165,11 @@ export class NutManager extends Component {
                 // 所有需要移动的螺丝圈移动完成
                 if (operationRecords.length > 0) {
                     self.operationStack.push(operationRecords); // 保存整个移动操作为数组
-                    console.log('operationStack', self.operationStack);
+                    // console.log('operationStack', self.operationStack);
                 }
-                if (onComplete) onComplete();
+                if (onComplete) {
+                    onComplete();
+                }
                 return;
             }
 
@@ -276,7 +280,7 @@ export class NutManager extends Component {
      * 处理移动后逻辑，包括通关检测
      */
     handlePostMoveLogic() {
-        console.log('检测是否通关:' + this.checkLevelCompletion());
+        // console.log('检测是否通关:' + this.checkLevelCompletion());
         if (this.checkLevelCompletion()) {
             tgxUIMgr.inst.showUI(UI_BattleResult);
         }
@@ -437,6 +441,7 @@ export class NutManager extends Component {
     private async onUndoHandler() {
         await this.undoLastOperation();
     }
+
     /**
      * 撤销最近的操作
      */

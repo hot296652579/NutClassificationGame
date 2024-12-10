@@ -49,8 +49,13 @@ export class LevelManager {
         this.levelModel.levelConfig.init(this.levelModel.level);
     }
 
+    /** 添加步数*/
+    addLevelStep(step: number = 1): void {
+        this.levelModel.playerStep += step;
+    }
+
     /** 清除关卡数据*/
     clearLevelData(): void {
-
+        this.levelModel.clearLevel();
     }
 }

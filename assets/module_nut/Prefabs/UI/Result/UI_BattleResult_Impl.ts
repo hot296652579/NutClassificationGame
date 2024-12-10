@@ -83,9 +83,12 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         }
     }
 
-    /** 计算基础奖励和额外奖励*/
+    /** 根据关卡步数计算星级*/
     private calculateReward(): void {
-
+        const { playerStep, levelConfig } = LevelManager.instance.levelModel;
+        console.log('玩家移动步数 playerStep:' + playerStep);
+        console.log('关卡配置步数 step:' + levelConfig.step);
+        console.log('配置的星星数据 mainConfig', LevelManager.instance.levelModel.mainConfig);
     }
 }
 
