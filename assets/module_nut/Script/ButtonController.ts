@@ -38,16 +38,16 @@ export class ButtonController extends Component {
         this.nutManager = find('Canvas').getComponentInChildren(NutManager);
     }
 
-    private async onClickHandler(type: TYPE_ITEM): Promise<void> {
+    private onClickHandler(type: TYPE_ITEM) {
         const { inOperation } = this.nutManager;
         if (inOperation) return;
 
         switch (type) {
             case TYPE_ITEM.REVOKE:
-                await this.nutManager.undoLastOperation();
+                EventDispatcher.instance.emit(GameEvent.EVENT_UNDO_REVOKE);
                 break;
             case TYPE_ITEM.ADDNUT:
-                this.nutManager.handleAdSuccess();
+                EventDispatcher.instance.emit(GameEvent.EVENT_ADD_SCREW);
                 break;
 
             default:

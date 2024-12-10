@@ -8,7 +8,6 @@ import { UI_BattleResult } from '../../../scripts/UIDef';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
 
-
 const { ccclass, property } = _decorator;
 
 @ccclass('NutManager')
@@ -21,15 +20,28 @@ export class NutManager extends Component {
 
     @property({ type: [CCString], tooltip: "当前关卡需要归类的颜色" })
     readonly levelColorStrings: String[] = []; // 在编辑器中使用字符串数组
+
     private currentRing: Node | null = null; // 当前悬浮的螺丝圈
     private currentNut: Node | null = null; // 当前选择的螺母
     private operationStack: NutOperationRecord[][] = []; // 操作栈，每次操作保存为一个记录数组
     public inOperation: boolean = false; // 是否在操作中
 
-    start() {
+    protected onLoad(): void {
+        for (const nutNode of this.nutNodes) {
+            nutNode.active = true;
+        }
         this.clearData();
+    }
+
+    setupUIListeners() {
+        input.on(Input.EventType.TOUCH_END, this.onTouchEnd, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_UNDO_REVOKE, this.onUndoHandler, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_ADD_SCREW, this.onAddScrewHandler, this);
+    }
+
+    start() {
         this.initNuts(); // 初始化数据
-        input.on(Input.EventType.TOUCH_START, this.onTouchStart, this);
+        this.setupUIListeners();
     }
 
     // 初始化螺母和螺丝圈的数据
@@ -47,12 +59,13 @@ export class NutManager extends Component {
         }
     }
 
-    onTouchStart(event: EventTouch) {
+    onTouchEnd(event: EventTouch) {
         const ray = new geometry.Ray();
         this.camera.screenPointToRay(event.getLocationX(), event.getLocationY(), ray);
 
         if (PhysicsSystem.instance.raycast(ray)) {
             const results = PhysicsSystem.instance.raycastResults;
+
             if (results.length > 0) {
                 const hitNode = results[0].collider.node;
                 const nutComponent = hitNode.getComponent(NutComponent);
@@ -64,8 +77,10 @@ export class NutManager extends Component {
     }
 
     onNutClicked(nutNode: Node) {
-        if (this.inOperation) return;
+        const self = this;
+        if (self.inOperation) return;
 
+        self.inOperation = true;
         const nutComponent = nutNode.getComponent(NutComponent)!;
         const growCanOp = nutComponent.growCanOp();
 
@@ -81,45 +96,49 @@ export class NutManager extends Component {
             return;
         }
 
-        if (this.currentRing) {
+        if (self.currentRing) {
             // 已有悬浮螺丝圈
-            if (this.currentNut === nutNode) {
+            if (self.currentNut === nutNode) {
                 console.log('点击同一螺母，归位操作');
-                this.moveRingToNut(this.currentRing, nutComponent, true);
-                this.resetCurrentSelection();
+                self.moveRingToNut(self.currentRing, nutComponent, true);
+                self.resetCurrentSelection();
+                self.inOperation = false;
             } else {
                 // 点击不同螺母
                 const topScrew = nutComponent.data.getTopScrew();
-                const currentRingColor = this.currentRing.getComponent(Ring)!.color;
+                const currentRingColor = self.currentRing.getComponent(Ring)!.color;
                 if (!topScrew || topScrew.color === currentRingColor) {
                     const full = nutComponent.data.isFull();
                     if (full) {
                         console.log('螺母已达到上限，无法操作');
+                        self.inOperation = false;
                         return;
                     }
 
-                    console.log('执行连续移动逻辑');
+                    // console.log('执行连续移动逻辑');
                     //连续移动逻辑
-                    this.inOperation = true;
-                    this.moveGroupRings(this.currentRing, this.currentNut, nutComponent, () => {
-                        this.resetCurrentSelection();
-                        this.checkAndDisplayNutCap(nutComponent);
-                        this.inOperation = false;
+                    self.inOperation = true;
+                    self.moveGroupRings(self.currentRing, self.currentNut, nutComponent, () => {
+                        self.resetCurrentSelection();
+                        self.checkAndDisplayNutCap(nutComponent);
+                        self.inOperation = false;
                     });
                 } else {
                     console.log('不符合移动要求，归位操作');
-                    const currentNutComponent = this.currentRing.parent!.parent!.getComponent(NutComponent)!;
-                    this.moveRingToNut(this.currentRing, currentNutComponent, true);
-                    this.resetCurrentSelection();
+                    const currentNutComponent = self.currentRing.parent!.parent!.getComponent(NutComponent)!;
+                    self.moveRingToNut(self.currentRing, currentNutComponent, true);
+                    self.resetCurrentSelection();
+                    self.inOperation = false;
                 }
             }
         } else {
             // 没有悬浮螺丝圈时：直接选中顶部螺丝圈并移动
             const topRing = nutComponent.getTopRingNode();
             if (topRing) {
-                this.currentRing = topRing;
-                this.currentNut = nutNode;
-                this.moveRingToSuspension(topRing, nutComponent);
+                self.currentRing = topRing;
+                self.currentNut = nutNode;
+                self.moveRingToSuspension(topRing, nutComponent);
+                self.inOperation = false;
             }
         }
     }
@@ -131,8 +150,9 @@ export class NutManager extends Component {
         targetNutComponent: NutComponent,
         onComplete?: () => void
     ) {
+        const self = this;
         const currentNutComponent = currentNutNode.getComponent(NutComponent)!;
-        const groupRings = this.getGroupRings(startRing, currentNutNode); //找到相邻同色的所有螺丝圈
+        const groupRings = self.getGroupRings(startRing, currentNutNode); //找到相邻同色的所有螺丝圈
         const freeSlots = targetNutComponent.getFreeSlots(); // 可用的数量
         const ringsToMove = groupRings.slice(0, freeSlots); // 截取可用的数量螺丝圈移动
 
@@ -142,7 +162,8 @@ export class NutManager extends Component {
             if (index >= ringsToMove.length) {
                 // 所有需要移动的螺丝圈移动完成
                 if (operationRecords.length > 0) {
-                    this.operationStack.push(operationRecords); // 保存整个移动操作为数组
+                    self.operationStack.push(operationRecords); // 保存整个移动操作为数组
+                    console.log('operationStack', self.operationStack);
                 }
                 if (onComplete) onComplete();
                 return;
@@ -151,23 +172,23 @@ export class NutManager extends Component {
             const ring = ringsToMove[index];
 
             const createOperation = () => {
-                const record = this.createNutOperationRecord(ring, currentNutComponent, targetNutComponent);
+                const record = self.createNutOperationRecord(ring, currentNutComponent, targetNutComponent);
                 operationRecords.push(record); // 保存每次移动的记录
             };
 
             if (ring === startRing) {
                 // 当前悬浮螺丝圈：直接移动到目标螺母
-                this.moveRingToSuspension(ring, targetNutComponent, () => {
+                self.moveRingToSuspension(ring, targetNutComponent, () => {
                     createOperation();
-                    this.moveRingToNut(ring, targetNutComponent, false);
+                    self.moveRingToNut(ring, targetNutComponent, false);
                     moveNext(index + 1);
                 });
             } else {
                 // 后续螺丝圈：先移动到当前螺母悬浮位置，再移动到目标螺母
-                this.moveRingToSuspension(ring, currentNutComponent, () => {
-                    this.moveRingToSuspension(ring, targetNutComponent, () => {
+                self.moveRingToSuspension(ring, currentNutComponent, () => {
+                    self.moveRingToSuspension(ring, targetNutComponent, () => {
                         createOperation();
-                        this.moveRingToNut(ring, targetNutComponent, false);
+                        self.moveRingToNut(ring, targetNutComponent, false);
                         moveNext(index + 1);
                     });
                 });
@@ -264,7 +285,7 @@ export class NutManager extends Component {
     /**
      * 处理广告成功逻辑：找到第一个 `canGrow` 为 `false` 的螺母组件并设置为可增长
      */
-    public handleAdSuccess(): void {
+    private handleAdSuccess(): void {
         for (const nutNode of this.nutNodes) {
             const nutComponent = nutNode.getComponent(NutComponent);
             if (nutComponent && nutComponent.data.canGrow) {
@@ -340,7 +361,6 @@ export class NutManager extends Component {
                 continue;
             }
 
-            // 如果归类完成，添加螺母的颜色
             const screws = nutComponent.data.screws;
             const topColor = screws[0].color;
             groupedColors.add(topColor);
@@ -348,14 +368,11 @@ export class NutManager extends Component {
 
         // 获取关卡所需归类的颜色
         const levelColors = this.getLevelColors();
-        console.log('获取关卡所需归类的颜色 levelColors:', levelColors);
         // 计算已归类的颜色数量
         const arrayColors = Array.from(groupedColors);
-        console.log('已经归类的颜色:', groupedColors);
         const filteredColors = arrayColors.filter(function (color) {
             return levelColors.includes(color);
         });
-        console.log('过滤后的颜色:', filteredColors);
         const result = filteredColors.length;
         return result >= levelColors.length;
     }
@@ -366,11 +383,10 @@ export class NutManager extends Component {
      * @returns 当前关卡的颜色数组
      */
     getLevelColors(): ScrewColor[] {
-        console.log('Before levelColorStrings:', this.levelColorStrings); // 打印初始值
+        // console.log('Before levelColorStrings:', this.levelColorStrings); // 打印初始值
         return [...this.levelColorStrings]
             .map(colorStr => ScrewColor[colorStr as keyof typeof ScrewColor]);
     }
-
 
     resetCurrentSelection() {
         this.currentRing = null;
@@ -412,11 +428,21 @@ export class NutManager extends Component {
         };
     }
 
+    private onAddScrewHandler() {
+        if (this.nutNodes) {
+            this.handleAdSuccess();
+        }
+    }
 
+    private async onUndoHandler() {
+        await this.undoLastOperation();
+    }
     /**
      * 撤销最近的操作
      */
     async undoLastOperation(): Promise<void> {
+        if (!this.operationStack) return;
+
         const lastOperations = this.operationStack.pop();
         if (!lastOperations || lastOperations.length === 0) {
             console.warn('没有可撤销的操作!!!');
@@ -464,15 +490,21 @@ export class NutManager extends Component {
 
     /** 清除数据*/
     clearData(): void {
-        console.log('清除数据!!!!!!!!!!!!!!!!');
         this.clearUndoStack();
         this.resetCurrentSelection();
-        this.inOperation = false;
+
         for (const nutNode of this.nutNodes) {
             const nutComponent = nutNode.getComponent(NutComponent)!;
-            nutComponent.data.isDone = false;
-            nutComponent.data.screws = [];
+            nutComponent.initData();
         }
+
+        this.inOperation = false;
+    }
+
+    protected onDestroy(): void {
+        input.off(Input.EventType.TOUCH_END, this.onTouchEnd);
+        EventDispatcher.instance.off(GameEvent.EVENT_UNDO_REVOKE, this.onUndoHandler);
+        EventDispatcher.instance.off(GameEvent.EVENT_ADD_SCREW, this.onAddScrewHandler);
     }
 }
 

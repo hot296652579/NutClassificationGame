@@ -143,7 +143,7 @@
     },
     "_depth": 1,
     "_stencil": 0,
-    "_clearFlags": 14,
+    "_clearFlags": 7,
     "_rect": {
       "__type__": "cc.Rect",
       "x": 0,
@@ -1532,7 +1532,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 4.92,
+      "x": 6,
       "y": 0,
       "z": 0
     }
@@ -1676,7 +1676,7 @@
     ],
     "value": {
       "__type__": "cc.Vec3",
-      "x": 9.766,
+      "x": 12,
       "y": 0,
       "z": 0
     }

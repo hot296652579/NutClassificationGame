@@ -3168,7 +3168,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": true
+    "value": false
   },
   {
     "__type__": "CCPropertyOverrideInfo",

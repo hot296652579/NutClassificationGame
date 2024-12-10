@@ -13,6 +13,7 @@ export class LevelManager {
 
     levelPrefabs: Prefab[] = [];
     parent: Node = null!;
+    currentLevel: Node = null!;
 
     public levelModel: LevelModel = null;
 
@@ -26,9 +27,15 @@ export class LevelManager {
             console.error(`关卡预设不存在 level: ${level}.`);
             return;
         }
-        const currentLevelNode = instantiate(levelPrefab);
+
+        if (this.currentLevel) {
+            this.currentLevel.destroy();
+        }
+
+        this.currentLevel = instantiate(levelPrefab);
         this.parent.removeAllChildren();
-        this.parent.addChild(currentLevelNode);
+        this.parent.addChild(this.currentLevel);
+        this.currentLevel.active = true;
         console.log(`Loaded level: ${level}.`);
     }
 

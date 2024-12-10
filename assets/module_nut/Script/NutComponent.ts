@@ -43,6 +43,10 @@ export class NutComponent extends Component {
     ringsUnknowNode: Node = null!; // 螺母中的 RingsUnknow 节点，用于存放未知螺丝圈
 
     protected start(): void {
+        this.initData();
+    }
+
+    initData(): void {
         this.data = new NutData();
         this.data.maxScrews = this.maxScrews;
         this.data.isGroup = this.isGroup;
