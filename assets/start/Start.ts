@@ -17,7 +17,10 @@ const _preloadRes = [
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/bgm_jiemian.mp3', type: 'audio' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/dianji.mp3', type: 'audio' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/shengli.mp3', type: 'audio' },
-    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/shibai.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/wancheng.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/shengqi.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/luoxia.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/jiesuo.mp3', type: 'audio' },
 ];
 
 const _loadingText = ['Loading.', 'Loading..', 'Loading...'];

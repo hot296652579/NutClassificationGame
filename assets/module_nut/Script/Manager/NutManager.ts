@@ -8,6 +8,7 @@ import { UI_BattleResult } from '../../../scripts/UIDef';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
 import { LevelManager } from './LevelMgr';
+import { NutGameAudioMgr } from './NutGameAudioMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -233,6 +234,7 @@ export class NutManager extends Component {
     }
 
     moveRingToSuspension(ringNode: Node, nutComponent: NutComponent, onComplete?: () => void) {
+        NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(5), 1.0);
         const targetPos = nutComponent.getSuspensionPosition();
         tween(ringNode)
             .to(duration, { worldPosition: targetPos })

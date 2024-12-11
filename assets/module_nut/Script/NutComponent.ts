@@ -3,6 +3,7 @@ import { NutData } from './Model/NutData';
 import { NutOperationRecord } from './Manager/NutManager';
 import { EventDispatcher } from '../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from './Enum/GameEvent';
+import { NutGameAudioMgr } from './Manager/NutGameAudioMgr';
 
 
 const { ccclass, property } = _decorator;
@@ -109,6 +110,7 @@ export class NutComponent extends Component {
 
                 if (ringsUnknowNode.active) {
                     EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, screwNode);
+                    NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(7), 1.0);
                 }
 
                 ringsUnknowNode.active = !screw.isShow;
@@ -133,6 +135,7 @@ export class NutComponent extends Component {
             .to(duration, { eulerAngles: new Vec3(0, 180, 0), position: new Vec3(endPosition.x, endPosition.y, endPosition.z) })
             .call(() => {
                 if (onComplete) {
+                    NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(6), 1.0);
                     onComplete();
                 }
             })
@@ -151,6 +154,7 @@ export class NutComponent extends Component {
         this.capNode.setPosition(v3(0, getPosByScrews, 0));
 
         if (show) {
+            NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(4), 1.0);
             this.capNode.active = show;
             this.capNode.setScale(v3(0, 1, 1));
 

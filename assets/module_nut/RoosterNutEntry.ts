@@ -35,6 +35,8 @@ export class RoosterNutEntry extends Component {
         AdvertMgr.instance.initilize();
         this.initilize();
         this.addEventListen();
+
+        NutGameAudioMgr.play(NutGameAudioMgr.getMusicIdName(1), 1.0);
     }
 
     initilize() {
