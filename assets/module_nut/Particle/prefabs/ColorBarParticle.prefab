@@ -42,15 +42,15 @@
     },
     "_lscale": {
       "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
+      "x": 2,
+      "y": 2,
+      "z": 2
     },
     "_mobility": 0,
     "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
-      "x": 89.99999999999999,
+      "x": 90,
       "y": 0,
       "z": 0
     },
@@ -78,7 +78,7 @@
     "startColor": {
       "__id__": 4
     },
-    "scaleSpace": 2,
+    "scaleSpace": 1,
     "startSize3D": false,
     "startSizeX": {
       "__id__": 5
@@ -115,7 +115,7 @@
       "__id__": 13
     },
     "duration": 1,
-    "loop": true,
+    "loop": false,
     "simulationSpeed": 1,
     "playOnAwake": true,
     "gravityModifier": {
@@ -130,9 +130,9 @@
     "bursts": [],
     "_renderCulling": false,
     "_cullingMode": 0,
-    "_aabbHalfX": 0,
-    "_aabbHalfY": 0,
-    "_aabbHalfZ": 0,
+    "_aabbHalfX": 1,
+    "_aabbHalfY": 13.5,
+    "_aabbHalfZ": 1.0000000000000027,
     "_dataCulling": false,
     "enableCulling": false,
     "_colorOverLifetimeModule": {
@@ -170,12 +170,12 @@
     },
     "_prewarm": false,
     "_capacity": 150,
-    "_simulationSpace": 0,
+    "_simulationSpace": 2,
     "_id": ""
   },
   {
     "__type__": "cc.CompPrefabInfo",
-    "fileId": "0b7a7v3FVOCpzmec7amMlB"
+    "fileId": "aeh1iCBKpJ4Jp7fSo809d6"
   },
   {
     "__type__": "cc.GradientRange",
@@ -198,7 +198,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 0.05,
+    "constant": 0.5,
     "multiplier": 1
   },
   {
@@ -296,14 +296,14 @@
     "randomDirectionAmount": 0,
     "sphericalDirectionAmount": 0,
     "randomPositionAmount": 0,
-    "radius": 0.05,
+    "radius": 1,
     "radiusThickness": 1,
     "arcMode": 0,
     "arcSpread": 0,
     "arcSpeed": {
       "__id__": 20
     },
-    "length": 0.4,
+    "length": 5,
     "boxThickness": {
       "__type__": "cc.Vec3",
       "x": 0,
@@ -334,7 +334,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 1,
+    "constant": 0,
     "multiplier": 1
   },
   {
@@ -365,7 +365,7 @@
   {
     "__type__": "cc.RealCurve",
     "_times": [
-      0.01,
+      0.004878048780487805,
       1
     ],
     "_values": [
@@ -373,12 +373,13 @@
         "__type__": "cc.RealKeyframeValue",
         "interpolationMode": 2,
         "tangentWeightMode": 0,
-        "value": 0.36,
-        "rightTangent": 0.58,
-        "rightTangentWeight": 0,
-        "leftTangent": 2,
-        "leftTangentWeight": 0,
-        "easingMethod": 0
+        "value": 0.4431818181818182,
+        "rightTangent": 2.2432659932659935,
+        "rightTangentWeight": 0.8146938560226147,
+        "leftTangent": 2.2432659932659935,
+        "leftTangentWeight": 1,
+        "easingMethod": 0,
+        "__editorExtras__": null
       },
       {
         "__type__": "cc.RealKeyframeValue",
@@ -386,10 +387,11 @@
         "tangentWeightMode": 0,
         "value": 0,
         "rightTangent": 0,
-        "rightTangentWeight": 0,
-        "leftTangent": -0.86,
-        "leftTangentWeight": 0,
-        "easingMethod": 0
+        "rightTangentWeight": 1,
+        "leftTangent": 0,
+        "leftTangentWeight": 0.3317073170731707,
+        "easingMethod": 0,
+        "__editorExtras__": null
       }
     ],
     "preExtrapolation": 2,
@@ -634,14 +636,12 @@
       "__id__": 53
     },
     "_space": 0,
-    "_particleSystem": {
-      "__id__": 2
-    }
+    "_particleSystem": null
   },
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 1,
+    "constant": 0,
     "multiplier": 1
   },
   {

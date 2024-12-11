@@ -81,7 +81,7 @@ export class RoosterNutEntry extends Component {
 
     /** 关卡升级*/
     private levelUpHandler(): void {
-        // this.onClearAllParticle();
+        this.onClearAllParticle();
         LevelManager.instance.clearLevelData();
         LevelManager.instance.upgradeLevel();
 
