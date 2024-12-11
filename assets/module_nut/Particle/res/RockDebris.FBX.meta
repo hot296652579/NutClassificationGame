@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "9f5d3421-f811-4514-8438-adef94bb3445",
+  "files": [],
+  "subMetas": {
+    "176a8": {
+      "importer": "gltf-mesh",
+      "uuid": "9f5d3421-f811-4514-8438-adef94bb3445@176a8",
+      "displayName": "",
+      "id": "176a8",
+      "name": "RockDebris_Low.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 64
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "6fb76": {
+      "importer": "gltf-material",
+      "uuid": "9f5d3421-f811-4514-8438-adef94bb3445@6fb76",
+      "displayName": "",
+      "id": "6fb76",
+      "name": "RockSpike.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "477d7": {
+      "importer": "gltf-scene",
+      "uuid": "9f5d3421-f811-4514-8438-adef94bb3445@477d7",
+      "displayName": "",
+      "id": "477d7",
+      "name": "RockDebris.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "9f5d3421-f811-4514-8438-adef94bb3445@477d7",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "9f5d3421-f811-4514-8438-adef94bb3445@176a8"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "9f5d3421-f811-4514-8438-adef94bb3445@6fb76"
+      ],
+      "scenes": [
+        "9f5d3421-f811-4514-8438-adef94bb3445@477d7"
+      ]
+    }
+  }
+}

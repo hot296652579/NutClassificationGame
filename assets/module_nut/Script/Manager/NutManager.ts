@@ -124,6 +124,7 @@ export class NutManager extends Component {
                         self.resetCurrentSelection();
                         self.checkAndDisplayNutCap(nutComponent);
                         self.inOperation = false;
+                        EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_ROCK, [nutComponent, this.node]);
                     });
                 } else {
                     console.log('不符合移动要求，归位操作');

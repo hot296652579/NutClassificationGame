@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "f8557e42-570a-4869-a725-1c5972aafd25",
+  "uuid": "10ec1dcc-a9d6-4112-a96a-9f20bcf640ea",
   "files": [
     ".json",
     ".png"
@@ -10,8 +10,8 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "f8557e42-570a-4869-a725-1c5972aafd25@6c48a",
-      "displayName": "image1",
+      "uuid": "10ec1dcc-a9d6-4112-a96a-9f20bcf640ea@6c48a",
+      "displayName": "RocksAlbedo",
       "id": "6c48a",
       "name": "texture",
       "userData": {
@@ -22,7 +22,7 @@
         "mipfilter": "none",
         "anisotropy": 0,
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "f8557e42-570a-4869-a725-1c5972aafd25",
+        "imageUuidOrDatabaseUri": "10ec1dcc-a9d6-4112-a96a-9f20bcf640ea",
         "visible": false
       },
       "ver": "1.0.22",
@@ -34,9 +34,9 @@
     }
   },
   "userData": {
-    "hasAlpha": true,
+    "hasAlpha": false,
     "type": "texture",
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "f8557e42-570a-4869-a725-1c5972aafd25@6c48a"
+    "redirect": "10ec1dcc-a9d6-4112-a96a-9f20bcf640ea@6c48a"
   }
 }

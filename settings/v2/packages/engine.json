@@ -5,6 +5,9 @@
       "base": {
         "_value": true
       },
+      "graphcis": {
+        "_value": true
+      },
       "gfx-webgl": {
         "_value": true
       },
@@ -30,7 +33,7 @@
         "_value": true
       },
       "particle": {
-        "_value": false
+        "_value": true
       },
       "physics": {
         "_value": true,
@@ -118,6 +121,9 @@
       "procedural-animation": {
         "_value": false
       },
+      "custom-pipeline": {
+        "_value": false
+      },
       "graphics": {
         "_value": true
       },
@@ -134,6 +140,7 @@
       "base",
       "gfx-webgl",
       "intersection-2d",
+      "particle",
       "physics-ammo",
       "primitive",
       "profiler",

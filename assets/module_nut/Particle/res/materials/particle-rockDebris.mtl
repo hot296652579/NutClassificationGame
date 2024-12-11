@@ -24,7 +24,6 @@
       }
     },
     {
-      "primitive": 13,
       "rasterizerState": {},
       "depthStencilState": {},
       "blendState": {
@@ -37,15 +36,8 @@
   "_props": [
     {
       "mainTexture": {
-        "__uuid__": "f8557e42-570a-4869-a725-1c5972aafd25@6c48a",
+        "__uuid__": "10ec1dcc-a9d6-4112-a96a-9f20bcf640ea@6c48a",
         "__expectedType__": "cc.Texture2D"
-      },
-      "tintColor": {
-        "__type__": "cc.Color",
-        "r": 131,
-        "g": 131,
-        "b": 131,
-        "a": 128
       }
     },
     {}
