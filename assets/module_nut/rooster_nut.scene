@@ -1494,6 +1494,10 @@
       "__uuid__": "8467b76e-33e8-4d71-8d8d-1dffb79cc1c5",
       "__expectedType__": "cc.Prefab"
     },
+    "particleColorBar": {
+      "__uuid__": "cebae0b3-e902-4a0a-ad8b-09e325205120",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "eeOxu4qehONZ/u2WlNNEGr"
   },
   {

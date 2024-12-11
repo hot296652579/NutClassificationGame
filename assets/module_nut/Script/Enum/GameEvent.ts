@@ -14,6 +14,8 @@ export class GameEvent {
     static readonly EVENT_ADD_PARTICLE_ROCK = 'EVENT_ADD_PARTICLE_ROCK';
     /** 添加增加螺丝特效*/
     static readonly EVENT_ADD_PARTICLE_DUST = 'EVENT_ADD_PARTICLE_DUST';
+    /** 添加增加撒花特效*/
+    static readonly EVENT_ADD_PARTICLE_COLOR_BAR = 'EVENT_ADD_PARTICLE_COLOR_BAR';
     /** 清除所有粒子特效*/
     static readonly EVENT_CLEAR_ALL_PARTICLE = 'EVENT_CLEAR_ALL_PARTICLE';
 

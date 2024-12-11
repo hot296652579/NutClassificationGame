@@ -346,6 +346,7 @@ export class NutManager extends Component {
         const isGroup = nutComponent.data.isGroup;
         if (checkIfGrouped && isGroup) {
             nutComponent.displayNutCap(checkIfGrouped);
+            EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, nutComponent);
         }
     }
 

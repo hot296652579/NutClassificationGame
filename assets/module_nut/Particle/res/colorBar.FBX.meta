@@ -1,0 +1,97 @@
+{
+  "ver": "2.3.12",
+  "importer": "fbx",
+  "imported": true,
+  "uuid": "0db72048-9ec2-41c2-bd52-d41f41d41fa2",
+  "files": [],
+  "subMetas": {
+    "46540": {
+      "importer": "gltf-mesh",
+      "uuid": "0db72048-9ec2-41c2-bd52-d41f41d41fa2@46540",
+      "displayName": "",
+      "id": "46540",
+      "name": "Box001.mesh",
+      "userData": {
+        "gltfIndex": 0,
+        "triangleCount": 36
+      },
+      "ver": "1.1.1",
+      "imported": true,
+      "files": [
+        ".bin",
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "05fc4": {
+      "importer": "gltf-material",
+      "uuid": "0db72048-9ec2-41c2-bd52-d41f41d41fa2@05fc4",
+      "displayName": "",
+      "id": "05fc4",
+      "name": "colorBar.material",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    },
+    "2e015": {
+      "importer": "gltf-scene",
+      "uuid": "0db72048-9ec2-41c2-bd52-d41f41d41fa2@2e015",
+      "displayName": "",
+      "id": "2e015",
+      "name": "colorBar.prefab",
+      "userData": {
+        "gltfIndex": 0
+      },
+      "ver": "1.0.14",
+      "imported": true,
+      "files": [
+        ".json"
+      ],
+      "subMetas": {}
+    }
+  },
+  "userData": {
+    "imageMetas": [],
+    "fbx": {
+      "smartMaterialEnabled": true
+    },
+    "redirect": "0db72048-9ec2-41c2-bd52-d41f41d41fa2@2e015",
+    "lods": {
+      "enable": false,
+      "hasBuiltinLOD": false,
+      "options": [
+        {
+          "screenRatio": 0.25,
+          "faceCount": 1
+        },
+        {
+          "screenRatio": 0.125,
+          "faceCount": 0.25
+        },
+        {
+          "screenRatio": 0.01,
+          "faceCount": 0.1
+        }
+      ]
+    },
+    "assetFinder": {
+      "meshes": [
+        "0db72048-9ec2-41c2-bd52-d41f41d41fa2@46540"
+      ],
+      "skeletons": [],
+      "textures": [],
+      "materials": [
+        "0db72048-9ec2-41c2-bd52-d41f41d41fa2@05fc4"
+      ],
+      "scenes": [
+        "0db72048-9ec2-41c2-bd52-d41f41d41fa2@2e015"
+      ]
+    }
+  }
+}

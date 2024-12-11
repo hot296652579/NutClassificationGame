@@ -23,6 +23,8 @@ export class RoosterNutEntry extends Component {
     particleRock: Prefab = null!;// 碎片特效
     @property(Prefab)
     particleDust: Prefab = null!;// 增加螺丝特效
+    @property(Prefab)
+    particleColorBar: Prefab = null!;// 增加撒花特效
 
     particleNodes: Node[] = [];
 
@@ -59,6 +61,7 @@ export class RoosterNutEntry extends Component {
         //增加特效监听
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock, this);
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar, this);
         EventDispatcher.instance.on(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle, this);
     }
 
@@ -69,6 +72,7 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust);
         EventDispatcher.instance.off(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle);
+        EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar);
     }
 
     onGameStart() {
@@ -77,6 +81,7 @@ export class RoosterNutEntry extends Component {
 
     /** 关卡升级*/
     private levelUpHandler(): void {
+        // this.onClearAllParticle();
         LevelManager.instance.clearLevelData();
         LevelManager.instance.upgradeLevel();
 
@@ -133,6 +138,15 @@ export class RoosterNutEntry extends Component {
             particle.setPosition(v3(Vec3.ZERO));
             this.particleNodes.push(particle);
         }
+    }
+
+    //归类 撒花特效
+    private onAddParticleColorBar(...args): void {
+        const nutComponent = args[0];
+        const particle = instantiate(this.particleColorBar)!;
+        particle.setParent(nutComponent.node);
+        particle.setPosition(v3(Vec3.ZERO));
+        this.particleNodes.push(particle);
     }
 
     //清除所有特效
