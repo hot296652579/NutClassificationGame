@@ -122,7 +122,7 @@ export class NutComponent extends Component {
     addRingNode(ringNode: Node, isReturning: boolean = false, onComplete?: () => void) {
         const startPosition = ringNode.position.clone(); // 记录起始位置
         const diff = isReturning ? 1 : 0;
-        const newY = (this.ringsNode.children.length - diff) * 1.5; // Y 坐标间隔 1.5
+        const newY = (this.ringsNode.children.length - diff) * 1.4; // Y 坐标间隔 1.5
         const endPosition = new Vec3(0, newY, 0);
 
         // 将螺丝圈添加到节点并播放动画
