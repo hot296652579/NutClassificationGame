@@ -25,6 +25,8 @@ export class RoosterNutEntry extends Component {
     particleDust: Prefab = null!;// 增加螺丝特效
     @property(Prefab)
     particleColorBar: Prefab = null!;// 增加撒花特效
+    @property(Prefab)
+    particleOpenBox: Prefab = null!;// 增加开盲盒特效
 
     particleNodes: Node[] = [];
 
@@ -62,6 +64,7 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock, this);
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust, this);
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, this.onAddParticleOpenBox, this);
         EventDispatcher.instance.on(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle, this);
     }
 
@@ -73,6 +76,7 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust);
         EventDispatcher.instance.off(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar);
+        EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, this.onAddParticleOpenBox);
     }
 
     onGameStart() {
@@ -145,6 +149,15 @@ export class RoosterNutEntry extends Component {
         const nutComponent = args[0];
         const particle = instantiate(this.particleColorBar)!;
         particle.setParent(nutComponent.node);
+        particle.setPosition(v3(Vec3.ZERO));
+        this.particleNodes.push(particle);
+    }
+
+    //添加拆盲盒特效
+    private onAddParticleOpenBox(...args): void {
+        const nutComponent = args[0];
+        const particle = instantiate(this.particleOpenBox)!;
+        particle.setParent(nutComponent);
         particle.setPosition(v3(Vec3.ZERO));
         this.particleNodes.push(particle);
     }

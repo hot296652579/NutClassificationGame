@@ -1498,6 +1498,10 @@
       "__uuid__": "cebae0b3-e902-4a0a-ad8b-09e325205120",
       "__expectedType__": "cc.Prefab"
     },
+    "particleOpenBox": {
+      "__uuid__": "a1e00399-0287-452b-bb61-9c53c64240ab",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "eeOxu4qehONZ/u2WlNNEGr"
   },
   {
