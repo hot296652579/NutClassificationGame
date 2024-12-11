@@ -107,61 +107,42 @@ export class RoosterNutEntry extends Component {
         LevelManager.instance.loadLevel(level);
     }
 
-    //碎片特效
-    private onAddParticleRock(...args): void {
-        // console.log("onAddParticleRock 添加粒子特效碎片");
-        const data = args[0];
+    // 碎片特效
+    private onAddParticleRock(data: [any]): void {
         const nutComponent = data[0];
-        const topRing = nutComponent.getTopRingNode();
-        const particle = instantiate(this.particleRock)!;
-        particle.setParent(topRing);
-        particle.setPosition(v3(Vec3.ZERO));
+        const particle = this.createParticle(this.particleRock, nutComponent.getTopRingNode());
         this.particleNodes.push(particle);
     }
 
-    //灰尘特效
-    private onAddParticleDust(...args): void {
+    // 灰尘特效
+    private onAddParticleDust(screwsNode: Node): void {
         console.log("onAddParticleDust 添加粒子特效灰尘");
-        const screwsNode = args[0];
-        const particle = instantiate(this.particleDust)!;
-        const children = screwsNode.children;
-
-        let highestVisibleNode: Node | null = null;
-        const getHighestVisibleNode = () => {
-            for (const child of children) {
-                if (child.active) { // 检查节点是否是显示状态
-                    highestVisibleNode = child; // 更新为当前显示的节点
-                }
-            }
-
-            return highestVisibleNode; // 返回最高的显示节点
-        }
-        highestVisibleNode = getHighestVisibleNode();
+        const highestVisibleNode = screwsNode.children.find(child => child.active) || null;
         if (highestVisibleNode) {
-            particle.setParent(highestVisibleNode);
-            particle.setPosition(v3(Vec3.ZERO));
+            const particle = this.createParticle(this.particleDust, highestVisibleNode);
             this.particleNodes.push(particle);
         }
     }
 
-    //归类 撒花特效
-    private onAddParticleColorBar(...args): void {
-        const nutComponent = args[0];
-        const particle = instantiate(this.particleColorBar)!;
-        particle.setParent(nutComponent.node);
-        particle.setPosition(v3(Vec3.ZERO));
+    // 归类 撒花特效
+    private onAddParticleColorBar(nutComponent: any): void {
+        const particle = this.createParticle(this.particleColorBar, nutComponent.node);
         this.particleNodes.push(particle);
     }
 
-    //添加拆盲盒特效
-    private onAddParticleOpenBox(...args): void {
-        const nutComponent = args[0];
-        const particle = instantiate(this.particleOpenBox)!;
-        particle.setParent(nutComponent);
-        particle.setPosition(v3(Vec3.ZERO));
+    // 添加拆盲盒特效
+    private onAddParticleOpenBox(nutComponent: Node): void {
+        const particle = this.createParticle(this.particleOpenBox, nutComponent);
         this.particleNodes.push(particle);
     }
 
+    // 创建粒子方法
+    private createParticle(particlePrefab: any, parentNode: Node): Node {
+        const particle = instantiate(particlePrefab)!;
+        particle.setParent(parentNode);
+        particle.setPosition(v3(Vec3.ZERO));
+        return particle;
+    }
     //清除所有特效
     private onClearAllParticle(): void {
         console.log("onClearAllParticle 清除所有粒子特效")

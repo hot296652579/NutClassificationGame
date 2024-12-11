@@ -101,12 +101,16 @@ export class NutComponent extends Component {
             const screwNode = this.ringsNode.children[i];
             if (screwNode) {
                 screwNode.active = screw.isShow; // 显示对应的螺丝圈节点
-                EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, screwNode);
             }
 
             // 更新 ringsUnknowNode 的隐藏状态
             const ringsUnknowNode = this.ringsUnknowNode.children[i];
             if (ringsUnknowNode) {
+
+                if (ringsUnknowNode.active) {
+                    EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, screwNode);
+                }
+
                 ringsUnknowNode.active = !screw.isShow;
             }
         }
