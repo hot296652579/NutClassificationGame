@@ -8,6 +8,7 @@ import { NutGameAudioMgr } from './Manager/NutGameAudioMgr';
 
 const { ccclass, property } = _decorator;
 export const duration: number = 0.2;
+const distance: number = 1.4;
 
 /** 螺母组件*/
 @ccclass('NutComponent')
@@ -122,7 +123,7 @@ export class NutComponent extends Component {
     addRingNode(ringNode: Node, isReturning: boolean = false, onComplete?: () => void) {
         const startPosition = ringNode.position.clone(); // 记录起始位置
         const diff = isReturning ? 1 : 0;
-        const newY = (this.ringsNode.children.length - diff) * 1.4; // Y 坐标间隔 1.5
+        const newY = (this.ringsNode.children.length - diff) * distance; // Y 坐标间隔 1.5
         const endPosition = new Vec3(0, newY, 0);
 
         // 将螺丝圈添加到节点并播放动画
@@ -150,7 +151,7 @@ export class NutComponent extends Component {
     //显示螺母帽
     displayNutCap(show: boolean) {
         Tween.stopAllByTarget(this.capNode);
-        const getPosByScrews = this.ringsNode.children.length * 1.5;
+        const getPosByScrews = this.ringsNode.children.length * distance;
         this.capNode.setPosition(v3(0, getPosByScrews, 0));
 
         if (show) {
