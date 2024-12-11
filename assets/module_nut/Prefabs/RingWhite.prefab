@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "RingCyan",
+    "_name": "RingWhite",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RingCyan",
+    "_name": "RingWhite",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -208,7 +208,7 @@
       "__id__": 13
     },
     "color": 6,
-    "colorName": "青色",
+    "colorName": "白色",
     "hoverHeight": 0.3,
     "hoverWidth": 0.5,
     "duration": 2,

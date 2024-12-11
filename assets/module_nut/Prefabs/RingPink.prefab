@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "RingPurpleRed",
+    "_name": "RingPink",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RingPurpleRed",
+    "_name": "RingPink",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -25,11 +25,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 12
+        "__id__": 10
       }
     ],
     "_prefab": {
-      "__id__": 14
+      "__id__": 12
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -106,9 +106,6 @@
       },
       {
         "__id__": 9
-      },
-      {
-        "__id__": 10
       }
     ],
     "removedComponents": []
@@ -176,26 +173,6 @@
     }
   },
   {
-    "__type__": "CCPropertyOverrideInfo",
-    "targetInfo": {
-      "__id__": 11
-    },
-    "propertyPath": [
-      "_materials",
-      "0"
-    ],
-    "value": {
-      "__uuid__": "055933eb-0706-4a8d-a59c-13688bffca43",
-      "__expectedType__": "cc.Material"
-    }
-  },
-  {
-    "__type__": "cc.TargetInfo",
-    "localID": [
-      "a66cCxqqlP7ZaOFAIymq4W"
-    ]
-  },
-  {
     "__type__": "9d25eWEJKlF26xhfDxnGv41",
     "_name": "",
     "_objFlags": 0,
@@ -205,10 +182,10 @@
     },
     "_enabled": true,
     "__prefab": {
-      "__id__": 13
+      "__id__": 11
     },
-    "color": 8,
-    "colorName": "紫红",
+    "color": 1,
+    "colorName": "粉色",
     "hoverHeight": 0.3,
     "hoverWidth": 0.5,
     "duration": 2,
