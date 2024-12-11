@@ -86,6 +86,7 @@ export class NutComponent extends Component {
         }
 
         EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_DUST, this.screwsNode);
+        NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(7), 1.0);
     }
 
     // 获取顶部螺丝圈节点
@@ -110,7 +111,6 @@ export class NutComponent extends Component {
 
                 if (ringsUnknowNode.active) {
                     EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, screwNode);
-                    NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(7), 1.0);
                 }
 
                 ringsUnknowNode.active = !screw.isShow;
