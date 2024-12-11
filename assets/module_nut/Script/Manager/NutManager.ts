@@ -464,11 +464,12 @@ export class NutManager extends Component {
 
                 //先隐藏螺丝帽
                 toNut.getComponent(NutComponent).displayNutCap(false);
+                EventDispatcher.instance.emit(GameEvent.EVENT_CLEAR_ALL_PARTICLE);
                 await this.undoRingNodeOperationAsync(toNut, operation);
             }
 
             this.inOperation = false;
-            console.log('撤销操作已完成');
+            // console.log('撤销操作已完成');
         } finally {
             this.inOperation = false;
         }

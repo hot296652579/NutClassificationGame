@@ -1,6 +1,8 @@
 import { _decorator, CCBoolean, CCFloat, Component, Node, Tween, tween, v3, Vec3 } from 'cc';
 import { NutData } from './Model/NutData';
 import { NutOperationRecord } from './Manager/NutManager';
+import { EventDispatcher } from '../../core_tgx/easy_ui_framework/EventDispatcher';
+import { GameEvent } from './Enum/GameEvent';
 
 
 const { ccclass, property } = _decorator;
@@ -76,6 +78,13 @@ export class NutComponent extends Component {
                 child.active = index < this.data.curScrews;
             });
         }
+
+        const visibleCount = this.screwsNode.children.filter(child => child.active).length;
+        if (visibleCount >= this.data.maxScrews) {
+            return
+        }
+
+        EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_DUST, this.screwsNode);
     }
 
     // 获取顶部螺丝圈节点

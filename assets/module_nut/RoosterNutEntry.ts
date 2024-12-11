@@ -21,6 +21,10 @@ export class RoosterNutEntry extends Component {
 
     @property(Prefab)
     particleRock: Prefab = null!;// 碎片特效
+    @property(Prefab)
+    particleDust: Prefab = null!;// 增加螺丝特效
+
+    particleNodes: Node[] = [];
 
     start() {
         NutGameAudioMgr.initilize();
@@ -54,6 +58,8 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.on(GameEvent.EVENT_BATTLE_FAIL_LEVEL_RESET, this.resetGameByLose, this);
         //增加特效监听
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle, this);
     }
 
     protected onDestroy(): void {
@@ -61,6 +67,8 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.off(GameEvent.EVENT_BATTLE_SUCCESS_LEVEL_UP, this.levelUpHandler);
         EventDispatcher.instance.off(GameEvent.EVENT_BATTLE_FAIL_LEVEL_RESET, this.resetGameByLose);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock);
+        EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust);
+        EventDispatcher.instance.off(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle);
     }
 
     onGameStart() {
@@ -90,6 +98,7 @@ export class RoosterNutEntry extends Component {
         LevelManager.instance.loadLevel(level);
     }
 
+    //碎片特效
     private onAddParticleRock(...args): void {
         // console.log("onAddParticleRock 添加粒子特效碎片");
         const data = args[0];
@@ -98,6 +107,41 @@ export class RoosterNutEntry extends Component {
         const particle = instantiate(this.particleRock)!;
         particle.setParent(topRing);
         particle.setPosition(v3(Vec3.ZERO));
+        this.particleNodes.push(particle);
+    }
+
+    //灰尘特效
+    private onAddParticleDust(...args): void {
+        console.log("onAddParticleDust 添加粒子特效灰尘");
+        const screwsNode = args[0];
+        const particle = instantiate(this.particleDust)!;
+        const children = screwsNode.children;
+
+        let highestVisibleNode: Node | null = null;
+        const getHighestVisibleNode = () => {
+            for (const child of children) {
+                if (child.active) { // 检查节点是否是显示状态
+                    highestVisibleNode = child; // 更新为当前显示的节点
+                }
+            }
+
+            return highestVisibleNode; // 返回最高的显示节点
+        }
+        highestVisibleNode = getHighestVisibleNode();
+        if (highestVisibleNode) {
+            particle.setParent(highestVisibleNode);
+            particle.setPosition(v3(Vec3.ZERO));
+            this.particleNodes.push(particle);
+        }
+    }
+
+    //清除所有特效
+    private onClearAllParticle(): void {
+        console.log("onClearAllParticle 清除所有粒子特效")
+        for (const particle of this.particleNodes) {
+            particle.removeFromParent();
+            particle.destroy();
+        }
     }
 
     /** 准备阶段界面*/

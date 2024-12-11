@@ -12,6 +12,10 @@ export class GameEvent {
 
     /** 添加粒子碎片特效*/
     static readonly EVENT_ADD_PARTICLE_ROCK = 'EVENT_ADD_PARTICLE_ROCK';
+    /** 添加增加螺丝特效*/
+    static readonly EVENT_ADD_PARTICLE_DUST = 'EVENT_ADD_PARTICLE_DUST';
+    /** 清除所有粒子特效*/
+    static readonly EVENT_CLEAR_ALL_PARTICLE = 'EVENT_CLEAR_ALL_PARTICLE';
 
     /** 闯关成功 关卡升级*/
     static readonly EVENT_BATTLE_SUCCESS_LEVEL_UP = 'EVENT_BATTLE_SUCCESS_LEVEL_UP';
