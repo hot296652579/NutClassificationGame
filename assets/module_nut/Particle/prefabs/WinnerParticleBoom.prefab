@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "ColorBarParticle",
+    "_name": "WinnerParticleBoom",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "ColorBarParticle",
+    "_name": "WinnerParticleBoom",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -114,7 +114,7 @@
     "startLifetime": {
       "__id__": 13
     },
-    "duration": 0.8,
+    "duration": 0.5,
     "loop": false,
     "simulationSpeed": 1,
     "playOnAwake": true,
@@ -170,7 +170,7 @@
     },
     "_prewarm": false,
     "_capacity": 150,
-    "_simulationSpace": 2,
+    "_simulationSpace": 0,
     "_id": ""
   },
   {
@@ -216,7 +216,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 1,
+    "constant": 50,
     "multiplier": 1
   },
   {
@@ -247,13 +247,13 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 1,
+    "constant": 5,
     "multiplier": 1
   },
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 0.2,
+    "constant": 7,
     "multiplier": 1
   },
   {
@@ -458,7 +458,7 @@
   },
   {
     "__type__": "cc.ForceOvertimeModule",
-    "_enable": false,
+    "_enable": true,
     "x": {
       "__id__": 33
     },
@@ -479,7 +479,7 @@
   {
     "__type__": "cc.CurveRange",
     "mode": 0,
-    "constant": 0,
+    "constant": 15,
     "multiplier": 1
   },
   {

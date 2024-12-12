@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "137b6460-a421-4a47-89f4-e899f891c8ab",
+  "uuid": "bf4ec03e-ca11-4fb5-b07f-46d9d26271ae",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "RockDebrisParticle"
+    "syncNodeName": "WinnerParticleBoom"
   }
 }

@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "137b6460-a421-4a47-89f4-e899f891c8ab",
+  "uuid": "b930693a-b9d7-4d64-9e87-a7c12c94fe6c",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "RockDebrisParticle"
+    "syncNodeName": "StarsParticle"
   }
 }
