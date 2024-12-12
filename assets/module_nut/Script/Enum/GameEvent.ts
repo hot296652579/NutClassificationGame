@@ -10,6 +10,9 @@ export class GameEvent {
     /** 增加螺丝事件*/
     static readonly EVENT_ADD_SCREW = 'EVENT_ADD_SCREW';
 
+    /** 游戏中更新星级*/
+    static readonly EVENT_UPDATE_STAR_STEP = 'EVENT_UPDATE_STAR_STEP';
+
     /** 添加粒子碎片特效*/
     static readonly EVENT_ADD_PARTICLE_ROCK = 'EVENT_ADD_PARTICLE_ROCK';
     /** 添加增加螺丝特效*/

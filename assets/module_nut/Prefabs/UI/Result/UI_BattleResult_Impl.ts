@@ -1,4 +1,4 @@
-import { isValid, Label } from "cc";
+import { isValid, Label, tween, v3, Vec3, Node, Tween } from "cc";
 import { EventDispatcher } from "../../../../core_tgx/easy_ui_framework/EventDispatcher";
 import { tgxModuleContext } from "../../../../core_tgx/tgx";
 import { GameUILayers } from "../../../../scripts/GameUILayers";
@@ -13,7 +13,7 @@ import { AdvertMgr } from "../../../Script/Manager/AdvertMgr";
 export class UI_BattleResult_Impl extends UI_BattleResult {
     rewardBase: number = 0; //基础奖励
     rewardAdditional: number = 0; //额外奖励
-    win: boolean = false;
+    win: boolean = true;
 
     constructor() {
         super('Prefabs/UI/Result/UI_BattleResult', GameUILayers.POPUP, Layout_BattleResult);
@@ -24,32 +24,39 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
     }
 
     protected onCreated(): void {
-        this.calculateReward();
+        const soundId = this.win ? 3 : 3;
+        NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
+
         let layout = this.layout as Layout_BattleResult;
-        this.onButtonEvent(layout.btGet, () => {
+        this.onButtonEvent(layout.btNext, () => {
             NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(5), 1.0);
             this.onClickRewardBase(); //领取基础奖励
         });
-        this.onButtonEvent(layout.btExtra, () => {
-            NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(5), 1.0);
-            this.addAdverHandler(); //看广告领取额外奖励
-        });
-        this.initilizeResult();
+        this.rotationLight();
+        this.updateStar();
     }
 
-    private initilizeResult(): void {
-        this.win = true;
-        let layout = this.layout as Layout_BattleResult;
-        let winNode = layout.winNode;
-        let LoseNode = layout.LoseNode;
-        winNode.active = this.win;
-        LoseNode.active = !this.win;
+    private rotationLight(): void {
+        const { light } = this.layout;
+        light.eulerAngles = v3(0, 0, 0);
+        tween(light)
+            .repeatForever(
+                tween()
+                    .to(2, { eulerAngles: new Vec3(0, 0, 360) }, { easing: 'linear' })
+                    .call(() => {
+                        light!.eulerAngles = new Vec3(0, 0, 0);
+                    })
+            )
+            .start();
+    }
 
-        layout.btGet.node.getChildByName('lbGet').getComponent(Label).string = `${this.rewardBase}`;
-        layout.btExtra.node.getChildByName('lbExtra').getComponent(Label).string = `${this.rewardAdditional}`;
-
-        const soundId = this.win ? 3 : 3;
-        NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
+    private updateStar(): void {
+        const { star } = LevelManager.instance.levelModel;
+        const { levStars } = this.layout;
+        console.log(`当前关卡星星:${star}`);
+        levStars.children.forEach((child, index) => {
+            child.getChildByName('Sprite').active = index < star;
+        });
     }
 
     private emitEvent(): void {
@@ -77,18 +84,11 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
     }
 
     private destoryMyself(): void {
+        Tween.stopAllByTarget(this.node)
         if (isValid(this.node)) {
             this.node.removeFromParent();
             this.node.destroy();
         }
-    }
-
-    /** 根据关卡步数计算星级*/
-    private calculateReward(): void {
-        const { playerStep, levelConfig } = LevelManager.instance.levelModel;
-        console.log('玩家移动步数 playerStep:' + playerStep);
-        console.log('关卡配置步数 step:' + levelConfig.step);
-        console.log('配置的星星数据 mainConfig', LevelManager.instance.levelModel.mainConfig);
     }
 }
 

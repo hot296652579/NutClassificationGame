@@ -2,14 +2,14 @@
   "ver": "1.0.8",
   "importer": "auto-atlas",
   "imported": true,
-  "uuid": "c28d67ab-bc9d-4295-b3b5-d8f3acfbcb46",
+  "uuid": "bc352be0-9827-4d28-a616-f3ab3f65358b",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "maxWidth": 2048,
-    "maxHeight": 2048,
+    "maxWidth": 1024,
+    "maxHeight": 1024,
     "padding": 2,
     "allowRotation": true,
     "forceSquared": false,

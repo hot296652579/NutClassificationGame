@@ -8,10 +8,10 @@ const { ccclass, property } = _decorator;
 @ccclass('Ring')
 export class Ring extends Component {
     @property
-    color: ScrewColor = ScrewColor.RED; //对应各自的颜色枚举
+    color: ScrewColor = ScrewColor.PINK; //对应各自的颜色枚举
 
     @property(CCString)
-    colorName: string = '红色'; //对应各自的颜色名称 默认红色
+    colorName: string = '粉红'; //对应各自的颜色名称 默认粉红
 
     @property
     hoverHeight: number = 0.3; // 悬浮高度（上下浮动的幅度）

@@ -88,12 +88,14 @@ export class NutManager extends Component {
 
         //增长类型 没解锁不可操作
         if (!growCanOp) {
+            self.inOperation = false;
             console.log('增加类型螺母未解锁，无法操作');
             return;
         }
 
         // 判断是否是归类类型且已经完成
         if (nutComponent.data.isGroup && nutComponent.data.isDone) {
+            self.inOperation = false;
             console.log('该螺母已完成归类，无法操作');
             return;
         }

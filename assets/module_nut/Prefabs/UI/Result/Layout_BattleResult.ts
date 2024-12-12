@@ -4,11 +4,15 @@ const { ccclass, property } = _decorator;
 @ccclass('Layout_BattleResult')
 export class Layout_BattleResult extends Component {
     @property(Button)
-    btGet: Button;
-    @property(Button)
-    btExtra: Button;
+    btNext: Button;
+
+    @property(Node)
+    light: Node;
+
     @property(Node)
     winNode: Node;
+
     @property(Node)
-    LoseNode: Node;
+    levStars: Node = null!;
+
 }

@@ -1,6 +1,8 @@
 import { _decorator, Node, Prefab, instantiate, Component } from 'cc';
 import { LevelModel } from '../Model/LevelModel';
 import { GlobalConfig } from '../Config/GlobalConfig';
+import { EventDispatcher } from 'db://assets/core_tgx/easy_ui_framework/EventDispatcher';
+import { GameEvent } from '../Enum/GameEvent';
 const { ccclass, property } = _decorator;
 
 @ccclass('LevelManager')
@@ -52,6 +54,26 @@ export class LevelManager {
     /** 添加步数*/
     addLevelStep(step: number = 1): void {
         this.levelModel.playerStep += step;
+        this.calculateStarLevel();
+    }
+
+    /** 计算操作后 星星等级*/
+    calculateStarLevel(): void {
+        const { mainConfig, levelConfig } = LevelManager.instance.levelModel;
+        const configStepStar = mainConfig.getStepStar;
+        const levelStep = levelConfig.step;      // 关卡配置步数
+        const playerStep = this.levelModel.playerStep;  // 玩家当前步数
+        const remainingSteps = levelStep - playerStep;  // 剩余步数
+
+        // 根据 configStar 数组判断星级
+        if (remainingSteps >= configStepStar[0]) {
+            this.levelModel.star = 3;
+        } else if (remainingSteps >= configStepStar[1]) {
+            this.levelModel.star = 2;
+        } else {
+            this.levelModel.star = 1;
+        }
+        EventDispatcher.instance.emit(GameEvent.EVENT_UPDATE_STAR_STEP);
     }
 
     /** 清除关卡数据*/

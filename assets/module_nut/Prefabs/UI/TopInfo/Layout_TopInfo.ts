@@ -8,10 +8,15 @@ export class Layout_TopInfo extends Component {
     btSet: Node = null!;
     @property(Node)
     btReLoad: Node = null!;
+    @property(Node)
+    levStars: Node = null!;
+
     @property(Label)
     lbLevel: Label = null!;
     @property(Label)
-    lbMoney: Label = null!;
+    lbRemainingSteps: Label = null!;
+    @property(ProgressBar)
+    levProgress: ProgressBar = null!;
 
     start() {
 
