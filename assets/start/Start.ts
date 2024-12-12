@@ -1,4 +1,4 @@
-import { _decorator, assetManager, Component, director, game, Label, Prefab, Node, AssetManager, Asset, PhysicsSystem, PhysicsSystem2D, EPhysics2DDrawFlags, AudioClip } from 'cc';
+import { _decorator, assetManager, Component, director, game, Label, Prefab, Node, AssetManager, Asset, PhysicsSystem, PhysicsSystem2D, EPhysics2DDrawFlags, AudioClip, ProgressBar } from 'cc';
 import { tgxModuleContext, tgxUIMgr, tgxUIWaiting } from '../core_tgx/tgx';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 
@@ -34,8 +34,11 @@ export class Start extends Component {
     @property(Prefab)
     uiCanvasPrefab: Prefab;
 
-    @property(Node)
-    loadingBar: Node;
+    // @property(Node)
+    // loadingBar: Node;
+
+    @property(ProgressBar)
+    loadingBar: ProgressBar = null!;
 
     private _percent: string = '';
     private _numCurrentLoaded = 0;
@@ -144,7 +147,8 @@ export class Start extends Component {
             let idx = Math.floor(game.totalTime / 1000) % 3;
             this.txtLoading.string = _loadingText[idx];
         }
-        this.loadingBar.setScale(this._numCurrentLoaded / _totalNum, 1, 1);
+        // this.loadingBar.setScale(this._numCurrentLoaded / _totalNum, 1, 1);
+        this.loadingBar.progress = this._numCurrentLoaded / _totalNum;
     }
 }
 
