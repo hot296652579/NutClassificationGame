@@ -2,7 +2,7 @@
   "ver": "1.0.26",
   "importer": "image",
   "imported": true,
-  "uuid": "5dc4ffc2-8f64-4017-90e1-51657f79924d",
+  "uuid": "8a75b2ab-74d6-491c-bf04-80fc52961219",
   "files": [
     ".json",
     ".png"
@@ -10,14 +10,14 @@
   "subMetas": {
     "6c48a": {
       "importer": "texture",
-      "uuid": "5dc4ffc2-8f64-4017-90e1-51657f79924d@6c48a",
-      "displayName": "volume",
+      "uuid": "8a75b2ab-74d6-491c-bf04-80fc52961219@6c48a",
+      "displayName": "GuanBiDeYinYue",
       "id": "6c48a",
       "name": "texture",
       "userData": {
         "wrapModeS": "clamp-to-edge",
         "wrapModeT": "clamp-to-edge",
-        "imageUuidOrDatabaseUri": "5dc4ffc2-8f64-4017-90e1-51657f79924d",
+        "imageUuidOrDatabaseUri": "8a75b2ab-74d6-491c-bf04-80fc52961219",
         "isUuid": true,
         "visible": false,
         "minfilter": "linear",
@@ -34,8 +34,8 @@
     },
     "f9941": {
       "importer": "sprite-frame",
-      "uuid": "5dc4ffc2-8f64-4017-90e1-51657f79924d@f9941",
-      "displayName": "volume",
+      "uuid": "8a75b2ab-74d6-491c-bf04-80fc52961219@f9941",
+      "displayName": "GuanBiDeYinYue",
       "id": "f9941",
       "name": "spriteFrame",
       "userData": {
@@ -46,10 +46,10 @@
         "offsetY": 0,
         "trimX": 0,
         "trimY": 0,
-        "width": 56,
-        "height": 46,
-        "rawWidth": 56,
-        "rawHeight": 46,
+        "width": 90,
+        "height": 76,
+        "rawWidth": 90,
+        "rawHeight": 76,
         "borderTop": 0,
         "borderBottom": 0,
         "borderLeft": 0,
@@ -61,17 +61,17 @@
         "meshType": 0,
         "vertices": {
           "rawPosition": [
-            -28,
-            -23,
+            -45,
+            -38,
             0,
-            28,
-            -23,
+            45,
+            -38,
             0,
-            -28,
-            23,
+            -45,
+            38,
             0,
-            28,
-            23,
+            45,
+            38,
             0
           ],
           "indexes": [
@@ -84,12 +84,12 @@
           ],
           "uv": [
             0,
-            46,
-            56,
-            46,
+            76,
+            90,
+            76,
             0,
             0,
-            56,
+            90,
             0
           ],
           "nuv": [
@@ -103,18 +103,18 @@
             1
           ],
           "minPos": [
-            -28,
-            -23,
+            -45,
+            -38,
             0
           ],
           "maxPos": [
-            28,
-            23,
+            45,
+            38,
             0
           ]
         },
         "isUuid": true,
-        "imageUuidOrDatabaseUri": "5dc4ffc2-8f64-4017-90e1-51657f79924d@6c48a",
+        "imageUuidOrDatabaseUri": "8a75b2ab-74d6-491c-bf04-80fc52961219@6c48a",
         "atlasUuid": ""
       },
       "ver": "1.0.12",
@@ -129,6 +129,6 @@
     "type": "sprite-frame",
     "hasAlpha": true,
     "fixAlphaTransparencyArtifacts": false,
-    "redirect": "5dc4ffc2-8f64-4017-90e1-51657f79924d@f9941"
+    "redirect": "8a75b2ab-74d6-491c-bf04-80fc52961219@f9941"
   }
 }

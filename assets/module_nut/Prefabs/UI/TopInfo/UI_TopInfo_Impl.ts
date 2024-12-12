@@ -38,6 +38,11 @@ export class UI_TopInfo_Impl extends UI_TopInfo {
                 tgxUIMgr.inst.showUI(UI_Setting);
             }
         });
+
+        this.onButtonEvent(layout.btReLoad, () => {
+            NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(5), 1.0);
+            EventDispatcher.instance.emit(GameEvent.EVENT_BATTLE_FAIL_LEVEL_RESET);
+        });
     }
 
     private addListener(): void {
