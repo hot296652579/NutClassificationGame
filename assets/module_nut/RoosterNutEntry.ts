@@ -30,13 +30,15 @@ export class RoosterNutEntry extends Component {
 
     particleNodes: Node[] = [];
 
-    start() {
+    protected onLoad(): void {
         NutGameAudioMgr.initilize();
         AdvertMgr.instance.initilize();
+        NutGameAudioMgr.play(NutGameAudioMgr.getMusicIdName(1), 1.0);
+    }
+
+    start() {
         this.initilize();
         this.addEventListen();
-
-        NutGameAudioMgr.play(NutGameAudioMgr.getMusicIdName(1), 1.0);
     }
 
     initilize() {
@@ -49,8 +51,6 @@ export class RoosterNutEntry extends Component {
         const { level } = LevelManager.instance.levelModel;
         LevelManager.instance.loadLevel(level);
         EventDispatcher.instance.emit(GameEvent.EVENT_UI_INITILIZE);//去通知界面初始化
-
-        this.prepStageView();
         tgxUIMgr.inst.showUI(UI_TopInfo);
     }
 
@@ -92,7 +92,6 @@ export class RoosterNutEntry extends Component {
         LevelManager.instance.upgradeLevel();
 
         this.loadLevelInfo();
-        this.prepStageView();
         LevelManager.instance.levelModel.curGameState = TYPE_GAME_STATE.GAME_STATE_INIT;
     }
 
@@ -100,7 +99,6 @@ export class RoosterNutEntry extends Component {
     private resetGameByLose(): void {
         LevelManager.instance.clearLevelData();
         this.loadLevelInfo();
-        this.prepStageView();
         LevelManager.instance.levelModel.curGameState = TYPE_GAME_STATE.GAME_STATE_INIT;
     }
 
@@ -157,12 +155,6 @@ export class RoosterNutEntry extends Component {
             particle.removeFromParent();
             particle.destroy();
         }
-    }
-
-    /** 准备阶段界面*/
-    private prepStageView(): void {
-        NutGameAudioMgr.play(NutGameAudioMgr.getMusicIdName(2), 1.0);
-
     }
 }
 
