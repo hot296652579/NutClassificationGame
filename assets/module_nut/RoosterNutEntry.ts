@@ -143,6 +143,7 @@ export class RoosterNutEntry extends Component {
         const particle = instantiate(particlePrefab)!;
         particle.setParent(parentNode);
         particle.setPosition(v3(Vec3.ZERO));
+        particle.setSiblingIndex(parentNode.children.length - 1);
         return particle;
     }
     //清除所有特效

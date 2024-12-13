@@ -145,6 +145,9 @@ export class NutManager extends Component {
                 self.currentNut = nutNode;
                 self.moveRingToSuspension(topRing, nutComponent);
                 self.inOperation = false;
+            } else {
+                console.log('螺母没有螺丝圈!');
+                self.inOperation = false;
             }
         }
     }
@@ -299,7 +302,7 @@ export class NutManager extends Component {
     private handleAdSuccess(): void {
         for (const nutNode of this.nutNodes) {
             const nutComponent = nutNode.getComponent(NutComponent);
-            if (nutComponent && nutComponent.data.canGrow) {
+            if (nutComponent && nutComponent.data.canGrow && !nutComponent.data.isDone) {
                 nutComponent.data.curScrews++;
 
                 if (nutComponent.data.curScrews >= nutComponent.data.maxScrews) {
