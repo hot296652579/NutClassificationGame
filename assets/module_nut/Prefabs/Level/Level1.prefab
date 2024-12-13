@@ -86,7 +86,7 @@
     "_lpos": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 15,
+      "y": 17,
       "z": 30
     },
     "_lrot": {
@@ -128,7 +128,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 30,
+    "_orthoHeight": 25,
     "_near": 1,
     "_far": 1000,
     "_color": {
