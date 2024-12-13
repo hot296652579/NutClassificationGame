@@ -42,7 +42,7 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         tween(light)
             .repeatForever(
                 tween()
-                    .to(2, { eulerAngles: new Vec3(0, 0, 360) }, { easing: 'linear' })
+                    .to(5, { eulerAngles: new Vec3(0, 0, 360) }, { easing: 'linear' })
                     .call(() => {
                         light!.eulerAngles = new Vec3(0, 0, 0);
                     })
