@@ -85,10 +85,10 @@
     },
     "_lrot": {
       "__type__": "cc.Quat",
-      "x": -0.06397656665577071,
-      "y": -0.44608233363525845,
-      "z": -0.8239028751062036,
-      "w": -0.3436591377065261
+      "x": 0.06421126399676516,
+      "y": -0.4725616559156866,
+      "z": -0.8331661007467682,
+      "w": -0.2799940061868963
     },
     "_lscale": {
       "__type__": "cc.Vec3",
@@ -100,9 +100,9 @@
     "_layer": 1073741824,
     "_euler": {
       "__type__": "cc.Vec3",
-      "x": -117.894,
-      "y": -194.909,
-      "z": 38.562
+      "x": -115.717,
+      "y": -203.993,
+      "z": 23.946
     },
     "_id": "c0y6F5f+pAvI805TdmxIjx"
   },
@@ -119,18 +119,18 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 250,
-      "b": 240,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_useColorTemperature": false,
-    "_colorTemperature": 6550,
+    "_colorTemperature": 7500,
     "_staticSettings": {
       "__id__": 4
     },
     "_visibility": -325058561,
-    "_illuminanceHDR": 65000,
-    "_illuminance": 65000,
+    "_illuminanceHDR": 119888,
+    "_illuminance": 119888,
     "_illuminanceLDR": 1.6927083333333335,
     "_shadowEnabled": true,
     "_shadowPcf": 2,
