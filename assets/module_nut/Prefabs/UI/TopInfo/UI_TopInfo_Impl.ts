@@ -109,6 +109,7 @@ export class UI_TopInfo_Impl extends UI_TopInfo {
     //闯关失败事件
     private resetGameByLose(): void {
         this.updateLevelLb();
+        this.onUpdateStarStep();
     }
 
     protected onDispose(): void {
