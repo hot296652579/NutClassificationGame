@@ -9,6 +9,7 @@ import { LevelManager } from "../../../Script/Manager/LevelMgr";
 import { UserManager } from "../../../Script/Manager/UserMgr";
 import { Layout_BattleResult } from "./Layout_BattleResult";
 import { AdvertMgr } from "../../../Script/Manager/AdvertMgr";
+import { duration } from "../../../Script/NutComponent";
 
 export class UI_BattleResult_Impl extends UI_BattleResult {
     rewardBase: number = 0; //基础奖励
@@ -24,6 +25,7 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
     }
 
     protected onCreated(): void {
+        this.playStartEffect();
         const soundId = this.win ? 3 : 3;
         NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
 
@@ -34,6 +36,15 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         });
         this.rotationLight();
         this.updateStar();
+    }
+
+    private playStartEffect(): void {
+        let layout = this.layout as Layout_BattleResult;
+        const { winNode } = layout;
+        winNode.setScale(new Vec3(0, 0, 0));
+        tween(winNode)
+            .to(duration, { scale: new Vec3(1, 1, 1) })
+            .start()
     }
 
     private rotationLight(): void {
