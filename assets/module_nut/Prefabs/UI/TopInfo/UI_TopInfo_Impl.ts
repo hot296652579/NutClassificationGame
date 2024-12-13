@@ -61,6 +61,7 @@ export class UI_TopInfo_Impl extends UI_TopInfo {
     private onUpdateStarStep(): void {
         this.updateStep();
         this.updateStar();
+        this.updateStepProgress();
     }
 
     private updateStep(): void {
@@ -71,6 +72,23 @@ export class UI_TopInfo_Impl extends UI_TopInfo {
             remain = 0;
         }
         lbRemainingSteps.string = remain;
+    }
+
+    private updateStepProgress(): void {
+        const { levelConfig, playerStep } = LevelManager.instance.levelModel;
+        const { levProgress } = this.layout;
+
+        let remain = Math.floor(levelConfig.step - playerStep);
+        if (remain <= 0) {
+            remain = 0;
+            return;
+        }
+
+        const total = levProgress.totalLength;
+        const precision = 10000;
+        const progressRatio = Math.floor((remain * precision) / levelConfig.step) / precision;
+        const progressLength = progressRatio * total;
+        levProgress.progress = progressLength / total;
     }
 
     private updateStar(): void {
