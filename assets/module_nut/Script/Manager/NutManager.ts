@@ -25,7 +25,7 @@ export class NutManager extends Component {
 
     private currentRing: Node | null = null; // 当前悬浮的螺丝圈
     private currentNut: Node | null = null; // 当前选择的螺母
-    private operationStack: NutOperationRecord[][] = []; // 操作栈，每次操作保存为一个记录数组
+    public operationStack: NutOperationRecord[][] = []; // 操作栈，每次操作保存为一个记录数组
     public inOperation: boolean = false; // 是否在操作中
 
     protected onLoad(): void {
@@ -462,12 +462,6 @@ export class NutManager extends Component {
         const executeUndoOperations = async () => {
             // 撤销操作
             const lastOperations = this.operationStack.pop();
-            if (!lastOperations || lastOperations.length === 0) {
-                console.warn('没有可撤销的操作!!!');
-                this.inOperation = false;
-                return;
-            }
-
             try {
                 // 按逆序逐个撤销操作
                 for (let i = lastOperations.length - 1; i >= 0; i--) {
@@ -479,7 +473,7 @@ export class NutManager extends Component {
                     EventDispatcher.instance.emit(GameEvent.EVENT_CLEAR_ALL_PARTICLE);
                     await this.undoRingNodeOperationAsync(toNut, operation);
                 }
-
+                this.inOperation = false;
                 console.log('撤销操作已完成');
             } finally {
                 this.inOperation = false;
