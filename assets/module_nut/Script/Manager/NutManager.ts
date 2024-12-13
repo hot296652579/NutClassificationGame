@@ -256,8 +256,9 @@ export class NutManager extends Component {
      * @param ringNode 螺丝圈节点
      * @param nutComponent 螺丝组件
      * @param isReturning 是否归位操作
+     * @param cb 回调函数
     */
-    moveRingToNut(ringNode: Node, targetNutComponent: NutComponent, isReturning: boolean = false) {
+    moveRingToNut(ringNode: Node, targetNutComponent: NutComponent, isReturning: boolean = false, cb?: () => void) {
         if (!ringNode) return;
 
         if (!isReturning && this.currentNut) {
@@ -276,6 +277,7 @@ export class NutManager extends Component {
         }
 
         targetNutComponent.addRingNode(ringNode, isReturning, () => {
+            if (cb) cb();
             this.handlePostMoveLogic();
         }
         );
@@ -399,6 +401,7 @@ export class NutManager extends Component {
     }
 
     resetCurrentSelection() {
+        console.log('清除了操作的螺丝圈和螺母');
         this.currentRing = null;
         this.currentNut = null;
     }
@@ -452,32 +455,48 @@ export class NutManager extends Component {
      * 撤销最近的操作
      */
     async undoLastOperation(): Promise<void> {
-        if (!this.operationStack) return;
+        console.log('before inOperation:' + this.inOperation);
+        if (!this.operationStack || this.inOperation) return;
+        this.inOperation = true;
 
-        const lastOperations = this.operationStack.pop();
-        if (!lastOperations || lastOperations.length === 0) {
-            console.warn('没有可撤销的操作!!!');
-            return;
-        }
-
-        try {
-            this.inOperation = true;
-            // 按逆序逐个撤销操作
-            for (let i = lastOperations.length - 1; i >= 0; i--) {
-                const operation = lastOperations[i];
-                const { toNut } = operation;
-
-                //先隐藏螺丝帽
-                toNut.getComponent(NutComponent).displayNutCap(false);
-                EventDispatcher.instance.emit(GameEvent.EVENT_CLEAR_ALL_PARTICLE);
-                await this.undoRingNodeOperationAsync(toNut, operation);
+        const executeUndoOperations = async () => {
+            // 撤销操作
+            const lastOperations = this.operationStack.pop();
+            if (!lastOperations || lastOperations.length === 0) {
+                console.warn('没有可撤销的操作!!!');
+                this.inOperation = false;
+                return;
             }
 
-            this.inOperation = false;
-            // console.log('撤销操作已完成');
-        } finally {
-            this.inOperation = false;
+            try {
+                // 按逆序逐个撤销操作
+                for (let i = lastOperations.length - 1; i >= 0; i--) {
+                    const operation = lastOperations[i];
+                    const { toNut } = operation;
+
+                    // 先隐藏螺丝帽
+                    toNut.getComponent(NutComponent).displayNutCap(false);
+                    EventDispatcher.instance.emit(GameEvent.EVENT_CLEAR_ALL_PARTICLE);
+                    await this.undoRingNodeOperationAsync(toNut, operation);
+                }
+
+                console.log('撤销操作已完成');
+            } finally {
+                this.inOperation = false;
+            }
+        };
+
+        if (this.currentNut) {
+            const nutComponent = this.currentNut.getComponent(NutComponent);
+            await new Promise<void>((resolve) => {
+                this.moveRingToNut(this.currentRing, nutComponent, true, () => {
+                    this.resetCurrentSelection();
+                    resolve();
+                });
+            });
         }
+
+        await executeUndoOperations();
     }
 
     private undoRingNodeOperationAsync(toNut: Node, operation: NutOperationRecord): Promise<void> {
