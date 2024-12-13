@@ -118,8 +118,13 @@ export class RoosterNutEntry extends Component {
 
     // 灰尘特效
     private onAddParticleDust(screwsNode: Node): void {
-        console.log("onAddParticleDust 添加粒子特效灰尘");
-        const highestVisibleNode = screwsNode.children.find(child => child.active) || null;
+        // console.log("onAddParticleDust 添加粒子特效灰尘");
+        const highestVisibleNode = screwsNode.children.reduce((topChild, child) => {
+            if (child.active && (!topChild || child.getSiblingIndex() > topChild.getSiblingIndex())) {
+                return child;
+            }
+            return topChild;
+        }, null);
         if (highestVisibleNode) {
             const particle = this.createParticle(this.particleDust, highestVisibleNode);
             this.particleNodes.push(particle);
@@ -142,8 +147,7 @@ export class RoosterNutEntry extends Component {
     private createParticle(particlePrefab: any, parentNode: Node): Node {
         const particle = instantiate(particlePrefab)!;
         particle.setParent(parentNode);
-        particle.setPosition(v3(Vec3.ZERO));
-        particle.setSiblingIndex(parentNode.children.length - 1);
+        particle.setPosition(v3(0, 0, 1));
         return particle;
     }
     //清除所有特效

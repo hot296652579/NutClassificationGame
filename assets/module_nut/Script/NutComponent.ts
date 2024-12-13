@@ -82,7 +82,7 @@ export class NutComponent extends Component {
         }
 
         const visibleCount = this.screwsNode.children.filter(child => child.active).length;
-        if (visibleCount >= this.data.maxScrews) {
+        if (visibleCount > this.data.maxScrews) {
             return
         }
 
