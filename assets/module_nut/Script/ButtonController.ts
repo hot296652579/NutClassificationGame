@@ -15,9 +15,12 @@ export class ButtonController extends Component {
     @property(Button) btAddScrew: Button = null!;
     nutManager: NutManager = null!;
 
+    protected onLoad(): void {
+        this.setupUIListeners();
+    }
+
     protected start() {
         this.addUIEvent();
-        this.setupUIListeners();
     }
 
     private addUIEvent(): void {
@@ -46,6 +49,7 @@ export class ButtonController extends Component {
         switch (type) {
             case TYPE_ITEM.REVOKE:
                 const { operationStack } = this.nutManager;
+                console.log('nutManager', this.nutManager.operationStack);
                 if (!operationStack || operationStack.length === 0) {
                     console.warn('没有可撤销的操作!!!');
                     this.nutManager.inOperation = false;

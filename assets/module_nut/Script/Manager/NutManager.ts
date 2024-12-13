@@ -33,6 +33,7 @@ export class NutManager extends Component {
             nutNode.active = true;
         }
         this.clearData();
+        EventDispatcher.instance.emit(GameEvent.EVENT_UI_INITILIZE);
     }
 
     setupUIListeners() {
@@ -458,7 +459,7 @@ export class NutManager extends Component {
      * 撤销最近的操作
      */
     async undoLastOperation(): Promise<void> {
-        console.log('before inOperation:' + this.inOperation);
+        // console.log('before inOperation:' + this.inOperation);
         if (!this.operationStack || this.inOperation) return;
         this.inOperation = true;
 
