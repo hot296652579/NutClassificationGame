@@ -254,7 +254,9 @@
     "__prefab": {
       "__id__": 8
     },
-    "camera": null,
+    "camera": {
+      "__id__": 3
+    },
     "nutNodes": [
       {
         "__id__": 9
