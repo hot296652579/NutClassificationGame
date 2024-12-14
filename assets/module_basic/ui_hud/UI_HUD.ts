@@ -3,7 +3,6 @@ import { Layout_UI_HUD } from "./Layout_HUD";
 import { tgxUIMgr, tgxUIController } from "../../core_tgx/tgx";
 import { GameUILayers } from "../../scripts/GameUILayers";
 import { UI_AboutMe } from "../../scripts/UIDef";
-import { UI_DemoList } from "../ui_demo_list/UI_DemoList";
 
 export class UI_HUD extends tgxUIController {
     constructor() {
@@ -37,9 +36,9 @@ export class UI_HUD extends tgxUIController {
     }
 
     onSceneChange() {
-        tgxUIMgr.inst.showUI(UI_DemoList, (ui: UI_DemoList) => {
-            ui.showCloseBtn();
-        });
+        // tgxUIMgr.inst.showUI(UI_DemoList, (ui: UI_DemoList) => {
+        //     ui.showCloseBtn();
+        // });
     }
 
     //销毁

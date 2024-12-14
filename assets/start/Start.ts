@@ -96,8 +96,8 @@ export class Start extends Component {
     }
 
     preloadRes(idx: number) {
-        // console.log('预加载资源：' + this._percent);
         let res = _preloadRes[idx];
+        // console.log('预加载资源：' + res.url);
         let bundle = assetManager.getBundle(res.bundle);
 
         let onComplete = () => {
