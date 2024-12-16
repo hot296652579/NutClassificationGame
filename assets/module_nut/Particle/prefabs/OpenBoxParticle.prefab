@@ -70,7 +70,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "35087c99-9af3-44a8-a5dd-e3820416e19f",
+        "__uuid__": "6487fd35-fb37-4d82-9b3b-dde67955d83a",
         "__expectedType__": "cc.Material"
       },
       null
@@ -184,7 +184,7 @@
     "color": {
       "__type__": "cc.Color",
       "r": 255,
-      "g": 37,
+      "g": 255,
       "b": 255,
       "a": 255
     }
@@ -677,7 +677,7 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "35087c99-9af3-44a8-a5dd-e3820416e19f",
+      "__uuid__": "6487fd35-fb37-4d82-9b3b-dde67955d83a",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,

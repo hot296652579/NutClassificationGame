@@ -97,11 +97,12 @@ export class NutComponent extends Component {
     }
 
     //揭示螺丝 隐藏未知螺丝显示真实螺丝
-    updateScrewVisibility(): void {
+    updateScrewVisibility(hexColor: string): void {
         const screws = this.data.screws;
+        let screwNode = null;
         for (let i = 0; i < screws.length; i++) {
             const screw = screws[i];
-            const screwNode = this.ringsNode.children[i];
+            screwNode = this.ringsNode.children[i];
             if (screwNode) {
                 screwNode.active = screw.isShow; // 显示对应的螺丝圈节点
             }
@@ -109,14 +110,12 @@ export class NutComponent extends Component {
             // 更新 ringsUnknowNode 的隐藏状态
             const ringsUnknowNode = this.ringsUnknowNode.children[i];
             if (ringsUnknowNode) {
-
-                if (ringsUnknowNode.active) {
-                    EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, screwNode);
-                }
-
                 ringsUnknowNode.active = !screw.isShow;
             }
         }
+
+        if (!screwNode) return;
+        EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, [screwNode, hexColor]);
     }
 
     // 添加螺丝圈到螺母动画

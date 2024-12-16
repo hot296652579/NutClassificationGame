@@ -11,6 +11,7 @@ import { NutGameAudioMgr } from './Script/Manager/NutGameAudioMgr';
 import { NutComponent } from './Script/NutComponent';
 import { Ring } from './Script/Ring';
 import { GameUtil } from './Script/Utils';
+import { NutManager } from './Script/Manager/NutManager';
 const { ccclass, property } = _decorator;
 
 @ccclass('RoosterNutEntry')
@@ -140,14 +141,15 @@ export class RoosterNutEntry extends Component {
     private onAddParticleColorBar(nutComponent: any): void {
         const getTopRingNode = nutComponent.getComponent(NutComponent).getTopRingNode();
         const colorHex = getTopRingNode.getComponent(Ring)!.colorHex;
-        console.log('需要转换的16进制颜色:' + colorHex);
         const particle = this.createParticle(this.particleColorBar, nutComponent.node, colorHex);
         this.particleNodes.push(particle);
     }
 
     // 添加拆盲盒特效
-    private onAddParticleOpenBox(nutComponent: Node): void {
-        const particle = this.createParticle(this.particleOpenBox, nutComponent);
+    private onAddParticleOpenBox(args): void {
+        const nutComponent = args[0];
+        const hexColor = args[1];
+        const particle = this.createParticle(this.particleOpenBox, nutComponent, hexColor);
         this.particleNodes.push(particle);
     }
 

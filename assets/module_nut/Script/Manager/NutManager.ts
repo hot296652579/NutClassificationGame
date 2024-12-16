@@ -2,7 +2,7 @@ import { _decorator, Component, Node, tween, PhysicsSystem, geometry, CameraComp
 import { duration, NutComponent } from '../NutComponent';
 import { Ring } from '../Ring';
 import { ScrewData } from '../Model/ScrewData';
-import { ScrewColor } from '../Enum/ScrewColor';
+import { HexScrewColor, ScrewColor } from '../Enum/ScrewColor';
 import { tgxUIMgr } from '../../../core_tgx/tgx';
 import { UI_BattleResult } from '../../../scripts/UIDef';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
@@ -339,6 +339,7 @@ export class NutManager extends Component {
             const screw = screws[i];
             if (!screw.isShow) {  // 找到第一个可见的螺丝圈
                 revealColor = screw.color;
+                // console.log('找到的第一个颜色: revealColor:' + revealColor + 'HexScrewColor:' + HexScrewColor[revealColor]);
                 foundVisibleScrew = true;
                 break;
             }
@@ -351,7 +352,8 @@ export class NutManager extends Component {
 
         nutComponent.data.revealBelowScrews(revealColor);
         // 更新显示效果
-        nutComponent.updateScrewVisibility();
+        const hexColor = HexScrewColor[revealColor];
+        nutComponent.updateScrewVisibility(hexColor);
     }
 
     /** 检测归类的螺母是否完成归类*/
