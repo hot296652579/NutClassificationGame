@@ -1706,7 +1706,7 @@
   },
   {
     "__type__": "cc.ShadowsInfo",
-    "_enabled": true,
+    "_enabled": false,
     "_type": 1,
     "_normal": {
       "__type__": "cc.Vec3",
@@ -1747,7 +1747,7 @@
     },
     "_diffuseMapHDR": null,
     "_diffuseMapLDR": null,
-    "_enabled": true,
+    "_enabled": false,
     "_useHDR": true,
     "_editableMaterial": null,
     "_reflectionHDR": null,

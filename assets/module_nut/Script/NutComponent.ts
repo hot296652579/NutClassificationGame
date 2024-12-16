@@ -213,4 +213,10 @@ export class NutComponent extends Component {
             return true;
         }
     }
+
+    //判断是否有剩余螺丝空间
+    hasScrews(): boolean {
+        const visibleCount = this.screwsNode.children.filter((node) => node.active).length;
+        return visibleCount > this.ringsNode.children.length;
+    }
 }

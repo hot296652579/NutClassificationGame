@@ -20,11 +20,12 @@ export class NutData {
 
     // 检查螺母是否已满
     isFull(): boolean {
+        const hasEnoughScrews = this.screws.length > 0 && this.screws.length >= this.maxScrews;
         if (this.canGrow) {
-            return this.screws.length >= this.curScrews && this.screws.length > 0;
-        } else {
-            return this.screws.length >= this.maxScrews;
+            return hasEnoughScrews && this.screws.length >= this.curScrews;
         }
+        return hasEnoughScrews;
+
     }
 
     // 获取顶部螺丝圈

@@ -86,6 +86,7 @@ export class NutManager extends Component {
         self.inOperation = true;
         const nutComponent = nutNode.getComponent(NutComponent)!;
         const growCanOp = nutComponent.growCanOp();
+        const hasScrews = nutComponent.hasScrews();
 
         //增长类型 没解锁不可操作
         if (!growCanOp) {
@@ -120,7 +121,12 @@ export class NutManager extends Component {
                         return;
                     }
 
-                    // console.log('执行连续移动逻辑');
+                    if (!hasScrews) {
+                        self.inOperation = false;
+                        console.log('没有螺丝空间，无法操作');
+                        return;
+                    }
+
                     //连续移动逻辑
                     self.inOperation = true;
                     self.moveGroupRings(self.currentRing, self.currentNut, nutComponent, () => {
