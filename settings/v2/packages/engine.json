@@ -18,7 +18,7 @@
         "_value": true
       },
       "skeletal-animation": {
-        "_value": true
+        "_value": false
       },
       "3d": {
         "_value": true
@@ -144,7 +144,6 @@
       "physics-ammo",
       "primitive",
       "profiler",
-      "skeletal-animation",
       "tween",
       "ui",
       "websocket"
