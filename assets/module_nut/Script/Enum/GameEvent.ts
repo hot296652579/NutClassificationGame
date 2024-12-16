@@ -21,6 +21,8 @@ export class GameEvent {
     static readonly EVENT_ADD_PARTICLE_COLOR_BAR = 'EVENT_ADD_PARTICLE_COLOR_BAR';
     /** 添加拆盲盒特效*/
     static readonly EVENT_ADD_PARTICLE_OPEN_BOX = 'EVENT_ADD_PARTICLE_OPEN_BOX';
+    /** 添加通关特效*/
+    static readonly EVENT_ADD_PARTICLE_LEVEL_UP = 'EVENT_ADD_PARTICLE_LEVEL_UP';
     /** 清除所有粒子特效*/
     static readonly EVENT_CLEAR_ALL_PARTICLE = 'EVENT_CLEAR_ALL_PARTICLE';
 

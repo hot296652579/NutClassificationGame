@@ -1,4 +1,4 @@
-import { Component, Label, Node, ParticleSystem, Prefab, ProgressBar, Tween, Vec3, _decorator, instantiate, physics, tween, v3 } from 'cc';
+import { Color, Component, Label, Node, ParticleSystem, Prefab, ProgressBar, Tween, Vec3, _decorator, instantiate, physics, tween, v3 } from 'cc';
 import { EventDispatcher } from '../core_tgx/easy_ui_framework/EventDispatcher';
 import { tgxUIMgr } from '../core_tgx/tgx';
 import { UI_ExtraTime, UI_Magnetic, UI_TopInfo } from '../scripts/UIDef';
@@ -8,6 +8,9 @@ import { LevelManager } from './Script/Manager/LevelMgr';
 import { UserManager } from './Script/Manager/UserMgr';
 import { TYPE_GAME_STATE } from './Script/Model/LevelModel';
 import { NutGameAudioMgr } from './Script/Manager/NutGameAudioMgr';
+import { NutComponent } from './Script/NutComponent';
+import { Ring } from './Script/Ring';
+import { GameUtil } from './Script/Utils';
 const { ccclass, property } = _decorator;
 
 @ccclass('RoosterNutEntry')
@@ -27,6 +30,8 @@ export class RoosterNutEntry extends Component {
     particleColorBar: Prefab = null!;// 增加撒花特效
     @property(Prefab)
     particleOpenBox: Prefab = null!;// 增加开盲盒特效
+    @property(Prefab)
+    particleWinner: Prefab = null!;// 增加通关特效
 
     particleNodes: Node[] = [];
 
@@ -67,6 +72,7 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust, this);
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar, this);
         EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, this.onAddParticleOpenBox, this);
+        EventDispatcher.instance.on(GameEvent.EVENT_ADD_PARTICLE_LEVEL_UP, this.onAddParticleWinner, this);
         EventDispatcher.instance.on(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle, this);
     }
 
@@ -76,6 +82,7 @@ export class RoosterNutEntry extends Component {
         EventDispatcher.instance.off(GameEvent.EVENT_BATTLE_FAIL_LEVEL_RESET, this.resetGameByLose);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_ROCK, this.onAddParticleRock);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_DUST, this.onAddParticleDust);
+        EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_LEVEL_UP, this.onAddParticleWinner);
         EventDispatcher.instance.off(GameEvent.EVENT_CLEAR_ALL_PARTICLE, this.onClearAllParticle);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_COLOR_BAR, this.onAddParticleColorBar);
         EventDispatcher.instance.off(GameEvent.EVENT_ADD_PARTICLE_OPEN_BOX, this.onAddParticleOpenBox);
@@ -131,7 +138,10 @@ export class RoosterNutEntry extends Component {
 
     // 归类 撒花特效
     private onAddParticleColorBar(nutComponent: any): void {
-        const particle = this.createParticle(this.particleColorBar, nutComponent.node);
+        const getTopRingNode = nutComponent.getComponent(NutComponent).getTopRingNode();
+        const colorHex = getTopRingNode.getComponent(Ring)!.colorHex;
+        console.log('需要转换的16进制颜色:' + colorHex);
+        const particle = this.createParticle(this.particleColorBar, nutComponent.node, colorHex);
         this.particleNodes.push(particle);
     }
 
@@ -141,9 +151,23 @@ export class RoosterNutEntry extends Component {
         this.particleNodes.push(particle);
     }
 
+    // 添加通关特效
+    private onAddParticleWinner(nutComponent: Node): void {
+        const particle = this.createParticle(this.particleWinner, nutComponent);
+        this.particleNodes.push(particle);
+    }
+
     // 创建粒子方法
-    private createParticle(particlePrefab: any, parentNode: Node): Node {
+    private createParticle(particlePrefab: any, parentNode: Node, color?: string): Node {
         const particle = instantiate(particlePrefab)!;
+        const particleSystem = particle.getComponent(ParticleSystem)!;
+
+        if (particleSystem && color) {
+            const startColor = GameUtil.hexToRGBA(color);
+            console.log('转成rgba startColor:', startColor);
+            particleSystem.startColor.color = startColor;
+        }
+
         particle.setParent(parentNode);
         particle.setPosition(v3(0, 0, 1));
         return particle;

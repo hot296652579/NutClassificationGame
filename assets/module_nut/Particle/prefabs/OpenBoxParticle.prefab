@@ -70,7 +70,7 @@
     },
     "_materials": [
       {
-        "__uuid__": "ae99ea5a-5b47-4f94-a6a8-991c699c016a",
+        "__uuid__": "35087c99-9af3-44a8-a5dd-e3820416e19f",
         "__expectedType__": "cc.Material"
       },
       null
@@ -677,12 +677,12 @@
     "_lengthScale": 1,
     "_mesh": null,
     "_cpuMaterial": {
-      "__uuid__": "ae99ea5a-5b47-4f94-a6a8-991c699c016a",
+      "__uuid__": "35087c99-9af3-44a8-a5dd-e3820416e19f",
       "__expectedType__": "cc.Material"
     },
     "_gpuMaterial": null,
     "_mainTexture": {
-      "__uuid__": "41759074-d493-46f4-a736-6eb219549928@6c48a",
+      "__uuid__": "b5b27ab1-e740-4398-b407-848fc2b2c897@6c48a",
       "__expectedType__": "cc.Texture2D"
     },
     "_useGPU": false,

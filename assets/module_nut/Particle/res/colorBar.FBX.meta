@@ -92,6 +92,7 @@
       "scenes": [
         "0db72048-9ec2-41c2-bd52-d41f41d41fa2@2e015"
       ]
-    }
+    },
+    "depthWriteInAlphaModeBlend": false
   }
 }

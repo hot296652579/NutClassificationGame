@@ -22,6 +22,9 @@ export class Ring extends Component {
     @property
     duration: number = 2; // 单次浮动的时间（秒）
 
+    @property
+    colorHex: string = '#FFF'; //颜色16进制
+
     private originalPosition: Vec3 = new Vec3(); // 初始位置
 
     onLoad() {

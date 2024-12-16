@@ -1528,6 +1528,10 @@
       "__uuid__": "a1e00399-0287-452b-bb61-9c53c64240ab",
       "__expectedType__": "cc.Prefab"
     },
+    "particleWinner": {
+      "__uuid__": "bf4ec03e-ca11-4fb5-b07f-46d9d26271ae",
+      "__expectedType__": "cc.Prefab"
+    },
     "_id": "eeOxu4qehONZ/u2WlNNEGr"
   },
   {

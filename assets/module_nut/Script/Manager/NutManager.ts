@@ -293,7 +293,11 @@ export class NutManager extends Component {
     handlePostMoveLogic() {
         // console.log('检测是否通关:' + this.checkLevelCompletion());
         if (this.checkLevelCompletion()) {
-            tgxUIMgr.inst.showUI(UI_BattleResult);
+            this.inOperation = true;
+            EventDispatcher.instance.emit(GameEvent.EVENT_ADD_PARTICLE_LEVEL_UP, this.node.parent);
+            this.scheduleOnce(() => {
+                tgxUIMgr.inst.showUI(UI_BattleResult);
+            }, 0.5);
         }
     }
 
