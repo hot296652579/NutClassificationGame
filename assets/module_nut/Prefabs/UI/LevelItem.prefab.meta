@@ -2,12 +2,12 @@
   "ver": "1.1.50",
   "importer": "prefab",
   "imported": true,
-  "uuid": "b7bf505e-4ba5-427c-9616-11ff198788fc",
+  "uuid": "ffb1e78b-9d51-4d1e-9cc0-83eb75b8ef80",
   "files": [
     ".json"
   ],
   "subMetas": {},
   "userData": {
-    "syncNodeName": "BlockPrefab"
+    "syncNodeName": "LevelItem"
   }
 }

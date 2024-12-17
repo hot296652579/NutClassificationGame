@@ -1,0 +1,81 @@
+{
+  "package_version": 2,
+  "version": "1.2.0",
+  "name": "assetclean",
+  "description": "i18n:assetclean.description",
+  "main": "./dist/index.js",
+  "devDependencies": {
+    "@types/node": "^16.0.1",
+    "typescript": "^4.3.4"
+  },
+  "author": "楚游香",
+  "editor": ">=3.1.0",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "panels": {
+    "setPathPanel": {
+      "title": "资源优化助手",
+      "main": "./dist/panel/panel.js",
+      "size": {
+        "width": 600,
+        "height": 500
+      }
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:menu.extension/资源优化助手",
+        "label": "检测占用空间",
+        "message": "startAssetSize"
+      },
+      {
+        "path": "i18n:menu.extension/资源优化助手",
+        "label": "检测冗余资源",
+        "message": "startAssetUnuse"
+      },
+      {
+        "path": "i18n:menu.extension/资源优化助手",
+        "label": "设置面板",
+        "message": "open-panel"
+      }
+    ],
+    "shortcuts": [
+      {
+        "message": "startAssetSize",
+        "win": "f4",
+        "mac": "ctrl+4"
+      },
+      {
+        "message": "startAssetUnuse",
+        "win": "f5",
+        "mac": "ctrl+5"
+      },
+      {
+        "message": "open-panel",
+        "win": "f6",
+        "mac": "ctrl+6"
+      }
+    ],
+    "messages": {
+      "startAssetSize": {
+        "methods": [
+          "checkAssetSize"
+        ]
+      },
+      "startAssetUnuse": {
+        "methods": [
+          "checkAssetUnuse"
+        ]
+      },
+      "open-panel": {
+        "methods": [
+          "showPanel"
+        ]
+      }
+    }
+  },
+  "_storeId": "12a03969bb6af8863ab22371f660a4a4"
+}
