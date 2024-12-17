@@ -207,12 +207,12 @@
     "__prefab": {
       "__id__": 13
     },
-    "color": 8,
-    "colorName": "黑色",
+    "color": 9,
+    "colorName": "浅粉",
     "hoverHeight": 0.3,
     "hoverWidth": 0.5,
     "duration": 2,
-    "colorHex": "#323135",
+    "colorHex": "#EB9682",
     "_id": ""
   },
   {
