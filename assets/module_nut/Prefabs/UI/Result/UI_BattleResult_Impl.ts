@@ -14,6 +14,7 @@ import { duration } from "../../../Script/NutComponent";
 export class UI_BattleResult_Impl extends UI_BattleResult {
     rewardBase: number = 0; //基础奖励
     rewardAdditional: number = 0; //额外奖励
+    timeoutIds: Array<number | NodeJS.Timeout> = [];
     win: boolean = true;
 
     constructor() {
@@ -66,7 +67,22 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         const { levStars } = this.layout;
         console.log(`当前关卡星星:${star}`);
         levStars.children.forEach((child, index) => {
-            child.getChildByName('Sprite').active = index < star;
+            const sprite = child.getChildByName('Sprite');
+            sprite.active = false; // 初始隐藏
+
+            // 延迟显示，间隔 0.5 秒
+            const timeoutId = setTimeout(() => {
+                sprite.active = index < star;
+                if (sprite.active) {
+                    // 播放从大到小的动画
+                    sprite.scale = new Vec3(1.4, 1.4, 1.4);
+                    tween(sprite)
+                        .to(0.3, { scale: new Vec3(1, 1, 1) })
+                        .start();
+                }
+            }, index * 500);
+
+            this.timeoutIds.push(timeoutId);
         });
     }
 
@@ -94,12 +110,18 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         })
     }
 
+    clearAllTimeouts() {
+        this.timeoutIds.forEach((id) => clearTimeout(id)); // 类型正常，无需强制转换
+        this.timeoutIds = [];
+    }
+
     private destoryMyself(): void {
         Tween.stopAllByTarget(this.node)
         if (isValid(this.node)) {
             this.node.removeFromParent();
             this.node.destroy();
         }
+        this.clearAllTimeouts();
     }
 }
 
