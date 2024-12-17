@@ -66,13 +66,17 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         const { star } = LevelManager.instance.levelModel;
         const { levStars } = this.layout;
         console.log(`当前关卡星星:${star}`);
+
+        let soundId = 8;
         levStars.children.forEach((child, index) => {
             const sprite = child.getChildByName('Sprite');
             sprite.active = false; // 初始隐藏
 
+
             // 延迟显示，间隔 0.5 秒
             const timeoutId = setTimeout(() => {
-                sprite.active = index < star;
+                NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
+                sprite.active = index <= star;
                 if (sprite.active) {
                     // 播放从大到小的动画
                     sprite.scale = new Vec3(1.4, 1.4, 1.4);
@@ -80,8 +84,8 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
                         .to(0.3, { scale: new Vec3(1, 1, 1) })
                         .start();
                 }
+                soundId++;
             }, index * 500);
-
             this.timeoutIds.push(timeoutId);
         });
     }
