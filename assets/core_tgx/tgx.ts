@@ -22,6 +22,8 @@ export { UI_Joystick as tgxUI_Joystick } from "./easy_controller/UI_Joystick";
 //ui framework
 export { Layout_UIAlert as tgxLayout_UIAlert } from "./easy_ui_framework/alert/Layout_UIAlert";
 export { UIAlert as tgxUIAlert } from "./easy_ui_framework/alert/UIAlert";
+export { Layout_UITips as tgxLayout_UITips } from "./easy_ui_framework/tips/Layout_UITips";
+export { UITips as tgxUITips } from "./easy_ui_framework/tips/UITips";
 export { Layout_UIWaiting as tgxLayout_UIWaiting } from "./easy_ui_framework/waiting/Layout_UIWaiting";
 export { UIWaiting as tgxUIWaiting } from "./easy_ui_framework/waiting/UIWaiting";
 export { EventDispatcher as tgxEventDispatcher } from "./easy_ui_framework/EventDispatcher";

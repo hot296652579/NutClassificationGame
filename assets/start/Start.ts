@@ -1,5 +1,5 @@
 import { _decorator, assetManager, Component, director, game, Label, Prefab, Node, AssetManager, Asset, PhysicsSystem, PhysicsSystem2D, EPhysics2DDrawFlags, AudioClip, ProgressBar } from 'cc';
-import { tgxModuleContext, tgxUIMgr, tgxUIWaiting } from '../core_tgx/tgx';
+import { tgxModuleContext, tgxUIMgr, tgxUITips, tgxUIWaiting } from '../core_tgx/tgx';
 import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 
 import { ModuleDef } from '../scripts/ModuleDef';
@@ -11,6 +11,7 @@ const _preloadBundles = [ModuleDef.BASIC, ModuleDef.MODULE_NUT];
 
 const _preloadRes = [
     { bundle: ModuleDef.BASIC, url: 'ui_alert/UI_Alert', type: 'prefab' },
+    { bundle: ModuleDef.BASIC, url: 'ui_tips/UI_Tips', type: 'prefab' },
     { bundle: ModuleDef.BASIC, url: 'ui_waiting/UI_Waiting', type: 'prefab' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Prefabs/Level/Level1', type: 'prefab' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Prefabs/UI/Result/UI_TopInfo', type: 'prefab' },

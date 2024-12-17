@@ -4,6 +4,7 @@ import { LevelManager } from './LevelMgr';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
 import { ADEvent } from '../Enum/ADEvent';
 import { AudioMgr } from '../../../core_tgx/base/AudioMgr';
+import { tgxUITips } from 'db://assets/core_tgx/tgx';
 const { ccclass, property } = _decorator;
 
 /** 广告管理*/
@@ -48,7 +49,8 @@ export class AdvertMgr {
                 AudioMgr.inst.resume();
             },
             error(err: any) {
-                console.log(`激励广告错误:${err}`);
+                // console.log(`激励广告错误:${err}`);
+                tgxUITips.show(err);
                 EventDispatcher.instance.emit(ADEvent.REWARD_VIDEO_ERROR);
                 AudioMgr.inst.resume();
             }

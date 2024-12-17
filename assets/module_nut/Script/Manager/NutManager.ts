@@ -3,7 +3,7 @@ import { duration, NutComponent } from '../NutComponent';
 import { Ring } from '../Ring';
 import { ScrewData } from '../Model/ScrewData';
 import { HexScrewColor, ScrewColor } from '../Enum/ScrewColor';
-import { tgxUIMgr } from '../../../core_tgx/tgx';
+import { tgxUIAlert, tgxUIMgr, tgxUITips } from '../../../core_tgx/tgx';
 import { UI_BattleResult } from '../../../scripts/UIDef';
 import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
@@ -91,7 +91,7 @@ export class NutManager extends Component {
         //增长类型 没解锁不可操作
         if (!growCanOp) {
             self.inOperation = false;
-            console.log('增加类型螺母未解锁，无法操作');
+            tgxUITips.show('Watching advertisements can unlock this nut.');
             return;
         }
 
@@ -417,7 +417,7 @@ export class NutManager extends Component {
     }
 
     resetCurrentSelection() {
-        console.log('清除了操作的螺丝圈和螺母');
+        // console.log('清除了操作的螺丝圈和螺母');
         this.currentRing = null;
         this.currentNut = null;
     }
