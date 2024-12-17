@@ -3887,6 +3887,22 @@
       {
         "__uuid__": "01f0a0aa-be0e-4ca0-8a8c-a9bec40fa675",
         "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "947efcfc-1d23-44c2-84ba-f0dae09ea2ab",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "2721ed65-7780-4a85-9c4d-b53dea91cad5",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "753ea669-4ed3-4f8e-a1f2-fd17b8782bdf",
+        "__expectedType__": "cc.Prefab"
+      },
+      {
+        "__uuid__": "b9ddffba-d17f-4e13-85f0-5440b96a6c75",
+        "__expectedType__": "cc.Prefab"
       }
     ],
     "gameUI": {

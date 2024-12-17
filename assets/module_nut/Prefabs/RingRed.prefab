@@ -1,7 +1,7 @@
 [
   {
     "__type__": "cc.Prefab",
-    "_name": "RingWhite",
+    "_name": "RingRed",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_native": "",
@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "RingWhite",
+    "_name": "RingRed",
     "_objFlags": 0,
     "__editorExtras__": {},
     "_parent": null,
@@ -185,7 +185,7 @@
       "0"
     ],
     "value": {
-      "__uuid__": "18a9ffdb-bc62-4af8-b699-2c0cfc0e1db6",
+      "__uuid__": "1395c5d2-877f-4b2c-912a-9633e063a4f3",
       "__expectedType__": "cc.Material"
     }
   },
@@ -207,12 +207,12 @@
     "__prefab": {
       "__id__": 13
     },
-    "color": 6,
-    "colorName": "白色",
+    "color": 8,
+    "colorName": "黑色",
     "hoverHeight": 0.3,
     "hoverWidth": 0.5,
     "duration": 2,
-    "colorHex": "#FFF",
+    "colorHex": "#323135",
     "_id": ""
   },
   {
