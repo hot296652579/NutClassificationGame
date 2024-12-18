@@ -230,7 +230,7 @@ export class NutManager extends Component {
         for (let i = allRings.length - 1; i >= 0; i--) {
             const ring = allRings[i];
             if (ring === startRing) foundStart = true;
-            if (ring.getComponent(Ring)!.color === startColor) {
+            if (ring.getComponent(Ring)!.color === startColor && ring.active) {
                 groupRings.push(ring);
             } else if (foundStart) {
                 break;
