@@ -23,5 +23,9 @@ export class Tablelevels_config {
     get step(): number {
         return this.data.step;
     }
+    /** 是否参与随机 */
+    get random(): number {
+        return this.data.random;
+    }
 }
     

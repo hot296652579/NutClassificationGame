@@ -1,3 +1,4 @@
+import { JsonUtil } from "db://assets/core_tgx/base/utils/JsonUtil";
 import { Tablelevels_config } from "../../../module_basic/table/Tablelevels_config";
 import { Tablemain_config } from "../../../module_basic/table/Tablemain_config";
 import { GlobalConfig } from "../Config/GlobalConfig";
@@ -34,6 +35,8 @@ export class LevelModel {
     public star: number = 3;
     /** 储存每关星星结算*/
     public levelStarsMap: Map<number, number> = new Map<number, number>();
+    /** 保存可随机的关卡*/
+    public randomLevelList: number[] = [];
 
     /** 当前游戏状态*/
     public curGameState: TYPE_GAME_STATE = TYPE_GAME_STATE.GAME_STATE_INIT;
@@ -50,6 +53,16 @@ export class LevelModel {
     upgradeLevel(up: number = 1) {
         this.level += up;
         this.levelConfig.init(this.level);
+    }
+
+    /** 可随机的关卡合集*/
+    getRandomLevelList() {
+        const table = JsonUtil.get(Tablelevels_config.TableName);
+        if (!table) {
+            console.warn('Get level table is fail!');
+        }
+        this.randomLevelList = Object.values(table).filter(item => item['random'] == 1)
+            .map(item => item['level']);
     }
 
     /** 清除关卡数据*/

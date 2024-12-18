@@ -75,9 +75,9 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
 
             // 延迟显示，间隔 0.5 秒
             const timeoutId = setTimeout(() => {
-                NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
-                sprite.active = index <= star;
+                sprite.active = index < star;
                 if (sprite.active) {
+                    NutGameAudioMgr.playOneShot(NutGameAudioMgr.getMusicIdName(soundId), 1.0);
                     // 播放从大到小的动画
                     sprite.scale = new Vec3(1.4, 1.4, 1.4);
                     tween(sprite)

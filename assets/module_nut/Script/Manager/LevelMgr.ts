@@ -16,22 +16,31 @@ export class LevelManager {
     levelPrefabs: Prefab[] = [];
     parent: Node = null!;
     currentLevel: Node = null!;
+    randomLevel: number = 0;
 
     public levelModel: LevelModel = null;
 
     initilizeModel(): void {
         this.levelModel = new LevelModel();
+        this.levelModel.getRandomLevelList();
     }
 
     loadLevel(level: number): void {
-        const levelPrefab = this.levelPrefabs[level - 1];
-        if (!levelPrefab) {
-            console.error(`关卡预设不存在 level: ${level}.`);
-            return;
+        let levelPrefab = null;
+        if (this.levelModel.level > GlobalConfig.levelTotal) {
+            console.log('随机关卡加载 this.randomLevel: ' + this.randomLevel);
+            levelPrefab = this.levelPrefabs[this.randomLevel - 1];
+        } else {
+            levelPrefab = this.levelPrefabs[level - 1];
         }
 
         if (this.currentLevel) {
             this.currentLevel.destroy();
+        }
+
+        if (!levelPrefab) {
+            console.log(`关卡预设不存在 level: ${level}.`)
+            return;
         }
 
         this.currentLevel = instantiate(levelPrefab);
@@ -45,10 +54,26 @@ export class LevelManager {
     upgradeLevel(up: number = 1): void {
         this.levelModel.level += up;
         if (this.levelModel.level > GlobalConfig.levelTotal) {
-            const level = Math.floor(Math.random() * GlobalConfig.levelTotal) + 1;
-            this.levelModel.level = level;
+            const randomLevelList = this.levelModel.randomLevelList;
+
+            // 随机选择一个值
+            let randomIndex = Math.floor(Math.random() * randomLevelList.length);
+            let randomLevel = randomLevelList[randomIndex];
+
+            // 如果随机到的关卡和当前关卡相同，则重新随机
+            while (randomLevel === this.randomLevel && randomLevelList.length > 1) {
+                randomIndex = Math.floor(Math.random() * randomLevelList.length);
+                randomLevel = randomLevelList[randomIndex];
+            }
+
+            this.randomLevel = randomLevel;
+            console.log(`随机真实关卡level: ${this.randomLevel}`);
+            this.levelModel.levelConfig.init(this.randomLevel);
         }
-        this.levelModel.levelConfig.init(this.levelModel.level);
+        else {
+            this.levelModel.levelConfig.init(this.levelModel.level);
+        }
+
     }
 
     /** 添加步数*/
