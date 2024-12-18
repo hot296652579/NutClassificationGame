@@ -57,22 +57,23 @@ export class UITips extends UIController {
         Tween.stopAllByTarget(this._curOpacity);
         this._curOpacity.opacity = 0;
         tween(this._curOpacity)
-            .to(.5, { opacity: 255 })
+            .to(0.5, { opacity: 255 })
             .start();
-        this.moveTo(0, this.node.position.y + this._transform.height);
+        // this.moveTo(0, this.node.position.y + this._transform.height * 2);
+        this.node.setPosition(0, this.node.position.y + this._transform.height * 4);
     }
 
     public fadeOut() {
         if (!this._curOpacity) return;
         Tween.stopAllByTarget(this._curOpacity);
         tween(this._curOpacity)
-            .to(.5, { opacity: 0 })
+            .to(2, { opacity: 0 })
             .call(() => {
                 this.stopAllActions();
                 this.node?.removeFromParent();
             })
             .start();
-        this.moveTo(0, this.node.position.y + this._transform.height);
+        // this.moveTo(0, this.node.position.y + this._transform.height * 2);
     }
 
     public moveTo(x: number, y: number) {
