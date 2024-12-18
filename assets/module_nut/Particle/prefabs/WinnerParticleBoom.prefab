@@ -197,8 +197,9 @@
   },
   {
     "__type__": "cc.CurveRange",
-    "mode": 0,
-    "constant": 0.5,
+    "mode": 3,
+    "constantMin": 0.3,
+    "constantMax": 0.8,
     "multiplier": 1
   },
   {
