@@ -3,6 +3,7 @@ import { Tablelevels_config } from "../../../module_basic/table/Tablelevels_conf
 import { Tablemain_config } from "../../../module_basic/table/Tablemain_config";
 import { GlobalConfig } from "../Config/GlobalConfig";
 import { IMainConfig, MainConfigModel } from "./MainConfigModel";
+import { sys } from "cc";
 
 /**道具类型
  * @param REVOKE 撤销
@@ -45,13 +46,14 @@ export class LevelModel {
         this.levelConfig = new Tablelevels_config();
         const mainConfig = new MainConfigModel();
         this.mainConfig = mainConfig.initilizeModel();
-        this.level = GlobalConfig.initilizeLevel;
-        this.levelConfig.init(this.level);
-    }
 
-    /** 关卡等级升级*/
-    upgradeLevel(up: number = 1) {
-        this.level += up;
+        const isDebug = GlobalConfig.isDebug;
+        if (isDebug) {
+            this.level = GlobalConfig.initilizeLevel;
+        } else {
+            const level = sys.localStorage.getItem('level');
+            this.level = level ? parseInt(level) : 1;
+        };
         this.levelConfig.init(this.level);
     }
 

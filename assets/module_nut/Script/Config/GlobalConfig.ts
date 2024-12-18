@@ -1,5 +1,5 @@
 export const GlobalConfig = {
-    isDebug: true,
+    isDebug: false,
     initilizeLevel: 1,//初始关卡
     levelTotal: 30,   //最大关卡等级
     plug: false //开挂必过

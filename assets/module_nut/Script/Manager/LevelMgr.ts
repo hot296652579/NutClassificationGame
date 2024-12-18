@@ -1,4 +1,4 @@
-import { _decorator, Node, Prefab, instantiate, Component } from 'cc';
+import { _decorator, Node, Prefab, instantiate, Component, sys } from 'cc';
 import { LevelModel } from '../Model/LevelModel';
 import { GlobalConfig } from '../Config/GlobalConfig';
 import { EventDispatcher } from 'db://assets/core_tgx/easy_ui_framework/EventDispatcher';
@@ -53,6 +53,7 @@ export class LevelManager {
     /** 关卡等级升级 */
     upgradeLevel(up: number = 1): void {
         this.levelModel.level += up;
+        sys.localStorage.setItem('level', this.levelModel.level.toString());
         if (this.levelModel.level > GlobalConfig.levelTotal) {
             const randomLevelList = this.levelModel.randomLevelList;
 
@@ -73,7 +74,6 @@ export class LevelManager {
         else {
             this.levelModel.levelConfig.init(this.levelModel.level);
         }
-
     }
 
     /** 添加步数*/
