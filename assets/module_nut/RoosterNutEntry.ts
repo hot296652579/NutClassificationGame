@@ -166,7 +166,6 @@ export class RoosterNutEntry extends Component {
 
         if (particleSystem && color) {
             const startColor = GameUtil.hexToRGBA(color);
-            console.log('转成rgba startColor:', startColor);
             particleSystem.startColor.color = startColor;
         }
 
