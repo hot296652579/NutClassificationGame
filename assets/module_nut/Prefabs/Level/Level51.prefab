@@ -1781,7 +1781,7 @@
       "__id__": 107
     },
     "asset": {
-      "__uuid__": "6e11b428-b50a-4b32-87b5-d533671ca7ae",
+      "__uuid__": "3f6dc4f6-6944-46d3-8e47-e2bade75a2b2",
       "__expectedType__": "cc.Prefab"
     },
     "fileId": "c46/YsCPVOJYA4mWEpNYRx",
@@ -1792,7 +1792,7 @@
   },
   {
     "__type__": "cc.PrefabInstance",
-    "fileId": "b819UjeqRBXa0qjYjdYWqU",
+    "fileId": "f6XrAoZRhOeanMfxPS83JJ",
     "prefabRootNode": {
       "__id__": 1
     },
@@ -1822,7 +1822,7 @@
     "propertyPath": [
       "_name"
     ],
-    "value": "RingPurple"
+    "value": "RingOrange"
   },
   {
     "__type__": "cc.TargetInfo",
