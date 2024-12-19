@@ -1,3 +1,4 @@
+/** 上报管理器*/
 export class GtagMgr {
 
     private static _inst: GtagMgr = null;
