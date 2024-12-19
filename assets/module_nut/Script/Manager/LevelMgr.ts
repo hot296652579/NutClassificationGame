@@ -44,7 +44,9 @@ export class LevelManager {
     async preloadLevel() {
         const bundle = assetManager.getBundle(resLoader.gameBundleName);
         for (let i = 1; i <= GlobalConfig.levelTotal; i++) {
-            bundle.preload(`Prefabs/Level/Level${i}`, Prefab)
+            bundle.preload(`Prefabs/Level/Level${i}`, Prefab, null, () => {
+                // console.log(`Level:${i} 预加载完成!`);
+            })
         }
     }
 

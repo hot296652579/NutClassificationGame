@@ -24,6 +24,9 @@ const _preloadRes = [
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/shengqi.mp3', type: 'audio' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/luoxia.mp3', type: 'audio' },
     { bundle: ModuleDef.MODULE_NUT, url: 'Audio/jiesuo.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/xing1.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/xing2.mp3', type: 'audio' },
+    { bundle: ModuleDef.MODULE_NUT, url: 'Audio/xing3.mp3', type: 'audio' },
 ];
 
 const _loadingText = ['Loading.', 'Loading..', 'Loading...'];
