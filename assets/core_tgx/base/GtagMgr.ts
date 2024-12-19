@@ -26,14 +26,14 @@ export class GtagMgr {
         if (_events === GtagType.game_start) {
             console.log('gtag上报游戏开始!');
             this.gtag('event', _events, {
-                'game_name': GtagType.game_start
+                'game_name': document.title
             })
         }
 
         if (_events === GtagType.level_start) {
             this.gtag('event', _events, {
                 'level_name': value.level,
-                'game_name': GtagType.level_start
+                'game_name': document.title
 
             })
         }
@@ -41,13 +41,13 @@ export class GtagMgr {
             this.gtag('event', _events, {
                 'level_name': value.level,
                 'success': 'level success',
-                'game_name': GtagType.level_end
+                'game_name': document.title
             })
         }
 
         if (_events === GtagType.ad_error) {
             this.gtag('event', _events, {
-                'game_name': GtagType.ad_error
+                'game_name': document.title
 
             })
         }
