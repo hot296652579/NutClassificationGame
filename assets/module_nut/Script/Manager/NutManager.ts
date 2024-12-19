@@ -9,6 +9,8 @@ import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispat
 import { GameEvent } from '../Enum/GameEvent';
 import { LevelManager } from './LevelMgr';
 import { NutGameAudioMgr } from './NutGameAudioMgr';
+import { AdvertMgr } from './AdvertMgr';
+import { GtagMgr, GtagType } from 'db://assets/core_tgx/base/GtagMgr';
 
 const { ccclass, property } = _decorator;
 
@@ -45,6 +47,10 @@ export class NutManager extends Component {
     start() {
         this.initNuts(); // 初始化数据
         this.setupUIListeners();
+
+        //添加上报
+        const { level } = LevelManager.instance.levelModel;
+        GtagMgr.inst.doGameDot(GtagType.level_start, { level });
     }
 
     // 初始化螺母和螺丝圈的数据

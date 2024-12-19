@@ -5,6 +5,7 @@ import { GameUILayers, GameUILayerNames } from '../scripts/GameUILayers';
 import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
 import { JsonUtil } from '../core_tgx/base/utils/JsonUtil';
+import { GtagMgr, GtagType } from '../core_tgx/base/GtagMgr';
 const { ccclass, property } = _decorator;
 
 const _preloadBundles = [ModuleDef.BASIC, ModuleDef.MODULE_NUT];
@@ -66,7 +67,9 @@ export class Start extends Component {
         tgxUIMgr.inst.setup(this.uiCanvasPrefab, GameUILayers.NUM, GameUILayerNames);
 
         this.preloadBundle(0);
+        GtagMgr.inst.init();
         this.loadConfig();
+        GtagMgr.inst.doGameDot(GtagType.game_start);
     }
 
     async loadConfig() {

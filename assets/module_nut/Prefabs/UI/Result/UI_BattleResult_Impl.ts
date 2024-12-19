@@ -10,6 +10,7 @@ import { UserManager } from "../../../Script/Manager/UserMgr";
 import { Layout_BattleResult } from "./Layout_BattleResult";
 import { AdvertMgr } from "../../../Script/Manager/AdvertMgr";
 import { duration } from "../../../Script/NutComponent";
+import { GtagMgr, GtagType } from "db://assets/core_tgx/base/GtagMgr";
 
 export class UI_BattleResult_Impl extends UI_BattleResult {
     rewardBase: number = 0; //基础奖励
@@ -37,6 +38,9 @@ export class UI_BattleResult_Impl extends UI_BattleResult {
         });
         this.rotationLight();
         this.updateStar();
+
+        const { level } = LevelManager.instance.levelModel;
+        GtagMgr.inst.doGameDot(GtagType.level_end, { level });
     }
 
     private playStartEffect(): void {

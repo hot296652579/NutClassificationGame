@@ -5,6 +5,7 @@ import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispat
 import { ADEvent } from '../Enum/ADEvent';
 import { AudioMgr } from '../../../core_tgx/base/AudioMgr';
 import { tgxUITips } from 'db://assets/core_tgx/tgx';
+import { GtagMgr, GtagType } from 'db://assets/core_tgx/base/GtagMgr';
 const { ccclass, property } = _decorator;
 
 /** 广告管理*/
@@ -17,6 +18,7 @@ export class AdvertMgr {
     }
 
     adInstance: any = null;
+    gtag: any = null;
 
     initilize(): void {
         this.adInstance = (window as any)['adInstance'];
@@ -53,6 +55,7 @@ export class AdvertMgr {
                 tgxUITips.show(err);
                 EventDispatcher.instance.emit(ADEvent.REWARD_VIDEO_ERROR);
                 AudioMgr.inst.resume();
+                GtagMgr.inst.doGameDot(GtagType.ad_error);
             }
         });
     }
