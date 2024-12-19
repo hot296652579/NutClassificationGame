@@ -16,8 +16,6 @@ const { ccclass, property } = _decorator;
 
 @ccclass('RoosterNutEntry')
 export class RoosterNutEntry extends Component {
-    @property(Prefab)
-    levelPrefabs: Prefab[] = [];
     @property(Node)
     gameUI: Node = null;
     @property(Node)
@@ -50,7 +48,6 @@ export class RoosterNutEntry extends Component {
     initilize() {
         this.initilizeUI();
         LevelManager.instance.parent = this.node;
-        LevelManager.instance.levelPrefabs = this.levelPrefabs;
 
         LevelManager.instance.initilizeModel();
         UserManager.instance.initilizeModel();

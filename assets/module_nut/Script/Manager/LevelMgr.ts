@@ -1,8 +1,9 @@
-import { _decorator, Node, Prefab, instantiate, Component, sys } from 'cc';
+import { _decorator, Node, Prefab, instantiate, Component, sys, assetManager } from 'cc';
 import { LevelModel } from '../Model/LevelModel';
 import { GlobalConfig } from '../Config/GlobalConfig';
 import { EventDispatcher } from 'db://assets/core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
+import { ResLoader, resLoader } from 'db://assets/core_tgx/base/ResLoader';
 const { ccclass, property } = _decorator;
 
 @ccclass('LevelManager')
@@ -13,7 +14,6 @@ export class LevelManager {
         return this._instance;
     }
 
-    levelPrefabs: Prefab[] = [];
     parent: Node = null!;
     currentLevel: Node = null!;
     randomLevel: number = 0;
@@ -23,15 +23,38 @@ export class LevelManager {
     initilizeModel(): void {
         this.levelModel = new LevelModel();
         this.levelModel.getRandomLevelList();
+        this.preloadLevel();
     }
 
-    loadLevel(level: number): void {
+    async loadAsyncLevel(level: number): Promise<Prefab> {
+        return new Promise((resolve, reject) => {
+            const bundle = assetManager.getBundle(resLoader.gameBundleName);
+            if (!bundle) {
+                console.error("module_nut is null!");
+                reject();
+            }
+
+            resLoader.loadAsync(resLoader.gameBundleName, `Prefabs/Level/Level${level}`, Prefab).then((prefab: Prefab) => {
+                resolve(prefab);
+            })
+        })
+    }
+
+    /** 预加载关卡*/
+    async preloadLevel() {
+        const bundle = assetManager.getBundle(resLoader.gameBundleName);
+        for (let i = 1; i <= GlobalConfig.levelTotal; i++) {
+            bundle.preload(`Prefabs/Level/Level${i}`, Prefab)
+        }
+    }
+
+    async loadLevel(level: number) {
         let levelPrefab = null;
         if (this.levelModel.level > GlobalConfig.levelTotal) {
             console.log('随机关卡加载 this.randomLevel: ' + this.randomLevel);
-            levelPrefab = this.levelPrefabs[this.randomLevel - 1];
+            levelPrefab = await this.loadAsyncLevel(this.randomLevel);
         } else {
-            levelPrefab = this.levelPrefabs[level - 1];
+            levelPrefab = await this.loadAsyncLevel(level);
         }
 
         if (this.currentLevel) {

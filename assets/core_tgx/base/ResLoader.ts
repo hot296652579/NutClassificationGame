@@ -35,6 +35,7 @@ export class ResLoader {
     //#region 资源配置数据
     /** 全局默认加载的资源包名 */
     defaultBundleName: string = "module_basic";
+    gameBundleName: string = "module_nut";
     /** 是否使用远程 CDN 资源 */
     cdn: boolean = false;
 
