@@ -6080,7 +6080,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -6365,7 +6365,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "cc.TargetInfo",
@@ -6651,7 +6651,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "CCPropertyOverrideInfo",

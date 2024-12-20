@@ -10721,7 +10721,7 @@
     "propertyPath": [
       "isGroup"
     ],
-    "value": false
+    "value": true
   },
   {
     "__type__": "CCPropertyOverrideInfo",
@@ -10985,6 +10985,8 @@
       "__id__": 0
     },
     "fileId": "d1g6lU2/lGdIhAQyqKPsi6",
+    "instance": null,
+    "targetOverrides": null,
     "nestedPrefabInstanceRoots": null
   },
   {
