@@ -39,11 +39,17 @@
   "splash-setting": {
     "background": {
       "image": "project://settings/BeiJin.png",
-      "type": "custom"
+      "type": "color",
+      "color": {
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "w": 1
+      }
     },
     "logo": {
       "type": "custom",
-      "image": "project://settings/logo.png"
+      "image": "project://settings/Icon.png"
     }
   }
 }
