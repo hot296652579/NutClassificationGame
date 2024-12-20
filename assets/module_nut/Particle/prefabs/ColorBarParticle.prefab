@@ -182,9 +182,9 @@
     "_mode": 0,
     "color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 250,
+      "g": 140,
+      "b": 140,
       "a": 255
     }
   },
@@ -263,7 +263,7 @@
   },
   {
     "__type__": "cc.ColorOvertimeModule",
-    "_enable": true,
+    "_enable": false,
     "color": {
       "__id__": 18
     }

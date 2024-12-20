@@ -87,6 +87,7 @@ export class AudioMgr {
         if (sound instanceof AudioClip) {
             this._audioSource.clip = sound;
             this._audioSource.play();
+            this._audioSource.loop = true;
             this.audioSource.volume = volume;
         } else {
             if (this._audioSource.clip) {
@@ -101,6 +102,7 @@ export class AudioMgr {
                 } else {
                     this._audioSource.clip = clip;
                     this._audioSource.play();
+                    this._audioSource.loop = true;
                     this.audioSource.volume = volume;
                 }
             });

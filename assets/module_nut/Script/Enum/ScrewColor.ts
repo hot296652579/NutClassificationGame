@@ -14,14 +14,14 @@ export enum ScrewColor {
 }
 
 export const HexScrewColor = {
-    [ScrewColor.PINK]: '#FF8D8D',    //粉色
+    [ScrewColor.PINK]: '#FC6294',    //粉色
     [ScrewColor.BLUE]: '#26A1EF',   //蓝色
     [ScrewColor.YELLOW]: '#FAB524', //黄色
-    [ScrewColor.GREEN]: '#92CC3C',  //绿色=
+    [ScrewColor.GREEN]: '#5CC931',  //绿色
     [ScrewColor.ORANGE]: '#FFA500', //橙色
-    [ScrewColor.WHITE]: '#C1B2D1',    //白色
-    [ScrewColor.PURPLE]: '#921397', //紫色
+    [ScrewColor.WHITE]: '#CE76F0',    //白色
+    [ScrewColor.PURPLE]: '#752FF1', //紫色
     [ScrewColor.BLACK]: '#323135', //黑色
-    [ScrewColor.PALEPINK]: '#EB9682', //浅粉
+    [ScrewColor.PALEPINK]: '#FF6E61', //浅粉
     [ScrewColor.RED]: '#F03636', //红色
 }

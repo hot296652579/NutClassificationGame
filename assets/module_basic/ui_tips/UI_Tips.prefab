@@ -78,7 +78,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 3
@@ -269,8 +269,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 600,
-      "height": 80
+      "width": 74.52734375,
+      "height": 54.4
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -308,11 +308,11 @@
     "_string": "tips",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
-    "_actualFontSize": 30,
-    "_fontSize": 30,
+    "_actualFontSize": 40,
+    "_fontSize": 40,
     "_fontFamily": "Arial",
-    "_lineHeight": 30,
-    "_overflow": 2,
+    "_lineHeight": 40,
+    "_overflow": 0,
     "_enableWrapText": false,
     "_font": {
       "__uuid__": "23a47957-4ba6-41f7-999f-a5fbf8a48aed",
@@ -325,7 +325,7 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 1,
-    "_enableOutline": false,
+    "_enableOutline": true,
     "_outlineColor": {
       "__type__": "cc.Color",
       "r": 0,
