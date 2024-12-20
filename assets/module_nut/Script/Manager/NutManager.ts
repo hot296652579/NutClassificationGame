@@ -145,7 +145,7 @@ export class NutManager extends Component {
                     });
                 } else {
                     console.log('不符合移动要求，归位操作');
-                    tgxUITips.show('Can only move to the same color or empty position');
+                    tgxUITips.show('Can only move to the same color \n or empty position');
                     const currentNutComponent = self.currentRing.parent!.parent!.getComponent(NutComponent)!;
                     self.moveRingToNut(self.currentRing, currentNutComponent, true);
                     self.resetCurrentSelection();
