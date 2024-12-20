@@ -13,6 +13,7 @@ import { AdvertMgr } from './AdvertMgr';
 import { GtagMgr, GtagType } from 'db://assets/core_tgx/base/GtagMgr';
 
 const { ccclass, property } = _decorator;
+const distance = 1.4;
 
 @ccclass('NutManager')
 export class NutManager extends Component {
@@ -443,10 +444,10 @@ export class NutManager extends Component {
         const fromNutNode = curNutComponent.node;
         const toNutNode = targetNutComponent.node;
 
-        const newStartY = (curNutComponent.ringsNode.children.length - 1) * 1.5;
+        const newStartY = (curNutComponent.ringsNode.children.length - 1) * distance;
         const startPosition = new Vec3(0, newStartY, 0);
 
-        const newEndY = (targetNutComponent.ringsNode.children.length) * 1.5;
+        const newEndY = (targetNutComponent.ringsNode.children.length) * distance;
         const endPosition = new Vec3(0, newEndY, 0);
 
         // 深度拷贝数据
@@ -496,6 +497,7 @@ export class NutManager extends Component {
                     EventDispatcher.instance.emit(GameEvent.EVENT_CLEAR_ALL_PARTICLE);
                     await this.undoRingNodeOperationAsync(toNut, operation);
                 }
+                LevelManager.instance.backLevelStep();
                 this.inOperation = false;
                 console.log('撤销操作已完成');
             } finally {

@@ -4,6 +4,7 @@ import { GameEvent } from './Enum/GameEvent';
 import { TYPE_ITEM } from './Model/LevelModel';
 import { NutManager } from './Manager/NutManager';
 import { AdvertMgr } from './Manager/AdvertMgr';
+import { tgxUITips } from '../../core_tgx/tgx';
 const { ccclass, property } = _decorator;
 
 /**
@@ -51,7 +52,7 @@ export class ButtonController extends Component {
                 const { operationStack } = this.nutManager;
                 console.log('nutManager', this.nutManager.operationStack);
                 if (!operationStack || operationStack.length === 0) {
-                    console.warn('没有可撤销的操作!!!');
+                    tgxUITips.show('There is no revocable operation!');
                     this.nutManager.inOperation = false;
                     return;
                 }

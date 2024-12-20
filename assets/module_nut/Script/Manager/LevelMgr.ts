@@ -107,6 +107,12 @@ export class LevelManager {
         this.calculateStarLevel();
     }
 
+    /** 撤回步数*/
+    backLevelStep(step: number = 1): void {
+        this.levelModel.playerStep -= step;
+        this.calculateStarLevel();
+    }
+
     /** 计算操作后 星星等级*/
     calculateStarLevel(): void {
         const { mainConfig, levelConfig } = LevelManager.instance.levelModel;
