@@ -80,9 +80,9 @@
         console.log('PRESDK3.0.1.js loaded successfully');
         // 初始化广告 SDK
         var adSdkConfig = {
-          el: document.querySelector("#abs"),
+          el: document.querySelector("GameDiv"),
           client: 'cpsense',
-          is_test: true
+          is_test: false
         };
         var adInstance = new adSdk(adSdkConfig);
         window.adInstance = adInstance;
