@@ -1,6 +1,6 @@
 import { _decorator, Node, Prefab, instantiate, Component, sys, assetManager } from 'cc';
 import { LevelModel } from '../Model/LevelModel';
-import { GlobalConfig } from '../Config/GlobalConfig';
+import { GlobalConfig } from '../../../start/Config/GlobalConfig';
 import { EventDispatcher } from 'db://assets/core_tgx/easy_ui_framework/EventDispatcher';
 import { GameEvent } from '../Enum/GameEvent';
 import { ResLoader, resLoader } from 'db://assets/core_tgx/base/ResLoader';

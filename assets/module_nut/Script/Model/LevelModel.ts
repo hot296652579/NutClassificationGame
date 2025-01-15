@@ -1,7 +1,7 @@
 import { JsonUtil } from "db://assets/core_tgx/base/utils/JsonUtil";
 import { Tablelevels_config } from "../../../module_basic/table/Tablelevels_config";
 import { Tablemain_config } from "../../../module_basic/table/Tablemain_config";
-import { GlobalConfig } from "../Config/GlobalConfig";
+import { GlobalConfig } from "../../../start/Config/GlobalConfig";
 import { IMainConfig, MainConfigModel } from "./MainConfigModel";
 import { sys } from "cc";
 

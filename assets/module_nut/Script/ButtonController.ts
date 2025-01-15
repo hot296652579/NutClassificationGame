@@ -3,8 +3,9 @@ import { EventDispatcher } from '../../core_tgx/easy_ui_framework/EventDispatche
 import { GameEvent } from './Enum/GameEvent';
 import { TYPE_ITEM } from './Model/LevelModel';
 import { NutManager } from './Manager/NutManager';
-import { AdvertMgr } from './Manager/AdvertMgr';
+import { AdvertMgr } from '../../core_tgx/base/ad/AdvertMgr';
 import { tgxUITips } from '../../core_tgx/tgx';
+import { GlobalConfig } from '../../start/Config/GlobalConfig';
 const { ccclass, property } = _decorator;
 
 /**
@@ -57,14 +58,22 @@ export class ButtonController extends Component {
                     return;
                 }
 
-                AdvertMgr.instance.showReawardVideo(() => {
+                if (!GlobalConfig.isDebug) {
+                    AdvertMgr.instance.showReawardVideo(() => {
+                        EventDispatcher.instance.emit(GameEvent.EVENT_UNDO_REVOKE);
+                    });
+                } else {
                     EventDispatcher.instance.emit(GameEvent.EVENT_UNDO_REVOKE);
-                });
+                }
                 break;
             case TYPE_ITEM.ADDNUT:
-                AdvertMgr.instance.showReawardVideo(() => {
+                if (!GlobalConfig.isDebug) {
+                    AdvertMgr.instance.showReawardVideo(() => {
+                        EventDispatcher.instance.emit(GameEvent.EVENT_ADD_SCREW);
+                    });
+                } else {
                     EventDispatcher.instance.emit(GameEvent.EVENT_ADD_SCREW);
-                })
+                }
                 break;
 
             default:

@@ -3,7 +3,7 @@ import { EventDispatcher } from '../core_tgx/easy_ui_framework/EventDispatcher';
 import { tgxUIMgr } from '../core_tgx/tgx';
 import { UI_ExtraTime, UI_Magnetic, UI_TopInfo } from '../scripts/UIDef';
 import { GameEvent } from './Script/Enum/GameEvent';
-import { AdvertMgr } from './Script/Manager/AdvertMgr';
+import { AdvertMgr } from '../core_tgx/base/ad/AdvertMgr';
 import { LevelManager } from './Script/Manager/LevelMgr';
 import { UserManager } from './Script/Manager/UserMgr';
 import { TYPE_GAME_STATE } from './Script/Model/LevelModel';
@@ -36,7 +36,7 @@ export class RoosterNutEntry extends Component {
 
     protected onLoad(): void {
         NutGameAudioMgr.initilize();
-        AdvertMgr.instance.initilize();
+
         NutGameAudioMgr.play(NutGameAudioMgr.getMusicIdName(1), 1.0);
     }
 

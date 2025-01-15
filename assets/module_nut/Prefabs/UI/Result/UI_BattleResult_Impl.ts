@@ -8,7 +8,7 @@ import { NutGameAudioMgr } from "../../../Script/Manager/NutGameAudioMgr";
 import { LevelManager } from "../../../Script/Manager/LevelMgr";
 import { UserManager } from "../../../Script/Manager/UserMgr";
 import { Layout_BattleResult } from "./Layout_BattleResult";
-import { AdvertMgr } from "../../../Script/Manager/AdvertMgr";
+import { AdvertMgr } from "../../../../core_tgx/base/ad/AdvertMgr";
 import { duration } from "../../../Script/NutComponent";
 import { GtagMgr, GtagType } from "db://assets/core_tgx/base/GtagMgr";
 

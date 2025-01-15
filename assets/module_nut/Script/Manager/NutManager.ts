@@ -9,8 +9,9 @@ import { EventDispatcher } from '../../../core_tgx/easy_ui_framework/EventDispat
 import { GameEvent } from '../Enum/GameEvent';
 import { LevelManager } from './LevelMgr';
 import { NutGameAudioMgr } from './NutGameAudioMgr';
-import { AdvertMgr } from './AdvertMgr';
+import { AdvertMgr } from '../../../core_tgx/base/ad/AdvertMgr';
 import { GtagMgr, GtagType } from 'db://assets/core_tgx/base/GtagMgr';
+import { GlobalConfig } from '../../../start/Config/GlobalConfig';
 
 const { ccclass, property } = _decorator;
 const distance = 1.4;
@@ -46,12 +47,16 @@ export class NutManager extends Component {
     }
 
     start() {
-        this.initNuts(); // 初始化数据
-        this.setupUIListeners();
-
         //添加上报
         const { level } = LevelManager.instance.levelModel;
         GtagMgr.inst.doGameDot(GtagType.level_start, { level });
+
+        if (!GlobalConfig.isDebug) {
+            AdvertMgr.instance.showInterstitial();
+        }
+
+        this.initNuts(); // 初始化数据
+        this.setupUIListeners();
     }
 
     // 初始化螺母和螺丝圈的数据
@@ -98,7 +103,7 @@ export class NutManager extends Component {
         //增长类型 没解锁不可操作
         if (!growCanOp) {
             self.inOperation = false;
-            tgxUITips.show('Watching advertisements can unlock this nut.');
+            tgxUITips.show('Watching advertisements \n can unlock this nut.');
             return;
         }
 

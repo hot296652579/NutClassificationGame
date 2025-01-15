@@ -6,6 +6,8 @@ import { ModuleDef } from '../scripts/ModuleDef';
 import { SceneDef } from '../scripts/SceneDef';
 import { JsonUtil } from '../core_tgx/base/utils/JsonUtil';
 import { GtagMgr, GtagType } from '../core_tgx/base/GtagMgr';
+import { AdvertMgr } from '../core_tgx/base/ad/AdvertMgr';
+import { GlobalConfig } from './Config/GlobalConfig';
 const { ccclass, property } = _decorator;
 
 const _preloadBundles = [ModuleDef.BASIC, ModuleDef.MODULE_NUT];
@@ -49,6 +51,14 @@ export class Start extends Component {
 
     private _percent: string = '';
     private _numCurrentLoaded = 0;
+
+    protected onLoad(): void {
+        AdvertMgr.instance.initilize();
+        if (!GlobalConfig.isDebug) {
+            AdvertMgr.instance.showInterstitial();
+        }
+    }
+
     start() {
 
         // // 确保物理系统启用
